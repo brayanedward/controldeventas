@@ -60,8 +60,8 @@
 
                             <div class="m-t-40 account-pages">
                                 <div class="text-center account-logo-box">
-                                    <h3  style="color:white;">NEMER SILVA</h3>
-                                    <h5 style="color:white;">Sistema de Gestión de Clientes</h5>
+                                    <h3  style="color:white;">MARIA PAZ</h3>
+                                    <h5 style="color:white;">Sistema Control de Ventas</h5>
                                     <!--<h4 class="text-uppercase font-bold m-b-0">Sign In</h4>-->
                                 </div>
                                 <div class="account-content">
