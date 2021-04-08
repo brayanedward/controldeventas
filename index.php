@@ -116,7 +116,7 @@
             </div>
           </section>
            <footer class="footer text-right" >© Copyright <?php echo date('Y'); ?>
-                  <a  href="https://desarrolloplus.net/" target="_blank">Desarrollo Plus.</a> Todos los derechos reservados.
+                  <a  href="https://mscode.cl/" target="_blank">MSCODE</a> Todos los derechos reservados.
             </footer>
           <!-- END HOME -->
         <script type="text/javascript">
