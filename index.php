@@ -5,11 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
         <meta name="author" content="Coderthemes">
-        
+
         <!-- App favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico">
         <!-- App title -->
-        <title>Nemer Silva - Gestión de Clientes</title>
+        <title>Maria Paz- Control de Ventas</title>
 
         <!-- App css -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -115,7 +115,7 @@
                 </div>
             </div>
           </section>
-           <footer class="footer text-right" >© Copyright <?php echo date('Y'); ?>  
+           <footer class="footer text-right" >© Copyright <?php echo date('Y'); ?>
                   <a  href="https://desarrolloplus.net/" target="_blank">Desarrollo Plus.</a> Todos los derechos reservados.
             </footer>
           <!-- END HOME -->
@@ -183,13 +183,13 @@ $('.form-control').on("focus", function() {
         <script src="assets/js/fastclick.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
         <script src="assets/js/detect.js"></script>
-        
+
         <script src="assets/js/jquery.blockUI.js"></script>
         <script src="assets/js/waves.js"></script>
         <script src="assets/js/jquery.slimscroll.js"></script>
         <script src="assets/js/jquery.scrollTo.min.js"></script>
         <!--<script src="assets/js/jquery.min.js"></script>
-        
+
 -->
         <!-- App js -->
         <script src="assets/js/jquery.core.js"></script>
