@@ -68,23 +68,25 @@ class VentaModel
 
     public function add(){
         $sql = "INSERT INTO tb_Venta
-                (rut_Venta, nombre_Venta, apellido_Venta, correo_Venta, estado_Venta, tipo_Venta, password_Venta)
+                (descripcion_venta,cliente_venta,valor_venta,direccion_venta,fechaUsuario_venta,fecha_venta,tipoPago_venta,estado_venta,usuario_venta)
                 VALUES
                 (
-                '{$this->get('rut')}',
-                '{$this->get('nombre')}',
-                '{$this->get('apellido')}',
-                '{$this->get('correo')}',
+                '{$this->get('descripcion')}',
+                '{$this->get('cliente')}',
+                '{$this->get('valor')}',
+                '{$this->get('direccion')}',
+                '{$this->get('fechaUsuario')}',
+                '{$this->get('fecha')}',
+                '{$this->get('tipoPago')}',
                 '{$this->get('estado')}',
-                '{$this->get('tipo')}',
-                '{$this->get('password')}'
+                '{$this->get('usuario')}'
                 )";
         $datos = $this->con->consultaRetorno($sql);
         return $datos;
     }
 
     public function delete(){
-        $sql = "UPDATE tb_Venta SET estado_Venta = '{$this->get('estado')}' WHERE rut_Venta ='{$this->get('rut')}'";
+        $sql = "UPDATE tb_Venta SET estado_Venta = '{$this->get('estado')}' WHERE id_venta ='{$this->get('id')}'";
         //echo $sql;
         $this->con->consultaSimple($sql);
     }
@@ -92,12 +94,14 @@ class VentaModel
     public function edit(){
         $sql = "UPDATE tb_Venta
                 SET
-                rut_Venta = '{$this->get('rut')}',
-                nombre_Venta = '{$this->get('nombre')}',
-                apellido_Venta = '{$this->get('apellido')}',
-                correo_Venta = '{$this->get('correo')}',
+                descripcion_venta = '{$this->get('descripcion')}',
+                cliente_venta = '{$this->get('cliente')}',
+                valor_venta = '{$this->get('valor')}',
+                direccion_venta = '{$this->get('direccion')}',
                 tipo_Venta = '{$this->get('tipo')}',
-                password = '{$this->get('password')}'
+                fechaUsuario_venta_ = '{$this->get('fechaUsuario')}',
+                fecha_venta_ = '{$this->get('fecha')}',
+                usuario_venta = '{$this->get('usuario')}'
                 WHERE
                 rut_Venta = '{$this->get('idusu')}'";
         $datos = $this->con->consultaRetorno($sql);
@@ -107,14 +111,8 @@ class VentaModel
     public function estado(){
         $sql = "UPDATE tb_Venta
                 SET estado_Venta = '{$this->get('estado')}'
-                WHERE rut_Venta = '{$this->get('id')}'";
+                WHERE id_venta = '{$this->get('id')}'";
         $this->con->consultaSimple($sql);
     }
 
-    public function cambiaPw(){
-        $sql = "UPDATE tb_Venta
-                SET password_Venta = '{$this->get('pass')}'
-                WHERE rut_Venta = '{$this->get('rut_Venta')}'";
-        $this->con->consultaSimple($sql);
-    }
 }
