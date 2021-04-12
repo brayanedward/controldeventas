@@ -62,12 +62,11 @@ class LoginController
         if ($rows = mysqli_fetch_assoc($this->model->lista())) {
 
             $_SESSION['rutUsuario']       = base64_encode($rows['rut_usuario']);
-            $_SESSION['dvUsuario']        = base64_encode($rows['dv_usuario']);
-            $_SESSION['nombreUsuario']    = base64_encode($rows['nombres_usuario']);
-            $_SESSION['apellidoPaterno']  = base64_encode($rows['apellidoPaterno_usuario']);
-            $_SESSION['apellidoMaterno']  = base64_encode($rows['apellidoMaterno_usuario']);
+            $_SESSION['nombreUsuario']    = base64_encode($rows['nombre_usuario']);
+            $_SESSION['apellidoPaterno']  = base64_encode($rows['apellido_usuario']);
             $_SESSION['estadoUsuario']       = base64_encode($rows['estado_usuario']);
             $_SESSION['passwordUsuario']  = base64_encode($rows['password_usuario']);
+            $_SESSION['correoUsuario']  = base64_encode($rows['correo_usuario']);
 
             echo 1;
         } else {

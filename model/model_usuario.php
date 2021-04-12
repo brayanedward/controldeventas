@@ -5,6 +5,7 @@ class UsuarioModel
 {
 
     private $rut;
+    private $dv;
     private $nombre;
     private $apellido;
     private $correo;
@@ -41,7 +42,7 @@ class UsuarioModel
     public function lista(){
         try {
 
-            $sql = "SELECT rut_usuario,nombre_usuario,apellido_usuario,correo_usuario,estado_usuario,tipo_usuario,password_usuario
+            $sql = "SELECT rut_usuario,dv_usuario,nombre_usuario,apellido_usuario,correo_usuario,estado_usuario,tipo_usuario,password_usuario
             FROM tb_usuario
             {$this->get('condicion')}";
             $datos = $this->con->consultaRetorno($sql);
@@ -65,10 +66,11 @@ class UsuarioModel
 
     public function add(){
         $sql = "INSERT INTO tb_usuario
-                (rut_usuario, nombre_usuario, apellido_usuario, correo_usuario, estado_usuario, tipo_usuario, password_usuario)
+                (rut_usuario, dv_usuario,nombre_usuario, apellido_usuario, correo_usuario, estado_usuario, tipo_usuario, password_usuario)
                 VALUES
                 (
                 '{$this->get('rut')}',
+                '{$this->get('dv')}',
                 '{$this->get('nombre')}',
                 '{$this->get('apellido')}',
                 '{$this->get('correo')}',
@@ -90,6 +92,7 @@ class UsuarioModel
         $sql = "UPDATE tb_usuario
                 SET
                 rut_usuario = '{$this->get('rut')}',
+                dv_usuario = '{$this->get('dv')}',
                 nombre_usuario = '{$this->get('nombre')}',
                 apellido_usuario = '{$this->get('apellido')}',
                 correo_usuario = '{$this->get('correo')}',
