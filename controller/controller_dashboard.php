@@ -7,7 +7,7 @@ header('Location: index.html');
 }*/
 date_default_timezone_set('America/Santiago');
 require_once 'model/model_dashboard.php';
-//require_once 'model/model_rol.php';
+require_once 'model/model_usuario.php';
 
 class DashboardController
 {
@@ -38,6 +38,7 @@ class DashboardController
     {
 
         $this->model      = new DashboardModel();
+        $this->modelUsuario = new UsuarioModel();
         $this->datetime   = date('Y-m-d H:i:s');
         $this->date       = date('Y-m-d');
         $this->time       = date('H:i:s');
@@ -208,7 +209,7 @@ class DashboardController
         $this->model->set("estado", 2);
         $query = $this->model->estado();
     }
-    
+
     public function cambiapassword(){
         $id = $_REQUEST['idusu'];
         $pass1 = $_REQUEST['pass1'];

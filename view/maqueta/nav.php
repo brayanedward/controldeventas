@@ -112,7 +112,7 @@
                                     </li>
                                 </ul>
                             </li> -->
-<!-- 
+<!--
                             <li>
                                 <a href="#" class="right-menu-item dropdown-toggle" data-toggle="dropdown">
                                     <i class="mdi mdi-email"></i>
@@ -208,7 +208,7 @@
                             </div>
                             <div class="user-info">
                                 <div>
-                                    <a href="#setting-dropdown" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo base64_decode($_SESSION['nombreUsuario'] );?> <?php echo base64_decode($_SESSION['apellidoPaterno']); ?> <?php echo base64_decode($_SESSION['apellidoMaterno']); ?> <span class="mdi mdi-menu-down"></span></a>
+                                    <a href="#setting-dropdown" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo base64_decode($_SESSION['nombreUsuario'] );?> <?php echo base64_decode($_SESSION['apellidoUsuario']); ?><span class="mdi mdi-menu-down"></span></a>
                                 </div>
                             </div>
                         </div>
