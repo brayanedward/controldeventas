@@ -66,7 +66,7 @@ class DashboardController
 
     public function index(){
         $condicion = "";
-        $this->model->set("condicion", $condicion);
+        $this->modelUsuario->set("condicion", $condicion);
         require_once './view/maqueta/header.php';
         require_once './view/maqueta/nav.php';
         require_once './view/dashboard/table_' . $this->controller . '.php';

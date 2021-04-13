@@ -25,25 +25,14 @@
                                 <div class="card-box widget-box-two widget-two-info">
                                     <i class="mdi mdi-chart-areaspline widget-two-icon"></i>
                                     <div class="wigdet-two-content text-white">
-                                        <p class="m-0 text-uppercase font-600 font-secondary text-overflow" title="Clientes Registrados">Clientes Registrados</p>
-                                        <h2 class="text-white"><span data-plugin="counterup">12</span> <small><i class="mdi mdi-arrow-up text-success"></i></small></h2>
+                                        <p class="m-0 text-uppercase font-600 font-secondary text-overflow" title="Clientes Registrados">Usuarios Registradas</p>
+                                        <h2 class="text-white"><span data-plugin="counterup"><?php echo $rows['num']; ?></span> <small><i class="mdi mdi-arrow-up text-success"></i></small></h2>
                                         <p class="m-0"><b>Última Actualización</b></p>
                                     </div>
                                 </div>
                             </div><!-- end col -->
                         <?php endforeach; ?>
 
-
-                            <div class="col-lg-3 col-md-6">
-                                <div class="card-box widget-box-two widget-two-danger">
-                                    <i class="mdi mdi-arrow-down-drop-circle widget-two-icon"></i>
-                                    <div class="wigdet-two-content text-white">
-                                        <p class="m-0 text-uppercase font-600 font-secondary text-overflow" title="User Today">CLIENTES MENORES A 65 AÑOS</p>
-                                        <h2 class="text-white"><span data-plugin="counterup">12</span> <small><i class="mdi mdi-arrow-down text-danger"></i></small></h2>
-                                        <p class="m-0"><b>Última Actualización</b></p>
-                                    </div>
-                                </div>
-                            </div><!-- end col -->
 
                             <div class="col-lg-3">
                                 <div class="panel panel-color panel-info">
@@ -55,8 +44,8 @@
                                             <table class="table table table-hover m-0">
                                                 <thead>
                                                     <tr>
-                                                        <th>Comuna</th>
-                                                        <th>Clientes</th>
+                                                        <th>Vendedor</th>
+                                                        <th>Nº Ventas</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
