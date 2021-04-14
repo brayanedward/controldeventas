@@ -87,12 +87,10 @@ class VentaController
     }
 
     public function add(){
-        //$condicionRol = " where estado_rol < 3 order by id_rol desc";
-        //$this->modelRol->set("condicion", $condicionRol);
 
         require_once './view/maqueta/header.php';
         require_once './view/maqueta/nav.php';
-        require_once './view/' . $this->controller . '/add_' . $this->controller . '.php';
+        require_once './view/venta/add_' . $this->controller . '.php';
         require_once './view/maqueta/footer.php';
     }
 

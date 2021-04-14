@@ -115,4 +115,20 @@ class VentaModel
         $this->con->consultaSimple($sql);
     }
 
+    public function listaPagos(){
+        try {
+            $sql = "SELECT 
+                            id_tipopago,
+                            descripcion_tipopago
+                    FROM
+                        tb_tipopago
+            {$this->get('condicion')}";
+            $datos = $this->con->consultaRetorno($sql);
+            return $datos;
+
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
 }
