@@ -47,6 +47,8 @@ class DashboardModel
         } catch (Exception $e) {
             die($e->getMessage());
         }
+
+        echo $sql;
     }
 
     public function count(){
@@ -59,7 +61,7 @@ class DashboardModel
         }
         return $num;
 
-      
+
     }
 
 

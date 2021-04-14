@@ -51,11 +51,14 @@ class UsuarioModel
         } catch (Exception $e) {
             die($e->getMessage());
         }
+
+        echo $sql;
     }
 
     public function count(){
-        $sql = "SELECT count(rut_usuario)as num FROM tb_usuario";
+        $sql = "SELECT count(rut_usuario)as num FROM tb_usuario ";
 
+  //echo $sql;
         $datos = $this->con->consultaRetorno($sql);
 
         if ($rows = mysqli_fetch_array($datos)) {
@@ -63,7 +66,7 @@ class UsuarioModel
         }
         return $num;
 
-        echo $sql;
+
     }
 
     public function add(){

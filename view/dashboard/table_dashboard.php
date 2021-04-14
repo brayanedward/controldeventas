@@ -20,18 +20,18 @@
 							</div>
 						</div>
                         <!-- end row -->
-                       <?php foreach ($this->modelUsuario->count() as $rows) : ?>
+
                             <div class="col-lg-3 col-md-6">
                                 <div class="card-box widget-box-two widget-two-info">
                                     <i class="mdi mdi-chart-areaspline widget-two-icon"></i>
                                     <div class="wigdet-two-content text-white">
                                         <p class="m-0 text-uppercase font-600 font-secondary text-overflow" title="Clientes Registrados">Usuarios Registradas</p>
-                                        <h2 class="text-white"><span data-plugin="counterup"><?php echo $rows['num'] ?></span> <small><i class="mdi mdi-arrow-up text-success"></i></small></h2>
+                                        <h2 class="text-white"><span data-plugin="counterup"><?php  echo $this->modelUsuario->count(); ?></span> <small><i class="mdi mdi-arrow-up text-success"></i></small></h2>
                                         <p class="m-0"><b>Última Actualización</b></p>
                                     </div>
                                 </div>
                             </div><!-- end col -->
-                        <?php endforeach; ?>
+
 
 
                           <!--  <div class="col-lg-3">
