@@ -3,9 +3,9 @@ class Conexion
 {
     private $datos = array(
         "host" => "localhost",
-        "user" => "desaijju_nemer",
-        "pass" => "74t#kK~XFCbd",
-        "db"   => "desaijju_nemer",
+        "user" => "root",
+        "pass" => "",
+        "db"   => "controlventas",
         //"host" => "localhost",
         //"user" => "root",
         //"pass" => "",
