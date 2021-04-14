@@ -68,6 +68,7 @@ class LoginController
             $_SESSION['estadoUsuario']       = base64_encode($rows['estado_usuario']);
             $_SESSION['passwordUsuario']  = base64_encode($rows['password_usuario']);
             $_SESSION['correoUsuario']  = base64_encode($rows['correo_usuario']);
+            $_SESSION['tipoUsuario']  = base64_encode($rows['tipo_usuario']);
 
             echo 1;
         } else {

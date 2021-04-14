@@ -7,7 +7,7 @@ header('Location: index.html');
 }*/
 date_default_timezone_set('America/Santiago');
 require_once 'model/model_usuario.php';
-//require_once 'model/model_rol.php';
+require_once 'model/model_tipoUsuario.php';
 
 class UsuarioController
 {
@@ -38,6 +38,7 @@ class UsuarioController
     {
 
         $this->model      = new UsuarioModel();
+        $this->modelTipoUsuario      = new tipoUsuarioModel();
         $this->datetime   = date('Y-m-d H:i:s');
         $this->date       = date('Y-m-d');
         $this->time       = date('H:i:s');
@@ -193,10 +194,11 @@ class UsuarioController
         $this->model->set("rut", $rut);
         $this->model->set("dv", $dv);
         $this->model->set("nombre", $_REQUEST['txtNombreUsuario']);
-        $this->model->set("apellidop", $_REQUEST['txtApellidoP']);
-        $this->model->set("apellidom", $_REQUEST['txtApellidoM']);
-        $this->model->set("password", $_REQUEST['txtPassword']);
+        $this->model->set("apellido", $_REQUEST['txtApellidoP']);
+        $this->model->set("correo", $_REQUEST['txtCorreoElectronico']);
         $this->model->set("estado", 1);
+        $this->model->set("tipo", $_REQUEST['tipoUsuario']);
+        $this->model->set("password", $_REQUEST['txtPassword']);
         $this->model->set("idusu", $_REQUEST['idusu']);
 
         if ($query = $this->model->edit()) {
@@ -225,8 +227,9 @@ class UsuarioController
         $this->model->set("rut", $rut);
         $this->model->set("dv", $dv);
         $this->model->set("nombre", $_REQUEST['txtNombreUsuario']);
-        $this->model->set("apellidop", $_REQUEST['txtApellidoP']);
-        $this->model->set("apellidom", $_REQUEST['txtApellidoM']);
+        $this->model->set("apellido", $_REQUEST['txtApellidoP']);
+        $this->model->set("correo", $_REQUEST['txtCorreoElectronico']);
+        $this->model->set("tipo", $_REQUEST['tipoUsuario']);
         $this->model->set("password", $_REQUEST['txtPassword']);
         $this->model->set("estado", 1);
         $this->model->set("idusu", $_REQUEST['idusu']);
@@ -234,8 +237,8 @@ class UsuarioController
         if ($query = $this->model->edit()) {
             echo 1;
             $_SESSION['nombreUsuario'] = base64_encode($_REQUEST['txtNombreUsuario']);
-            $_SESSION['apellidoPaterno'] = base64_encode($_REQUEST['txtApellidoP']);
-            $_SESSION['apellidoMaterno'] = base64_encode($_REQUEST['txtApellidoM']);
+            $_SESSION['apellidoUsuario'] = base64_encode($_REQUEST['txtApellidoP']);
+            $_SESSION['tipoUsuario'] = base64_encode($_REQUEST['tipoUsuario']);
         } else {
             echo 2;
         }
@@ -254,7 +257,7 @@ class UsuarioController
         $this->model->set("estado", 2);
         $query = $this->model->estado();
     }
-    
+
     public function cambiapassword(){
         $id = $_REQUEST['idusu'];
         $pass1 = $_REQUEST['pass1'];

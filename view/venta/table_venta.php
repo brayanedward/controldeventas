@@ -38,7 +38,7 @@
                                                 <th data-priority="3" id="tech-companies-1-col-2-clone">Vendedor</th>
                                                 <th data-priority="1" id="tech-companies-1-col-3-clone">Cliente</th>
                                                 <th data-priority="1" id="tech-companies-1-col-3-clone">Valor</th>
-                                                <th data-priority="3" id="tech-companies-1-col-5-clone"></th>
+                                                <th data-priority="3" id="tech-companies-1-col-5-clone">Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -48,14 +48,26 @@
                                                 <tr>
                                                     <th data-org-colspan="1" data-columns="tech-companies-1-col-0"><span class="co-name"><?php echo $rows['id_venta'];?></span></th>
                                                     <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['fechaUsuario_venta']); ?></td>
-                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['fechaUsuario_venta']); ?></td>
-                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo $rows['fechaUsuario_venta']; ?></td>
-                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['nombre_usuario']); ?> <?php echo strtoupper($rows['apellido_usuario']); ?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo $rows['cliente_venta']; ?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">$<?php echo $rows['valor_venta']; ?></td>
                                                     <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-5">
 
                                                         <span class="hint  hint--left iconPerfil" data-hint="Ver Reporte" attr-rut="<?php echo $rows['id_venta'] ?>">
                                                             <a class="btn btn-icon waves-effect waves-light btn-warning">
                                                                 <i style="cursor: pointer;" class="mdi mdi-eye "></i>
+                                                            </a>
+                                                        </span>
+
+                                                        <span class="hint  hint--left iconPerfil" data-hint="Exportar Excel" attr-rut="<?php echo $rows['id_venta'] ?>">
+                                                            <a class="btn btn-icon waves-effect waves-light btn-success">
+                                                                <i style="cursor: pointer;" class="mdi mdi-file-excel "></i>
+                                                            </a>
+                                                        </span>
+
+                                                        <span class="hint  hint--left iconPerfil" data-hint="Exportar Pdf" attr-rut="<?php echo $rows['id_venta'] ?>">
+                                                            <a class="btn btn-icon waves-effect waves-light btn-danger">
+                                                                <i style="cursor: pointer;" class="mdi mdi-file-pdf "></i>
                                                             </a>
                                                         </span>
 
