@@ -230,7 +230,7 @@
                            </li>
 
                             <li>
-                                <a href="./view.php?c=clientes" class="waves-effect"><i class="mdi mdi-account-multiple "></i><span> Ventas </span></a>
+                                <a href="./view.php?c=venta" class="waves-effect"><i class="mdi mdi-account-multiple "></i><span> Ventas </span></a>
                             </li>
 
                             <li>
