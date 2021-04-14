@@ -37,7 +37,7 @@ class VentaController
     public function __construct()
     {
 
-        $this->model      = new ventaModel();
+        $this->model      = new VentaModel();
         $this->datetime   = date('Y-m-d H:i:s');
         $this->date       = date('Y-m-d');
         $this->time       = date('H:i:s');
