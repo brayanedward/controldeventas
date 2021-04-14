@@ -21,31 +21,41 @@
 						</div>
                         <!-- end row -->
 
-                            <div class="col-lg-3 col-md-6">
-                                <div class="card-box widget-box-two widget-two-info">
-                                    <i class="mdi mdi-chart-areaspline widget-two-icon"></i>
-                                    <div class="wigdet-two-content text-white">
-                                        <p class="m-0 text-uppercase font-600 font-secondary text-overflow" title="Clientes Registrados">Usuarios Registradas</p>
-                                        <h2 class="text-white"><span data-plugin="counterup"><?php  echo $this->modelUsuario->count(); ?></span> <small><i class="mdi mdi-arrow-up text-success"></i></small></h2>
-                                        <p class="m-0"><b>Última Actualización</b></p>
-                                    </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card-box widget-box-two widget-two-success">
+                                <i class="mdi mdi-chart-areaspline widget-two-icon"></i>
+                                <div class="wigdet-two-content text-white">
+                                    <p class="m-0 text-uppercase font-600 font-secondary text-overflow" title="Clientes Registrados">Ventas de Hoy</p>
+                                    <h2 class="text-white"><span data-plugin="counterup"><?php  echo $this->modelVenta->countHoy(); ?></span> <small><i class="mdi mdi-arrow-up text-success"></i></small></h2>
+                                    <p class="m-0"><b>Última Actualización</b></p>
                                 </div>
                             </div>
-                      <!-- end col -->
+                        </div>
+                  <!-- end col -->
 
-                      <!-- end row -->
-
-                          <div class="col-lg-3 col-md-6">
-                              <div class="card-box widget-box-two widget-two-info">
-                                  <i class="mdi mdi-chart-areaspline widget-two-icon"></i>
-                                  <div class="wigdet-two-content text-white">
-                                      <p class="m-0 text-uppercase font-600 font-secondary text-overflow" title="Clientes Registrados">Ventas Registradas</p>
-                                      <h2 class="text-white"><span data-plugin="counterup"><?php  echo $this->modelVenta->count(); ?></span> <small><i class="mdi mdi-arrow-up text-success"></i></small></h2>
-                                      <p class="m-0"><b>Última Actualización</b></p>
-                                  </div>
-                              </div>
+                  <div class="col-lg-4 col-md-6">
+                      <div class="card-box widget-box-two widget-two-warning">
+                          <i class="mdi mdi-chart-areaspline widget-two-icon"></i>
+                          <div class="wigdet-two-content text-white">
+                              <p class="m-0 text-uppercase font-600 font-secondary text-overflow" title="Clientes Registrados">Ventas Últimos 7 Días</p>
+                              <h2 class="text-white"><span data-plugin="counterup"><?php  echo $this->modelVenta->count(); ?></span> <small><i class="mdi mdi-arrow-up text-success"></i></small></h2>
+                              <p class="m-0"><b>Última Actualización</b></p>
                           </div>
-                    <!-- end col -->
+                      </div>
+                  </div>
+            <!-- end col -->
+
+            <div class="col-lg-4 col-md-6">
+                <div class="card-box widget-box-two widget-two-danger">
+                    <i class="mdi mdi-chart-areaspline widget-two-icon"></i>
+                    <div class="wigdet-two-content text-white">
+                        <p class="m-0 text-uppercase font-600 font-secondary text-overflow" title="Clientes Registrados">Ventas del Mes</p>
+                        <h2 class="text-white"><span data-plugin="counterup"><?php  echo $this->modelVenta->count(); ?></span> <small><i class="mdi mdi-arrow-up text-success"></i></small></h2>
+                        <p class="m-0"><b>Última Actualización</b></p>
+                    </div>
+                </div>
+            </div>
+      <!-- end col -->
 
 
 

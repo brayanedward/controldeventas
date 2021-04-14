@@ -70,6 +70,41 @@ class VentaModel
         return $num;
     }
 
+    public function countHoy(){
+        $hoy = date('Y-m-d');
+        $sql = "SELECT count(id_venta)as num FROM tb_Venta WHERE fechaUsuario_venta BETWEEN '$hoy 00:00:00' AND '$hoy 23:59:59'";
+
+        $datos = $this->con->consultaRetorno($sql);
+
+        if ($rows = mysqli_fetch_array($datos)) {
+            $num = $rows[0];
+        }
+        return $num;
+    }
+
+    public function countSiete(){
+        $sql = "SELECT count(id_venta)as num FROM tb_Venta WHERE YEAR(fechaUsuario_venta) = YEAR(CURRENT_DATE())
+        AND MONTH(fechaUsuario_venta)  = MONTH(CURRENT_DATE())";
+
+        $datos = $this->con->consultaRetorno($sql);
+
+        if ($rows = mysqli_fetch_array($datos)) {
+            $num = $rows[0];
+        }
+        return $num;
+    }
+
+    public function countMes(){
+        $sql = "SELECT count(id_venta)as num FROM tb_Venta ";
+
+        $datos = $this->con->consultaRetorno($sql);
+
+        if ($rows = mysqli_fetch_array($datos)) {
+            $num = $rows[0];
+        }
+        return $num;
+    }
+
     public function add(){
         $sql = "INSERT INTO tb_Venta
                 (descripcion_venta,cliente_venta,valor_venta,direccion_venta,fechaUsuario_venta,fecha_venta,tipoPago_venta,estado_venta,usuario_venta)
