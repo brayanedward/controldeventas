@@ -47,7 +47,7 @@
                                             </div>
 
                                             <div>
-                                                <h4 class="m-b-5"><?php echo $rows['nombres_usuario']; ?> <?php echo $rows['apellidoPaterno_usuario']; ?></h4>
+                                                <h4 class="m-b-5"><?php echo $rows['nombre_usuario']; ?> <?php echo $rows['apellido_usuario']; ?></h4>
                                                 <p class="text-muted"> <?php echo $rows['rut_usuario'] . '-' . $rows['dv_usuario']; ?> </p>
                                             </div>
 

@@ -23,7 +23,7 @@
 
                 <!-- LOGO -->
                 <div class="topbar-left">
-                    <a href="view.php" class="logo"><span>CLIENTES</span></span><i class="mdi mdi-cube"></i></a>
+                    <a href="view.php" class="logo"><span>VENTAS</span></span><i class="mdi mdi-cube"></i></a>
                     <!-- Image logo -->
                     <!--<a href="index.html" class="logo">-->
                         <!--<span>-->
@@ -230,11 +230,7 @@
                            </li>
 
                             <li>
-                                <a href="./view.php?c=clientes" class="waves-effect"><i class="mdi mdi-account-multiple "></i><span> Clientes </span></a>
-                            </li>
-
-                            <li>
-                                <a href="./view.php?c=clientes&a=listaxbusq" class="waves-effect"><i class="zmdi zmdi-search"></i><span> Buscar Clientes </span></a>
+                                <a href="./view.php?c=clientes" class="waves-effect"><i class="mdi mdi-account-multiple "></i><span> Ventas </span></a>
                             </li>
 
                             <li>
