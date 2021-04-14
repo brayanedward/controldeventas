@@ -58,7 +58,10 @@ class DashboardModel
             $num = $rows[0];
         }
         return $num;
+
+      
     }
+
 
     public function add(){
         $sql = "INSERT INTO tb_archivo

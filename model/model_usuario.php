@@ -62,6 +62,8 @@ class UsuarioModel
             $num = $rows[0];
         }
         return $num;
+
+        echo $sql;
     }
 
     public function add(){
