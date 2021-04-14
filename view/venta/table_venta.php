@@ -6,13 +6,13 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="page-title-box">
-                        <h4 class="page-title">Lista de Clientes </h4>
+                        <h4 class="page-title">Lista de Ventas </h4>
                         <ol class="breadcrumb p-0 m-0">
                             <li>
-                                <a href="#">Lista de Clientes</a>
+                                <a href="#">Ventas</a>
                             </li>
                             <li class="active">
-                                Lista de Clientes
+                                Lista de Ventas
                             </li>
                         </ol>
                         <div class="clearfix"></div>
@@ -33,7 +33,6 @@
                                     <table id="datatable" class="table table-striped mb-0">
                                         <thead>
                                             <tr>
-                                                <th id="tech-companies-1-col-0-clone">Rut</th>
                                                 <th data-priority="1" id="tech-companies-1-col-1-clone">ID</th>
                                                 <th data-priority="1" id="tech-companies-1-col-1-clone">Fecha</th>
                                                 <th data-priority="3" id="tech-companies-1-col-2-clone">Vendedor</th>
@@ -47,11 +46,11 @@
                                             foreach ($this->model->lista() as $rows) : ?>
 
                                                 <tr>
-                                                    <th data-org-colspan="1" data-columns="tech-companies-1-col-0"><span class="co-name"><?php echo $rows['id_venta']; ?>-<?php echo $rows['dv_cliente']; ?></span></th>
+                                                    <th data-org-colspan="1" data-columns="tech-companies-1-col-0"><span class="co-name"><?php echo $rows['id_venta'];?></span></th>
                                                     <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['fechaUsuario_venta']); ?></td>
-                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['fechaUsuario_venta']); ?> <?php echo strtoupper($rows['apellidom_cliente']); ?></td>
-                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo $rows['fechaUsuario_venta']; ?> <b>año(s)</b> <?php echo $rows['meses_actual'];?><b> Mes(es)</b> <?php echo $rows['dias_actual']; ?> <b>día(s)</b></td>
-                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo $alert;?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['fechaUsuario_venta']); ?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo $rows['fechaUsuario_venta']; ?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"></td>
                                                     <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-5">
 
                                                         <span class="hint  hint--left iconPerfil" data-hint="Ver Reporte" attr-rut="<?php echo $rows['id_venta'] ?>">

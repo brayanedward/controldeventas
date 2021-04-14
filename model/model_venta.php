@@ -49,10 +49,14 @@ class VentaModel
             {$this->get('condicion')}";
             $datos = $this->con->consultaRetorno($sql);
             return $datos;
+            echo $sql;
+
 
         } catch (Exception $e) {
             die($e->getMessage());
         }
+
+        echo $sql;
     }
 
     public function count(){
