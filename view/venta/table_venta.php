@@ -38,7 +38,7 @@
                                                 <th data-priority="1" id="tech-companies-1-col-1-clone">Fecha</th>
                                                 <th data-priority="3" id="tech-companies-1-col-2-clone">Vendedor</th>
                                                 <th data-priority="1" id="tech-companies-1-col-3-clone">Cliente</th>
-                                                <th data-priority="1" id="tech-companies-1-col-3-clone">Valor/th>
+                                                <th data-priority="1" id="tech-companies-1-col-3-clone">Valor</th>
                                                 <th data-priority="3" id="tech-companies-1-col-5-clone"></th>
                                             </tr>
                                         </thead>
