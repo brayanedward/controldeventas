@@ -25,8 +25,8 @@
                         <div class="table-rep-plugin">
                             <div class="table-wrapper">
                                 <div class="btn-toolbar">
-                                    <a href="./view.php?c=clientes&a=add" class="btn btn-info waves-effect waves-light mb-3" data-animation="fadein" data-plugin="custommodal" data-overlayspeed="200" data-overlaycolor="#36404a">
-                                        <i class="md md-add"></i> Agregar Clientes</a>
+                                    <a href="./view.php?c=venta&a=add" class="btn btn-info waves-effect waves-light mb-3" data-animation="fadein" data-plugin="custommodal" data-overlayspeed="200" data-overlaycolor="#36404a">
+                                        <i class="md md-add"></i> Agregar Venta</a>
                                 </div>
                                 <div class="table-responsive mb-0 fixed-solution" data-pattern="priority-columns">
                                     <br>
