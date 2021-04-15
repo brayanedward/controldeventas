@@ -75,6 +75,12 @@ class VentaController
     }
 
     public function table(){
+      if(base64_decode($_SESSION['tipoUsuario'])==1){
+        $condicion = " where estado_venta < 3 order by nombre_venta desc";
+      }else {
+        $usuario = base64_decode($_SESSION['rutUsuario']);
+        $condicion = " where estado_venta < 3 and usuario_venta = $usuario order by nombre_venta desc";
+      }
         $condicion = " where estado_venta < 3 order by nombre_venta desc";
         $this->model->set("condicion", $condicion);
         require_once './view/' . $this->controller . '/table_' . $this->controller . '.php';

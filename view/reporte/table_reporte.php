@@ -18,7 +18,7 @@
                                 <a href="#">Reportes</a>
                             </li>
                             <li class="active">
-                                Generación de Reportes
+                                Generar Reportes
                             </li>
                         </ol>
                         <div class="clearfix"></div>
