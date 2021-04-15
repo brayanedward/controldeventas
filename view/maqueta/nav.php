@@ -230,12 +230,17 @@
                            </li>
 
                             <li>
-                                <a href="./view.php?c=venta" class="waves-effect"><i class="mdi mdi-account-multiple "></i><span> Ventas </span></a>
+                                <a href="./view.php?c=venta" class="waves-effect"><i class="mdi mdi-square-inc-cash "></i><span> Ventas </span></a>
                             </li>
                             <?php if(base64_decode($_SESSION['tipoUsuario'])==1){ ?>
                               <li>
-                                  <a href="./view.php?c=usuario" class="waves-effect"><i class="zmdi zmdi-sort-amount-asc"></i><span> Gestion Usuarios </span></a>
+                                  <a href="./view.php?c=reporte" class="waves-effect"><i class="zmdi zmdi-sort-amount-asc"></i><span> Generar Reportes </span></a>
                               </li>
+
+                              <li>
+                                  <a href="./view.php?c=usuario" class="waves-effect"><i class="mdi mdi-account-multiple "></i><span> Gestion Usuarios </span></a>
+                              </li>
+
                             <?php } ?>
 
 
