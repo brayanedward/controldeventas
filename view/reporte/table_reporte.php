@@ -30,17 +30,28 @@
                     <div class="card-box">
                         <div class="body">
                             <form class="form" id="form" method="POST">
-                              <div class="form-group col-md-3">
+                              <div class="form-group col-md-2">
                                 <label for="tipoUsuario">FECHA DESDE</label>
-                                  <input type="date" id="txtFechaDesde" name="txtFechaDesde" class="form-control datepicker valid" placeholder="Ej: 30/07/2016" aria-invalid="false">
+                                  <input type="date" id="txtFechaDesde" name="txtFechaDesde" class="form-control datepicker valid" placeholder="Ej: 30/07/2016" aria-invalid="false" value="<?php echo date('d-m-Y');?>">
+                              </div>
+
+                              <div class="form-group col-md-2">
+                                <label for="tipoUsuario">FECHA HASTA</label>
+                                  <input type="date" id="txtFechaHasta" name="txtFechaHasta" class="form-control datepicker valid" placeholder="Ej: 30/07/2016" aria-invalid="false" value="<?php echo date('d-m-Y');?>">
                               </div>
 
                               <div class="form-group col-md-3">
-                                <label for="tipoUsuario">FECHA HASTA</label>
-                                  <input type="date" id="txtFechaHasta" name="txtFechaHasta" class="form-control datepicker valid" placeholder="Ej: 30/07/2016" aria-invalid="false">
+                                <label for="usuario">VENDEDOR</label>
+                                  <select class="form-control" id="usuario" name="usuario">
+                                    <option value="0">SELECCIONE VENDEDOR</option>
+                                    <option value="3" selected>TODOS</option>
+                                    <?php foreach ($this->modelUsuario->lista() as $rows4):?>
+                                       <option value="<?php echo $rows4['rut_usuario']?>"><?php echo $rows4['nombre_usuario']?> <?php echo $rows4['apellido_usuario']?></option>
+                                     <?php endforeach;?>
+                                  </select>
                               </div>
 
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                   <label for="tipoUsuario">TIPO USUARIO</label>
                                     <select class="form-control" id="tipoUsuario" name="tipoUsuario">
                                       <option value="0">SELECCIONE TIPO USUARIO</option>
@@ -54,9 +65,9 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group col-md-3">
-                                  <label for="tipoUsuario">TIPO PAGO</label>
-                                    <select class="form-control" id="tipoUsuario" name="tipoUsuario">
+                                <div class="form-group col-md-2">
+                                  <label for="tipoPago">TIPO PAGO</label>
+                                    <select class="form-control" id="tipoPago" name="tipoPago">
                                       <option value="0">SELECCIONE TIPO PAGO</option>
                                       <option value="3" selected>TODOS</option>
                                       <?php foreach ($this->modelTipoPago->lista() as $rows3):?>
@@ -65,8 +76,8 @@
                                     </select>
                                 </div>
                                 <br>
-                                <button type="button" onclick="editar(<?php echo $rows['rut_usuario']?>)" class="btn btn-danger btn-round">Generar PDF</button>
-                                <button type="button" onclick="editar(<?php echo $rows['rut_usuario']?>)" class="btn btn-success btn-round">Generar Excel</button>
+                                <button type="button" class="btn btn-danger btn-round btnPdf">Generar PDF</button>
+                                <button type="button" class="btn btn-success btn-round btnExcel">Generar Excel</button>
                                 <a href="<?php echo $this->urlhome; ?>"> <button type="button" class="btn btn-warning btn-round"><i class="zmdi zmdi-long-arrow-return"></i> Volver</button></a>
                             </form>
                         </div>
@@ -77,40 +88,7 @@
 
     </div>
 
-        <!-- Modal -->
-    <div class="modal fade" id="ModalVisita" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Realizar Nueva Visita</h5>
-                </div>
-                <div class="modal-body">
-                    <table class="">
-                        <tr>
-                            <td>
-                                Indique Fecha Visita:
-                            </td>
-                            <td>
-                                <input type="date" id="txtfechavisita" name="txtfechavisita" class="form-control datepicker valid" placeholder="Ej: 30/07/2016" aria-invalid="false">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Indique Descripcion Visita:
-                            </td>
-                            <td>
-                                <textarea class="form-control" name="txtindivisita" id="txtindivisita" cols="55" rows="5"></textarea>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="btnGuardaVisita">Guardar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <div class="modal fade" id="ModalHistorial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -170,15 +148,17 @@
             } );
 
 
-        $("body").on('click','span.iconPerfil', function(event) {
-            $('#contenidoInfoCliente').empty('');
-            var rutCliente = $(this).attr('attr-rut');
-            $('#modalInfoCliente').modal('show');
+        $("body").on('click','button.btnPdf', function(event) {
+            //var rutCliente = $(this).attr('attr-rut');
             $.ajax({
                 data: {
-                    "rutCliente": rutCliente
+                    "txtFechaDesde": txtFechaDesde,
+                    "txtFechaHasta": txtFechaHasta,
+                    "tipoUsuario"  : tipoUsuario,
+                    "tipoPago"     : tipoPago,
+                    "usuario"      : usuario
                 },
-                url: "<?php echo $this->infoCliente; ?>",
+                url: "<?php echo $this->generaPDF; ?>",
                 type: "POST",
                 cache: false,
                 dataType: "html",
@@ -186,8 +166,12 @@
                 beforeSend: function() {
                 },
                 success: function(respuesta) {
-                    $('#contenidoInfoCliente').html(respuesta);
-
+                  //  $('#contenidoInfoCliente').html(respuesta);
+                  alert("paso");
+                },
+                error: function(respuesta) {
+                  //  $('#contenidoInfoCliente').html(respuesta);
+                  alert("no paso");
                 }
             });
             return false;
@@ -230,97 +214,5 @@
             }
         }
 
-        function buscar() {
-            var tipob = $('#selTipoBusq').val();
-            var direccion = $('#direccion').val();
-            var rut = $('#rut').val();
-            var nombre = $('#nombre').val();
-            var apellidop = $('#apellidop').val();
-            var apellidom = $('#apellidom').val();
-            var direccionnum = $('#direccionnum').val();
-
-            $.ajax({
-                data: {
-                    "tipob": tipob,
-                    "direccion": direccion,
-                    "rut": rut,
-                    "nombre": nombre,
-                    "apellidop": apellidop,
-                    "apellidom": apellidom,
-                    "direccionnum": direccionnum
-                },
-                url: "<?php echo $this->listaxfiltro; ?>",
-                type: "POST",
-                cache: false,
-                dataType: "html",
-                contentType: "application/x-www-form-urlencoded",
-                beforeSend: function() {
-                    $('.message').html('<div class="sk-wave"> <div class="sk-rect sk-rect1"></div> <div class="sk-rect sk-rect2"></div> <div class="sk-rect sk-rect3"></div> <div class="sk-rect sk-rect4"></div> <div class="sk-rect sk-rect5"></div> </div>');
-                },
-                success: function(respuesta) {
-                    $('#resultbusq').show();
-                    $('#tbodyClientes').html(respuesta);
-                }
-            });
-            return false;
-        }
-
-        function realizarVisita(rutcli){
-            $('#ModalVisita').modal();
-            $("#btnGuardaVisita").attr("onclick","guardaVisita("+rutcli+")");
-        }
-
-        function guardaVisita(rutcli){
-            var txtindivisita = $('#txtindivisita').val();
-            var txtfechavisita = $('#txtfechavisita').val();
-
-            $.ajax({
-                data: {
-                    "txtindivisita": txtindivisita,
-                    "txtfechavisita": txtfechavisita,
-                    "rutcli": rutcli
-                },
-                url: "<?php echo $this->guardaVisita; ?>",
-                type: "POST",
-                cache: false,
-                dataType: "html",
-                contentType: "application/x-www-form-urlencoded",
-                beforeSend: function() {
-                    $('.message').html('<div class="sk-wave"> <div class="sk-rect sk-rect1"></div> <div class="sk-rect sk-rect2"></div> <div class="sk-rect sk-rect3"></div> <div class="sk-rect sk-rect4"></div> <div class="sk-rect sk-rect5"></div> </div>');
-                },
-                success: function(respuesta) {
-                    if (respuesta == 1) {
-                        alertify.success('Guardado Exitosamente!');
-                        $('#ModalVisita').modal('hide');
-                        $('#txtindivisita').val('');
-                    } else {
-                        alertify.error('Error al ingresar la información');
-                    }
-                }
-            });
-            return false;
-        }
-
-        function historilVisitas(rutcli){
-            $('#ModalHistorial').modal();
-            $('#cargaHistorial').empty();
-            $.ajax({
-                data: {
-                    "rutcli": rutcli
-                },
-                url: "<?php echo $this->HistorialVisita; ?>",
-                type: "POST",
-                cache: false,
-                dataType: "html",
-                contentType: "application/x-www-form-urlencoded",
-                beforeSend: function() {
-                    $('.message').html('<div class="sk-wave"> <div class="sk-rect sk-rect1"></div> <div class="sk-rect sk-rect2"></div> <div class="sk-rect sk-rect3"></div> <div class="sk-rect sk-rect4"></div> <div class="sk-rect sk-rect5"></div> </div>');
-                },
-                success: function(respuesta) {
-                    $('#cargaHistorial').html(respuesta);
-                }
-            });
-            return false;
-        }
 
     </script>
