@@ -9,6 +9,7 @@ date_default_timezone_set('America/Santiago');
 require_once 'model/model_reporte.php';
 require_once 'model/model_tipoPago.php';
 require_once 'model/model_tipoUsuario.php';
+require_once 'model/model_usuario.php';
 //require_once 'model/model_rol.php';
 
 class ReporteController
@@ -42,6 +43,7 @@ class ReporteController
         $this->model      = new reporteModel();
         $this->modelTipoPago = new tipoPagoModel();
         $this->modelTipoUsuario = new tipoUsuarioModel();
+        $this->modelUsuario = new UsuarioModel();
         $this->datetime   = date('Y-m-d H:i:s');
         $this->date       = date('Y-m-d');
         $this->time       = date('H:i:s');
@@ -67,10 +69,13 @@ class ReporteController
         $this->urlultimo   = './view.php?c=' . $this->controller . '&a=ultimo';
         $this->urltable    = './view.php?c=' . $this->controller . '&a=table';
         $this->urlchpass   = './view.php?c=' . $this->controller . '&a=cambiapassword';
+        $this->generaPDF      = './view.php?c=' . $this->controller . '&a=generaPDF&id=';
     }
 
     public function index(){
         $condicion = "";
+        $condicionUsuario = 'order by nombre_usuario asc';
+        $this->modelUsuario->set("condicion",$condicionUsuario);
         $this->model->set("condicion", $condicion);
         require_once './view/maqueta/header.php';
         require_once './view/maqueta/nav.php';
@@ -78,38 +83,23 @@ class ReporteController
         require_once './view/maqueta/footer.php';
     }
 
-    public function table(){
-        $condicion = " where estado_reporte < 3 order by nombre_reporte desc";
+
+    public function generaPDF(){
+        $fechaDesde = $_REQUEST['fechaDesde'];
+        $fechaHasta = $_REQUEST['fechaHasta'];
+        $tipoPago = $_REQUEST['tipoPago'];
+        $tipoUsuario = $_REQUEST['tipoUsuario'];
+        $vendedor = $_REQUEST['vendedor'];
+        $condicion = '';
+
+
+        $condicion = 'where rutcliente_ficha = '.$rutcli.'';
+        $condicion = 'where c.rut_cliente= ' .$rutcli.'';
+
         $this->model->set("condicion", $condicion);
-        require_once './view/' . $this->controller . '/table_' . $this->controller . '.php';
-    }
-
-    public function ultimo(){
-        $condicion = " where estado_reporte < 3 order by rut_reporte desc limit 10";
-        $this->model->set("condicion", $condicion);
-        require_once './view/' . $this->controller . '/rows_' . $this->controller . '.php';
-    }
 
 
-    public function delete(){
-        $id = base64_decode($_REQUEST['id']);
-        $this->model->set("rut", $id);
-        $this->model->set("estado", 3);
-        $query = $this->model->delete();
-    }
+        require_once './reportes/reportePdf.php';
 
-    public function deshabilitar(){
-        $id = base64_decode($_REQUEST['id']);
-        $this->model->set("rut", $id);
-        $this->model->set("estado", 2);
-        $query = $this->model->estado();
-    }
-
-    public function cambiapassword(){
-        $id = $_REQUEST['idusu'];
-        $pass1 = $_REQUEST['pass1'];
-        $this->model->set("pass", $pass1);
-        $this->model->set("rut_reporte", $id);
-        $query = $this->model->cambiaPw();
     }
 }
