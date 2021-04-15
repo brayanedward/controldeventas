@@ -66,7 +66,12 @@ class VentaController
     }
 
     public function index(){
-        $condicion = "";
+      if(base64_decode($_SESSION['tipoUsuario'])==1){
+        $condicion = " and a.estado_venta < 3 order by a.fechaUsuario_venta desc";
+      }else {
+        $usuario = base64_decode($_SESSION['rutUsuario']);
+        $condicion = " and a.estado_venta < 3 and a.usuario_venta = ".$usuario." order by a.fechaUsuario_venta desc";
+      }
         $this->model->set("condicion", $condicion);
         require_once './view/maqueta/header.php';
         require_once './view/maqueta/nav.php';
@@ -75,13 +80,7 @@ class VentaController
     }
 
     public function table(){
-      if(base64_decode($_SESSION['tipoUsuario'])==1){
-        $condicion = " where estado_venta < 3 order by nombre_venta desc";
-      }else {
-        $usuario = base64_decode($_SESSION['rutUsuario']);
-        $condicion = " where estado_venta < 3 and usuario_venta = $usuario order by nombre_venta desc";
-      }
-        $condicion = " where estado_venta < 3 order by nombre_venta desc";
+        $condicion= '';
         $this->model->set("condicion", $condicion);
         require_once './view/' . $this->controller . '/table_' . $this->controller . '.php';
     }

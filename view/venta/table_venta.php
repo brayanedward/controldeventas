@@ -181,7 +181,7 @@
             } );
 
 
-        $("body").on('click','span.iconPerfil', function(event) {
+      /*  $("body").on('click','span.iconPerfil', function(event) {
             $('#contenidoInfoCliente').empty('');
             var rutCliente = $(this).attr('attr-rut');
             $('#modalInfoCliente').modal('show');
@@ -203,7 +203,7 @@
             });
             return false;
 
-        });
+        });*/
 
 
 

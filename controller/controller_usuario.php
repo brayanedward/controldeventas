@@ -164,7 +164,8 @@ class UsuarioController
         $this->model->set("dv", $dv);
         $this->model->set("nombre", $_REQUEST['txtNombreUsuario']);
         $this->model->set("apellidop", $_REQUEST['txtApellidoP']);
-        $this->model->set("apellidom", $_REQUEST['txtApellidoM']);
+        $this->model->set("correo", $_REQUEST['txtCorreoElectronico']);
+        $this->model->set("tipo", $_REQUEST['tipoUsuario']);
         $this->model->set("password", $_REQUEST['txtPassword']);
         $this->model->set("estado", 1);
 

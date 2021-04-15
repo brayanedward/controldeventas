@@ -31,13 +31,22 @@
                                 <div class="form-group">
                                     <input type="text" id="txtNombreUsuario" name="txtNombreUsuario" class="form-control" placeholder="Ingrese el Nombre de Usuario" autocomplete="off" maxlength="200">
                                 </div>
-                                <label for="txtApellidoP">Apellidos Paterno</label>
+                                <label for="txtApellidoP">Apellidos</label>
                                 <div class="form-group">
                                     <input type="text" id="txtApellidoP" name="txtApellidoP" class="form-control" placeholder="Ingrese el Apellido de Usuario" autocomplete="off" maxlength="200">
                                 </div>
-                                <label for="txtApellidoM">Apellidos Materno</label>
+                                <label for="txtCorreoElectronico">Correo</label>
                                 <div class="form-group">
-                                    <input type="text" id="txtApellidoM" name="txtApellidoM" class="form-control" placeholder="Ingrese el Apellido de Usuario" autocomplete="off" maxlength="200">
+                                    <input type="text" id="txtCorreoElectronico" name="txtCorreoElectronico" class="form-control" placeholder="Ingrese el Apellido de Usuario" autocomplete="off" maxlength="200">
+                                </div>
+                                <label for="tipoUsuario">Tipo Usuario</label>
+                                <div class="form-group">
+                                    <select class="form-control" id="tipoUsuario" name="tipoUsuario">
+                                      <option value="0">SELECCIONE TIPO USUARIO</option>
+                                      <?php foreach ($this->modelTipoUsuario->lista() as $rows2):?>
+                                         <option value="<?php echo $rows2['id_tipoUsuario']?>"><?php echo $rows2['descripcion_tipoUsuario']?></option>
+                                       <?php endforeach; ?>
+                                    </select>
                                 </div>
                                 <label for="txtPassword">Contraseña</label>
                                 <div class="form-group">
@@ -121,7 +130,8 @@
                     "txtRutUsuario": $('#txtRutUsuario').val(),
                     "txtNombreUsuario": $('#txtNombreUsuario').val(),
                     "txtApellidoP": $('#txtApellidoP').val(),
-                    "txtApellidoM": $('#txtApellidoM').val(),
+                    "txtCorreoElectronico": $('#txtCorreoElectronico').val(),
+                    "tipoUsuario": $('#tipoUsuario').val(),
                     "txtPassword": $('#txtPassword').val()
                 },
                 url: "<?php echo $this->urlsave; ?>",
