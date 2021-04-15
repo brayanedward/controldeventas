@@ -14,6 +14,12 @@ class VentaModel
     private $pago;
     private $estado;
     private $usuario;
+    private $txtValorventa;
+    private $txtFechaventa;
+    private $txtNombrecventa;
+    private $txtDireccioventa;
+    private $selTipopago;
+    private $txtDetalleventa;
 
     private $create;
     private $update;
@@ -67,17 +73,17 @@ class VentaModel
     }
 
     public function add(){
-        $sql = "INSERT INTO tb_Venta
-                (descripcion_venta,cliente_venta,valor_venta,direccion_venta,fechaUsuario_venta,fecha_venta,tipoPago_venta,estado_venta,usuario_venta)
+        $sql = "INSERT INTO tb_venta
+                (descripción_venta,cliente_venta,valor_venta,direccion_venta,fechaUsuario_venta,fecha_venta,tipoPago_venta,estado_venta,usuario_venta)
                 VALUES
                 (
-                '{$this->get('descripcion')}',
-                '{$this->get('cliente')}',
-                '{$this->get('valor')}',
-                '{$this->get('direccion')}',
-                '{$this->get('fechaUsuario')}',
-                '{$this->get('fecha')}',
-                '{$this->get('tipoPago')}',
+                '{$this->get('txtDetalleventa')}',
+                '{$this->get('txtNombrecventa')}',
+                '{$this->get('txtValorventa')}',
+                '{$this->get('txtDireccioventa')}',
+                 sysdate(),
+                '{$this->get('txtFechaventa')}',
+                '{$this->get('selTipopago')}',
                 '{$this->get('estado')}',
                 '{$this->get('usuario')}'
                 )";

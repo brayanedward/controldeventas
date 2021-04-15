@@ -143,32 +143,19 @@ class VentaController
     }
 
     public function save(){
-        $rut = stripslashes($_REQUEST['txtRutventa']);
-        $rut = addslashes($rut);
-        $rut = trim($rut);
-        $rut = htmlspecialchars($rut);
-        $rut = str_replace('"', '', $rut);
-        $rut = str_replace(':', '', $rut);
-        $rut = str_replace('.', '', $rut);
-        $rut = str_replace(',', '', $rut);
-        $rut = str_replace(';', '', $rut);
-
-        $position = explode("-", $rut);
-        $rut      = $position[0];
-        $dv       = $position[1];
-
-        $this->model->set("rut", $rut);
-        $this->model->set("dv", $dv);
-        $this->model->set("nombre", $_REQUEST['txtNombreventa']);
-        $this->model->set("apellidop", $_REQUEST['txtApellidoP']);
-        $this->model->set("apellidom", $_REQUEST['txtApellidoM']);
-        $this->model->set("password", $_REQUEST['txtPassword']);
+        $this->model->set("txtValorventa", $_REQUEST['txtValorventa']);
+        $this->model->set("txtFechaventa", $_REQUEST['txtFechaventa']);
+        $this->model->set("txtNombrecventa", $_REQUEST['txtNombrecventa']);
+        $this->model->set("txtDireccioventa", $_REQUEST['txtDireccioventa']);
+        $this->model->set("selTipopago", $_REQUEST['selTipopago']);
+        $this->model->set("txtDetalleventa", $_REQUEST['txtDetalleventa']);
+        $this->model->set("usuario", base64_decode($_SESSION['rutUsuario']));
         $this->model->set("estado", 1);
 
         if ($query = $this->model->add()) {
-            echo "1";
+            echo '1';
         } else {
-            echo "2";
+            echo '2';
         }
     }
 

@@ -157,11 +157,12 @@ function grabar() {
     if (validacionesUsu() == '') {
         $.ajax({
             data: {
-                "txtRutUsuario": $('#txtRutUsuario').val(),
-                "txtNombreUsuario": $('#txtNombreUsuario').val(),
-                "txtApellidoP": $('#txtApellidoP').val(),
-                "txtApellidoM": $('#txtApellidoM').val(),
-                "txtPassword": $('#txtPassword').val()
+                "txtValorventa": $('#txtValorventa').val(),
+                "txtFechaventa": $('#txtFechaventa').val(),
+                "txtNombrecventa": $('#txtNombrecventa').val(),
+                "txtDireccioventa": $('#txtDireccioventa').val(),
+                "selTipopago": $('#selTipopago').val(),
+                "txtDetalleventa": $('#txtDetalleventa').val()
             },
             url: "<?php echo $this->urlsave; ?>",
             type: "POST",
@@ -174,12 +175,10 @@ function grabar() {
                 );
             },
             success: function(respuesta) {
+                console.log(respuesta);
                 if (respuesta == 1) {
                     alertify.success('Guardado Exitosamente!');
                     limpiar();
-                    setTimeout(() => {
-                        window.location.href = '<?php echo $this->urlhome; ?>';
-                    }, 1000);
                 } else {
                     alertify.error('Error al ingresar la información');
                 }
@@ -195,45 +194,34 @@ function grabar() {
 function validacionesUsu() {
     var errores = '';
 
-    if ($('#txtRutUsuario').val() == '') {
-        errores += '- Debe completar el Rut de Usuario \n';
+    if ($('#txtValorventa').val() == '') {
+        errores += '- Debe completar el Valor de la venta \n';
     }
-    if ($('#txtNombreUsuario').val() == '') {
-        errores += '- Debe completar el Nombre de Usuario \n';
+    if ($('#txtFechaventa').val() == '') {
+        errores += '- Debe completar la Fecha de la venta \n';
     }
-    if ($('#txtApellidoUsuario').val() == '') {
-        errores += '- Debe completar el Apellido de Usuario \n';
+    if ($('#txtNombrecventa').val() == '') {
+        errores += '- Debe completar Nombre Cliente venta\n';
     }
-    if ($('#txtFecNacimiento').val() == '') {
-        errores += '- Debe completar la Fecha de Nacimiento \n';
+    if ($('#txtDireccioventa').val() == '') {
+        errores += '- Debe completar la dirección de la venta \n';
     }
-    if ($('#txtCorreoElectronico').val() == '') {
-        errores += '- Debe completar el Correo de Usuario \n';
+    if ($('#selTipopago').val() == '') {
+        errores += '- Debe completar el Tipo de pago \n';
     }
-    if ($('#txtPassword').val() == '') {
-        errores += '- Debe completar la Contraseña de Usuario \n';
-    }
-
-    var pw1 = $('#txtPassword').val();
-    var pw2 = $('#txtPassword2').val();
-
-    if (pw1 && pw2 != '') {
-        if (pw1 != pw2) {
-            errores += '- Las Contraseñas no Coinciden \n';
-        }
+    if ($('#txtDetalleventa').val() == '') {
+        errores += '- Debe completar el detalle de la venta \n';
     }
 
     return errores;
 }
 
 function limpiar() {
-    $('#txtRutUsuario').val('');
-    $('#txtNombreUsuario').val('');
-    $('#txtApellidoUsuario').val('');
-    $('#txtFecNacimiento').val('');
-    $('#txtCorreoElectronico').val('');
-    $('#txtTelUsuario').val('');
-    $('#txtPassword').val('');
-    $('#txtPassword2').val('');
+    $('#txtValorventa').val('');
+    $('#txtFechaventa').val('');
+    $('#txtNombrecventa').val('');
+    $('#txtDireccioventa').val('');
+    $('#selTipopago').val('');
+    $('#txtDetalleventa').val('');
 }
 </script>
