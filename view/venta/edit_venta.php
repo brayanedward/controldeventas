@@ -34,6 +34,7 @@
                             </div>
                             <div class="clearfix"></div>
                         </div>
+                        <?php foreach ($this->model->lista() as $rows); ?>
                         <div id="ventas" class="panel-collapse collapse in">
                             <div class="portlet-body">
                                 <div class="form-group col-lg-6">
@@ -41,13 +42,13 @@
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="zmdi zmdi-money"></i></span>
                                         <input type="number" id="txtValorventa" name="txtValorventa"
-                                            class="form-control" placeholder="" maxlength="9">
+                                            class="form-control" placeholder="" maxlength="9" value="<?php echo $rows['valor_venta']?>">
                                     </div>
                                 </div>
                                 <div class="form-group col-lg-6">
                                     <label for="txtFechaventa">Fecha Venta</label>
                                     <input type="date" id="txtFechaventa" name="txtFechaventa" class="form-control"
-                                        placeholder="">
+                                        placeholder="" value="<?php echo $rows['fecha_venta']?>">
                                 </div>
 
                                 <div class="form-group col-lg-6">
@@ -56,7 +57,7 @@
                                         <span class="input-group-addon"><i class="zmdi zmdi-account-box-o"></i></span>
                                         <input type="text" id="txtNombrecventa" name="txtNombrecventa"
                                             class="form-control" placeholder="Ingrese los Nombres de Cliente"
-                                            maxlength="500">
+                                            maxlength="500" value="<?php echo $rows['cliente_venta']?>">
                                     </div>
                                 </div>
 
@@ -64,7 +65,7 @@
                                     <label for="txtDireccioventa">Dirección Venta</label>
                                     <input type="text" id="txtDireccioventa" name="txtDireccioventa"
                                         class="form-control" placeholder="Ingrese Direccion de la Venta"
-                                        maxlength="500">
+                                        maxlength="500" value="<?php echo $rows['direccion_venta']?>">
                                 </div>
                                 <br>
                                 <label for="txtCorreoElectronico">Tipo de Pago</label>
@@ -73,7 +74,8 @@
                                     <select id="selTipopago" name="selTipopago" class="form-control" required="">
                                         <option>SELECCIONE ... </option>
                                         <?php foreach ($this->model->listaPagos() as $rowPago) : ?>
-                                        <option value="<?php echo $rowPago['id_tipopago'] ?>">
+                                        <?php if($rows['tipoPago_venta'] == $rowPago['id_tipopago']){ $selected = 'selected';}else{$selected = '';}?>
+                                        <option <?php echo $selected; ?> value="<?php echo $rowPago['id_tipopago'] ?>">
                                             <?php echo $rowPago['descripcion_tipopago'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
@@ -83,11 +85,12 @@
                                     <label for="txtDetalleventa">Detalle Venta</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="zmdi zmdi-border-color"></i></span>
-                                        <textarea class="form-control" name="txtDetalleventa" id="txtDetalleventa" rows="3" style="width:100%;"  maxlength="500"></textarea>
+                                        <textarea class="form-control" name="txtDetalleventa" id="txtDetalleventa" rows="3" style="width:100%;"  maxlength="500"><?php echo $rows['descripcion_venta']?></textarea>
                                     </div>
                                 </div>
+                                
                                 <br>
-                                <button type="button" onclick="grabar()" class="btn btn-info btn-round"><i class="zmdi zmdi-floppy"></i> Guardar</button>
+                                <button type="button" onclick="grabar(<?php echo $rows['id_venta']?>)" class="btn btn-info btn-round"><i class="zmdi zmdi-floppy"></i> Guardar</button>
                                 <a href="<?php echo $this->urlhome; ?>"> <button type="button" class="btn btn-danger btn-round"><i class="zmdi zmdi-long-arrow-return"></i> Volver</button></a>
                             </div>
                         </div>
@@ -132,7 +135,7 @@ $('input[name="txtRutUsuario"]').Rut({
     format_on: 'keyup'
 });
 
-function grabar() {
+function grabar(idventa) {
 
     if (validacionesUsu() == '') {
         $.ajax({
@@ -142,9 +145,10 @@ function grabar() {
                 "txtNombrecventa": $('#txtNombrecventa').val(),
                 "txtDireccioventa": $('#txtDireccioventa').val(),
                 "selTipopago": $('#selTipopago').val(),
-                "txtDetalleventa": $('#txtDetalleventa').val()
+                "txtDetalleventa": $('#txtDetalleventa').val(),
+                "idventa": idventa
             },
-            url: "<?php echo $this->urlsave; ?>",
+            url: "<?php echo $this->urlupdate; ?>",
             type: "POST",
             cache: false,
             dataType: "html",

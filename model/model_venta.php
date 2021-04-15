@@ -20,6 +20,7 @@ class VentaModel
     private $txtDireccioventa;
     private $selTipopago;
     private $txtDetalleventa;
+    private $idventa;
 
     private $create;
     private $update;
@@ -51,10 +52,10 @@ class VentaModel
         try {
 
             $sql = "SELECT a.id_venta,a.descripcion_venta,a.cliente_venta,a.valor_venta,a.direccion_venta,a.fechaUsuario_venta,a.fecha_venta,a.tipoPago_venta,a.estado_venta,a.usuario_venta,
-                    b.nombre_usuario ,b.apellido_usuario
-            FROM tb_venta a,tb_usuario b
+                    b.nombre_usuario ,b.apellido_usuario, c.descripcion_tipopago
+            FROM tb_venta a,tb_usuario b, tb_tipopago c
             WHERE
-            a.usuario_venta = b.rut_usuario
+            a.usuario_venta = b.rut_usuario and a.tipoPago_venta = c.id_tipopago
             {$this->get('condicion')}";
             $datos = $this->con->consultaRetorno($sql);
             return $datos;
@@ -115,7 +116,7 @@ class VentaModel
 
     public function add(){
         $sql = "INSERT INTO tb_venta
-                (descripción_venta,cliente_venta,valor_venta,direccion_venta,fechaUsuario_venta,fecha_venta,tipoPago_venta,estado_venta,usuario_venta)
+                (descripcion_venta,cliente_venta,valor_venta,direccion_venta,fechaUsuario_venta,fecha_venta,tipoPago_venta,estado_venta,usuario_venta)
                 VALUES
                 (
                 '{$this->get('txtDetalleventa')}',
@@ -125,8 +126,7 @@ class VentaModel
                  sysdate(),
                 '{$this->get('txtFechaventa')}',
                 '{$this->get('selTipopago')}',
-                '{$this->get('estado')}',
-                '{$this->get('usuario')}'
+                '{$this->get('estado')}'
                 )";
         $datos = $this->con->consultaRetorno($sql);
         return $datos;
@@ -139,18 +139,16 @@ class VentaModel
     }
 
     public function edit(){
-        $sql = "UPDATE tb_Venta
+        $sql = "UPDATE tb_venta
                 SET
-                descripcion_venta = '{$this->get('descripcion')}',
-                cliente_venta = '{$this->get('cliente')}',
-                valor_venta = '{$this->get('valor')}',
-                direccion_venta = '{$this->get('direccion')}',
-                tipo_Venta = '{$this->get('tipo')}',
-                fechaUsuario_venta_ = '{$this->get('fechaUsuario')}',
-                fecha_venta_ = '{$this->get('fecha')}',
-                usuario_venta = '{$this->get('usuario')}'
+                descripcion_venta = '{$this->get('txtDetalleventa')}',
+                cliente_venta = '{$this->get('txtNombrecventa')}',
+                valor_venta = '{$this->get('txtValorventa')}',
+                direccion_venta = '{$this->get('txtDireccioventa')}',
+                tipoPago_venta = '{$this->get('selTipopago')}',
+                fecha_venta = '{$this->get('txtFechaventa')}'
                 WHERE
-                rut_Venta = '{$this->get('idusu')}'";
+                id_venta = '{$this->get('idventa')}'";
         $datos = $this->con->consultaRetorno($sql);
         return $datos;
     }
@@ -168,8 +166,7 @@ class VentaModel
                             id_tipopago,
                             descripcion_tipopago
                     FROM
-                        tb_tipopago
-            {$this->get('condicion')}";
+                        tb_tipopago";
             $datos = $this->con->consultaRetorno($sql);
             return $datos;
 
