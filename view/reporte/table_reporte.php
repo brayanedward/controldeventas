@@ -1,18 +1,24 @@
+
 <script type="text/javascript">
-</script>
+  $( function() {
+    jQuery('#txtFechaHasta').datepicker();
+    jQuery('#txtFechaDesde').datepicker();
+  } );
+  </script>
+
 <div class="content-page">
     <div class="content">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
                     <div class="page-title-box">
-                        <h4 class="page-title">Lista de Ventas </h4>
+                        <h4 class="page-title">Reportes </h4>
                         <ol class="breadcrumb p-0 m-0">
                             <li>
-                                <a href="#">Ventas</a>
+                                <a href="#">Reportes</a>
                             </li>
                             <li class="active">
-                                Lista de Ventas
+                                Generar Reportes
                             </li>
                         </ol>
                         <div class="clearfix"></div>
@@ -20,70 +26,53 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-lg-12">
                     <div class="card-box">
-                        <div class="table-rep-plugin">
-                            <div class="table-wrapper">
-                                <div class="btn-toolbar">
-                                    <a href="./view.php?c=venta&a=add" class="btn btn-info waves-effect waves-light mb-3" data-animation="fadein" data-plugin="custommodal" data-overlayspeed="200" data-overlaycolor="#36404a">
-                                        <i class="md md-add"></i> Agregar Venta</a>
+                        <div class="body">
+                            <form class="form" id="form" method="POST">
+                              <div class="form-group col-md-3">
+                                <label for="tipoUsuario">FECHA DESDE</label>
+                                  <input type="date" id="txtFechaDesde" name="txtFechaDesde" class="form-control datepicker valid" placeholder="Ej: 30/07/2016" aria-invalid="false">
+                              </div>
+
+                              <div class="form-group col-md-3">
+                                <label for="tipoUsuario">FECHA HASTA</label>
+                                  <input type="date" id="txtFechaHasta" name="txtFechaHasta" class="form-control datepicker valid" placeholder="Ej: 30/07/2016" aria-invalid="false">
+                              </div>
+
+                                <div class="form-group col-md-3">
+                                  <label for="tipoUsuario">TIPO USUARIO</label>
+                                    <select class="form-control" id="tipoUsuario" name="tipoUsuario">
+                                      <option value="0">SELECCIONE TIPO USUARIO</option>
+                                      <option value="3" selected>TODOS</option>
+                                      <?php foreach ($this->modelTipoUsuario->lista() as $rows2):?>
+                                       <?php if($rows2['id_tipoUsuario']==3){?>
+                                         <option value="<?php echo $rows2['id_tipoUsuario']?>" selected><?php echo $rows2['descripcion_tipoUsuario']?></option>
+                                       <?php } else{ ?>
+                                         <option value="<?php echo $rows2['id_tipoUsuario']?>"><?php echo $rows2['descripcion_tipoUsuario']?></option>
+                                       <?php } endforeach;?>
+                                    </select>
                                 </div>
-                                <div class="table-responsive mb-0 fixed-solution" data-pattern="priority-columns">
-                                    <br>
-                                    <table id="datatable" class="table table-striped mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th data-priority="1" id="tech-companies-1-col-1-clone">ID</th>
-                                                <th data-priority="1" id="tech-companies-1-col-1-clone">Fecha</th>
-                                                <th data-priority="3" id="tech-companies-1-col-2-clone">Vendedor</th>
-                                                <th data-priority="1" id="tech-companies-1-col-3-clone">Cliente</th>
-                                                <th data-priority="1" id="tech-companies-1-col-3-clone">Valor</th>
-                                                <th data-priority="3" id="tech-companies-1-col-5-clone">Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php $o = 0;
-                                            foreach ($this->model->lista() as $rows) : ?>
 
-                                                <tr>
-                                                    <th data-org-colspan="1" data-columns="tech-companies-1-col-0"><span class="co-name"><?php echo $rows['id_venta'];?></span></th>
-                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['fechaUsuario_venta']); ?></td>
-                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['nombre_usuario']); ?> <?php echo strtoupper($rows['apellido_usuario']); ?></td>
-                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo $rows['cliente_venta']; ?></td>
-                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">$<?php echo $rows['valor_venta']; ?></td>
-                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-5">
-
-                                                        <span class="hint  hint--left iconPerfil" data-hint="Ver Reporte" attr-rut="<?php echo $rows['id_venta'] ?>">
-                                                            <a class="btn btn-icon waves-effect waves-light btn-warning">
-                                                                <i style="cursor: pointer;" class="mdi mdi-eye "></i>
-                                                            </a>
-                                                        </span>
-
-                                                        <span class="hint  hint--left iconPerfil" data-hint="Exportar Excel" attr-rut="<?php echo $rows['id_venta'] ?>">
-                                                            <a class="btn btn-icon waves-effect waves-light btn-success">
-                                                                <i style="cursor: pointer;" class="mdi mdi-file-excel "></i>
-                                                            </a>
-                                                        </span>
-
-                                                        <span class="hint  hint--left iconPerfil" data-hint="Exportar Pdf" attr-rut="<?php echo $rows['id_venta'] ?>">
-                                                            <a class="btn btn-icon waves-effect waves-light btn-danger">
-                                                                <i style="cursor: pointer;" class="mdi mdi-file-pdf "></i>
-                                                            </a>
-                                                        </span>
-
-                                                </tr>
-                                            <?php $o++;
-                                            endforeach; ?>
-                                        </tbody>
-                                    </table>
+                                <div class="form-group col-md-3">
+                                  <label for="tipoUsuario">TIPO PAGO</label>
+                                    <select class="form-control" id="tipoUsuario" name="tipoUsuario">
+                                      <option value="0">SELECCIONE TIPO PAGO</option>
+                                      <option value="3" selected>TODOS</option>
+                                      <?php foreach ($this->modelTipoPago->lista() as $rows3):?>
+                                         <option value="<?php echo $rows3['id_tipoPago']?>"><?php echo $rows3['descripcion_tipoPago']?></option>
+                                       <?php endforeach;?>
+                                    </select>
                                 </div>
-                            </div>
-
+                                <br>
+                                <button type="button" onclick="editar(<?php echo $rows['rut_usuario']?>)" class="btn btn-danger btn-round">Generar PDF</button>
+                                <button type="button" onclick="editar(<?php echo $rows['rut_usuario']?>)" class="btn btn-success btn-round">Generar Excel</button>
+                                <a href="<?php echo $this->urlhome; ?>"> <button type="button" class="btn btn-warning btn-round"><i class="zmdi zmdi-long-arrow-return"></i> Volver</button></a>
+                            </form>
                         </div>
-
                     </div>
                 </div>
-            </div>
+            </div> <!-- end row -->
         </div> <!-- content -->
 
     </div>
@@ -181,7 +170,7 @@
             } );
 
 
-      /*  $("body").on('click','span.iconPerfil', function(event) {
+        $("body").on('click','span.iconPerfil', function(event) {
             $('#contenidoInfoCliente').empty('');
             var rutCliente = $(this).attr('attr-rut');
             $('#modalInfoCliente').modal('show');
@@ -203,7 +192,7 @@
             });
             return false;
 
-        });*/
+        });
 
 
 

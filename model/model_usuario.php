@@ -12,6 +12,7 @@ class UsuarioModel
     private $estado;
     private $tipo;
     private $password;
+    private $idusu;
 
     private $create;
     private $update;
@@ -102,10 +103,12 @@ class UsuarioModel
                 apellido_usuario = '{$this->get('apellido')}',
                 correo_usuario = '{$this->get('correo')}',
                 tipo_usuario = '{$this->get('tipo')}',
-                password = '{$this->get('password')}'
+                password_usuario = '{$this->get('password')}'
                 WHERE
                 rut_usuario = '{$this->get('idusu')}'";
+
         $datos = $this->con->consultaRetorno($sql);
+        //echo $sql;
         return $datos;
     }
 

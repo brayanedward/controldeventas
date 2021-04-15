@@ -50,19 +50,60 @@ class VentaModel
     public function lista(){
         try {
 
-            $sql = "SELECT id_venta,descripcion_venta,cliente_venta,valor_venta,direccion_venta,fechaUsuario_venta,fecha_venta,tipoPago_venta,estado_venta,usuario_venta
-            FROM tb_venta
+            $sql = "SELECT a.id_venta,a.descripcion_venta,a.cliente_venta,a.valor_venta,a.direccion_venta,a.fechaUsuario_venta,a.fecha_venta,a.tipoPago_venta,a.estado_venta,a.usuario_venta,
+                    b.nombre_usuario ,b.apellido_usuario
+            FROM tb_venta a,tb_usuario b
+            WHERE
+            a.usuario_venta = b.rut_usuario
             {$this->get('condicion')}";
             $datos = $this->con->consultaRetorno($sql);
             return $datos;
 
+
         } catch (Exception $e) {
             die($e->getMessage());
         }
+
+        echo $sql;
     }
 
     public function count(){
         $sql = "SELECT count(id_venta)as num FROM tb_Venta";
+
+        $datos = $this->con->consultaRetorno($sql);
+
+        if ($rows = mysqli_fetch_array($datos)) {
+            $num = $rows[0];
+        }
+        return $num;
+    }
+
+    public function countHoy(){
+        $hoy = date('Y-m-d');
+        $sql = "SELECT count(id_venta)as num FROM tb_Venta WHERE fechaUsuario_venta BETWEEN '$hoy 00:00:00' AND '$hoy 23:59:59'";
+
+        $datos = $this->con->consultaRetorno($sql);
+
+        if ($rows = mysqli_fetch_array($datos)) {
+            $num = $rows[0];
+        }
+        return $num;
+    }
+
+    public function countSiete(){
+        $sql = "SELECT count(id_venta)as num FROM tb_Venta WHERE YEAR(fechaUsuario_venta) = YEAR(CURRENT_DATE())
+        AND MONTH(fechaUsuario_venta)  = MONTH(CURRENT_DATE())";
+
+        $datos = $this->con->consultaRetorno($sql);
+
+        if ($rows = mysqli_fetch_array($datos)) {
+            $num = $rows[0];
+        }
+        return $num;
+    }
+
+    public function countMes(){
+        $sql = "SELECT count(id_venta)as num FROM tb_Venta ";
 
         $datos = $this->con->consultaRetorno($sql);
 

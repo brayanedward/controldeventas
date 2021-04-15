@@ -29,16 +29,31 @@
                                 </div>
                                 <label for="txtNombreUsuario">Nombre Usuario</label>
                                 <div class="form-group">
-                                    <input type="text" id="txtNombreUsuario" name="txtNombreUsuario" value="<?php echo $rows['nombres_usuario']?>" class="form-control" placeholder="Ingrese el Nombre de Usuario">
+                                    <input type="text" id="txtNombreUsuario" name="txtNombreUsuario" value="<?php echo $rows['nombre_usuario']?>" class="form-control" placeholder="Ingrese el Nombre de Usuario">
                                 </div>
-                                <label for="txtApellidoP">Apellidos Paterno</label>
+                                <label for="txtApellidoP">Apellidos Usuario</label>
                                 <div class="form-group">
-                                    <input type="text" id="txtApellidoP" name="txtApellidoP" value="<?php echo $rows['apellidoPaterno_usuario']?>" class="form-control" placeholder="Ingrese el Apellido de Usuario">
+                                    <input type="text" id="txtApellidoP" name="txtApellidoP" value="<?php echo $rows['apellido_usuario']?>" class="form-control" placeholder="Ingrese los apellidos del Usuario">
                                 </div>
-                                <label for="txtApellidoM">Apellidos Materno</label>
+
+                                <label for="txtCorreoElectronico">Correo Usuario</label>
                                 <div class="form-group">
-                                    <input type="text" id="txtApellidoM" name="txtApellidoM" value="<?php echo $rows['apellidoMaterno_usuario']?>" class="form-control" placeholder="Ingrese el Apellido de Usuario">
+                                    <input type="text" id="txtCorreoElectronico" name="txtCorreoElectronico" value="<?php echo $rows['correo_usuario']?>" class="form-control" placeholder="Ingrese el correo del Usuario">
                                 </div>
+
+                                <label for="tipoUsuario">Tipo Usuario</label>
+                                <div class="form-group">
+                                    <select class="form-control" id="tipoUsuario" name="tipoUsuario">
+                                      <option value="0">SELECCIONE TIPO USUARIO</option>
+                                      <?php foreach ($this->modelTipoUsuario->lista() as $rows2):?>
+                                       <?php if($rows['tipo_usuario']==$rows2['id_tipoUsuario']){?>
+                                         <option value="<?php echo $rows2['id_tipoUsuario']?>" selected><?php echo $rows2['descripcion_tipoUsuario']?></option>
+                                       <?php } else{ ?>
+                                         <option value="<?php echo $rows2['id_tipoUsuario']?>"><?php echo $rows2['descripcion_tipoUsuario']?></option>
+                                       <?php } endforeach;?>
+                                    </select>
+                                </div>
+
                                 <label for="txtPassword">Contraseña</label>
                                 <div class="form-group">
                                     <input onblur="validapwIguales()" type="password" id="txtPassword" name="txtPassword" value="<?php echo $rows['password_usuario']?>" class="form-control" placeholder="Contraseña" style="width: 50%;">
@@ -109,6 +124,8 @@
                     "txtApellidoP": $('#txtApellidoP').val(),
                     "txtApellidoM": $('#txtApellidoM').val(),
                     "txtPassword": $('#txtPassword').val(),
+                    "txtCorreoElectronico": $('#txtPassword').val(),
+                    "tipoUsuario": $('#tipoUsuario').val(),
                     "idusu":idusu
                 },
                 url: "<?php echo $this->urlupdate; ?>",
@@ -120,6 +137,7 @@
                     $('.message').html('<div class="sk-wave"> <div class="sk-rect sk-rect1"></div> <div class="sk-rect sk-rect2"></div> <div class="sk-rect sk-rect3"></div> <div class="sk-rect sk-rect4"></div> <div class="sk-rect sk-rect5"></div> </div>');
                 },
                 success: function(respuesta) {
+                  //alert(respuesta);
                     if (respuesta == 1) {
                         alertify.success('Guardado Exitosamente!');
                         limpiar();
