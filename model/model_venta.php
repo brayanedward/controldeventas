@@ -21,6 +21,8 @@ class VentaModel
     private $selTipopago;
     private $txtDetalleventa;
     private $idventa;
+    private $txtTelefonocliente;
+    private $txtCorreocliente;
 
     private $create;
     private $update;
@@ -50,8 +52,11 @@ class VentaModel
 
     public function lista(){
         try {
-
-            $sql = "SELECT a.id_venta,a.descripcion_venta,a.cliente_venta,a.valor_venta,a.direccion_venta,a.fechaUsuario_venta,a.fecha_venta,a.tipoPago_venta,a.estado_venta,a.usuario_venta, b.nombre_usuario ,b.apellido_usuario,c.descripcion_tipopago,d.descripcion_tipoUsuario,c.descripcion_tipoPago FROM tb_venta a,tb_usuario b,tb_tipoPago c, tb_tipoUsuario d WHERE a.usuario_venta = b.rut_usuario and a.tipoPago_venta = c.id_tipoPago and b.tipo_usuario = d.id_tipoUsuario
+            $sql = "SELECT a.id_venta,a.descripcion_venta,a.cliente_venta,a.valor_venta,a.direccion_venta,a.fechaUsuario_venta,a.fecha_venta,a.tipoPago_venta,a.estado_venta,a.usuario_venta,
+                    b.nombre_usuario ,b.apellido_usuario, c.descripcion_tipopago, a.telefono_venta, a.correo_venta
+            FROM tb_venta a,tb_usuario b, tb_tipopago c
+            WHERE
+            a.usuario_venta = b.rut_usuario and a.tipoPago_venta = c.id_tipopago
             {$this->get('condicion')}";
             $datos = $this->con->consultaRetorno($sql);
             return $datos;
@@ -112,7 +117,7 @@ class VentaModel
 
     public function add(){
         $sql = "INSERT INTO tb_venta
-                (descripcion_venta,cliente_venta,valor_venta,direccion_venta,fechaUsuario_venta,fecha_venta,tipoPago_venta,estado_venta,usuario_venta)
+                (descripcion_venta,cliente_venta,valor_venta,direccion_venta,fechaUsuario_venta,fecha_venta,tipoPago_venta,estado_venta,usuario_venta,telefono_venta,correo_venta)
                 VALUES
                 (
                 '{$this->get('txtDetalleventa')}',
@@ -122,7 +127,10 @@ class VentaModel
                  sysdate(),
                 '{$this->get('txtFechaventa')}',
                 '{$this->get('selTipopago')}',
-                '{$this->get('estado')}'
+                '{$this->get('estado')}',
+                '{$this->get('usuario')}',
+                '{$this->get('txtTelefonocliente')}',
+                '{$this->get('txtCorreocliente')}'
                 )";
         $datos = $this->con->consultaRetorno($sql);
         return $datos;
@@ -142,7 +150,9 @@ class VentaModel
                 valor_venta = '{$this->get('txtValorventa')}',
                 direccion_venta = '{$this->get('txtDireccioventa')}',
                 tipoPago_venta = '{$this->get('selTipopago')}',
-                fecha_venta = '{$this->get('txtFechaventa')}'
+                fecha_venta = '{$this->get('txtFechaventa')}',
+                telefono_venta = '{$this->get('txtTelefonocliente')}',
+                correo_venta = '{$this->get('txtCorreocliente')}'
                 WHERE
                 id_venta = '{$this->get('idventa')}'";
         $datos = $this->con->consultaRetorno($sql);

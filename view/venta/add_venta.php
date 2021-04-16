@@ -51,7 +51,7 @@
                                 </div>
 
                                 <div class="form-group col-lg-6">
-                                    <label for="txtNombrecventa">Nombres Cliente Venta</label>
+                                    <label for="txtNombrecventa">Nombres Cliente</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="zmdi zmdi-account-box-o"></i></span>
                                         <input type="text" id="txtNombrecventa" name="txtNombrecventa"
@@ -64,6 +64,22 @@
                                     <label for="txtDireccioventa">Dirección Venta</label>
                                     <input type="text" id="txtDireccioventa" name="txtDireccioventa"
                                         class="form-control" placeholder="Ingrese Direccion de la Venta"
+                                        maxlength="500">
+                                </div>
+                                <br>
+                                <div class="form-group col-lg-6">
+                                    <label for="txtTelefonocliente">Teléfono Cliente </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-phone"></i></span>
+                                        <input type="text" id="txtTelefonocliente" name="txtTelefonocliente"
+                                            class="form-control" placeholder="Ingrese Telefono Cliente"
+                                            maxlength="500">
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label for="txtCorreocliente">Correo Cliente </label>
+                                    <input type="text" id="txtCorreocliente" name="txtCorreocliente"
+                                        class="form-control" placeholder="Ingrese el Correo Electrónico"
                                         maxlength="500">
                                 </div>
                                 <br>
@@ -142,7 +158,9 @@ function grabar() {
                 "txtNombrecventa": $('#txtNombrecventa').val(),
                 "txtDireccioventa": $('#txtDireccioventa').val(),
                 "selTipopago": $('#selTipopago').val(),
-                "txtDetalleventa": $('#txtDetalleventa').val()
+                "txtDetalleventa": $('#txtDetalleventa').val(),
+                "txtTelefonocliente": $('#txtTelefonocliente').val(),
+                "txtCorreocliente": $('#txtCorreocliente').val()
             },
             url: "<?php echo $this->urlsave; ?>",
             type: "POST",
@@ -203,5 +221,7 @@ function limpiar() {
     $('#txtDireccioventa').val('');
     $('#selTipopago').val('');
     $('#txtDetalleventa').val('');
+    $('#txtTelefonocliente').val('');
+    $('#txtCorreocliente').val('');
 }
 </script>

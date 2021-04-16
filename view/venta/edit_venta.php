@@ -68,6 +68,22 @@
                                         maxlength="500" value="<?php echo $rows['direccion_venta']?>">
                                 </div>
                                 <br>
+                                <div class="form-group col-lg-6">
+                                    <label for="txtTelefonocliente">Teléfono Cliente </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-phone"></i></span>
+                                        <input type="text" id="txtTelefonocliente" name="txtTelefonocliente"
+                                            class="form-control" placeholder="Ingrese Telefono Cliente"
+                                            maxlength="500" value="<?php echo $rows['telefono_venta']?>"> 
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label for="txtCorreocliente">Correo Cliente </label>
+                                    <input type="text" id="txtCorreocliente" name="txtCorreocliente"
+                                        class="form-control" placeholder="Ingrese el Correo Electrónico"
+                                        maxlength="500" value="<?php echo $rows['correo_venta']?>">
+                                </div>
+                                <br>
                                 <label for="txtCorreoElectronico">Tipo de Pago</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="zmdi zmdi-card"></i></span>
@@ -146,7 +162,9 @@ function grabar(idventa) {
                 "txtDireccioventa": $('#txtDireccioventa').val(),
                 "selTipopago": $('#selTipopago').val(),
                 "txtDetalleventa": $('#txtDetalleventa').val(),
-                "idventa": idventa
+                "idventa": idventa,
+                "txtTelefonocliente": $('#txtTelefonocliente').val(),
+                "txtCorreocliente": $('#txtCorreocliente').val()
             },
             url: "<?php echo $this->urlupdate; ?>",
             type: "POST",
@@ -207,5 +225,7 @@ function limpiar() {
     $('#txtDireccioventa').val('');
     $('#selTipopago').val('');
     $('#txtDetalleventa').val('');
+    $('#txtTelefonocliente').val('');
+    $('#txtCorreocliente').val('');
 }
 </script>
