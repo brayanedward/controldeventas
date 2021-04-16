@@ -53,7 +53,7 @@
                                                     <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">$<?php echo $rows['valor_venta']; ?></td>
                                                     <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-5">
 
-                                                        <span class="hint  hint--left iconPerfil" data-hint="Ver Reporte" attr-rut="<?php echo $rows['id_venta'] ?>">
+                                                        <span class="hint  hint--left iconVenta" data-hint="Ver Reporte" attr-idventa="<?php echo $rows['id_venta'] ?>">
                                                             <a class="btn btn-icon waves-effect waves-light btn-warning">
                                                                 <i style="cursor: pointer;" class="mdi mdi-eye "></i>
                                                             </a>
@@ -68,6 +68,12 @@
                                                         <span class="hint  hint--left iconPerfil" data-hint="Exportar Pdf" attr-rut="<?php echo $rows['id_venta'] ?>">
                                                             <a class="btn btn-icon waves-effect waves-light btn-danger">
                                                                 <i style="cursor: pointer;" class="mdi mdi-file-pdf "></i>
+                                                            </a>
+                                                        </span>
+                                                
+                                                        <span class="hint  hint--left" data-hint="Editar Venta">
+                                                            <a class="btn btn-icon waves-effect waves-light btn-primary" href="<?php echo $this->urledit . base64_encode($rows['id_venta']); ?>">
+                                                                <i style="cursor: pointer;" class="mdi mdi-pen " id="iconHistorial"></i>
                                                             </a>
                                                         </span>
 
@@ -142,14 +148,14 @@
     </div>
 
 
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modalInfoCliente">
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modalInfoVenta">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="mySmallModalLabel">INFORMACIÓN DEL CLIENTE</h4>
+                        <h4 class="modal-title" id="mySmallModalLabel">INFORMACIÓN DETALLADA DE LA VENTA</h4>
                     </div>
-                    <div class="modal-body" id="contenidoInfoCliente">
+                    <div class="modal-body" id="contenidoInfoVenta">
 
                     </div>
             </div><!-- /.modal-content -->
@@ -181,15 +187,15 @@
             } );
 
 
-      /*  $("body").on('click','span.iconPerfil', function(event) {
-            $('#contenidoInfoCliente').empty('');
-            var rutCliente = $(this).attr('attr-rut');
-            $('#modalInfoCliente').modal('show');
+       $("body").on('click','span.iconVenta', function(event) {
+            $('#contenidoInfoVenta').empty('');
+            var idventa = $(this).attr('attr-idventa');
+            $('#modalInfoVenta').modal('show');
             $.ajax({
                 data: {
-                    "rutCliente": rutCliente
+                    "idventa": idventa
                 },
-                url: "<?php echo $this->infoCliente; ?>",
+                url: "<?php echo $this->infoventa; ?>",
                 type: "POST",
                 cache: false,
                 dataType: "html",
@@ -197,13 +203,13 @@
                 beforeSend: function() {
                 },
                 success: function(respuesta) {
-                    $('#contenidoInfoCliente').html(respuesta);
+                    $('#contenidoInfoVenta').html(respuesta);
 
                 }
             });
             return false;
 
-        });*/
+        });
 
 
 
@@ -239,99 +245,6 @@
                 $('#direccionnum').val('');
                 $('#rut').val('');
             }
-        }
-
-        function buscar() {
-            var tipob = $('#selTipoBusq').val();
-            var direccion = $('#direccion').val();
-            var rut = $('#rut').val();
-            var nombre = $('#nombre').val();
-            var apellidop = $('#apellidop').val();
-            var apellidom = $('#apellidom').val();
-            var direccionnum = $('#direccionnum').val();
-
-            $.ajax({
-                data: {
-                    "tipob": tipob,
-                    "direccion": direccion,
-                    "rut": rut,
-                    "nombre": nombre,
-                    "apellidop": apellidop,
-                    "apellidom": apellidom,
-                    "direccionnum": direccionnum
-                },
-                url: "<?php echo $this->listaxfiltro; ?>",
-                type: "POST",
-                cache: false,
-                dataType: "html",
-                contentType: "application/x-www-form-urlencoded",
-                beforeSend: function() {
-                    $('.message').html('<div class="sk-wave"> <div class="sk-rect sk-rect1"></div> <div class="sk-rect sk-rect2"></div> <div class="sk-rect sk-rect3"></div> <div class="sk-rect sk-rect4"></div> <div class="sk-rect sk-rect5"></div> </div>');
-                },
-                success: function(respuesta) {
-                    $('#resultbusq').show();
-                    $('#tbodyClientes').html(respuesta);
-                }
-            });
-            return false;
-        }
-
-        function realizarVisita(rutcli){
-            $('#ModalVisita').modal();
-            $("#btnGuardaVisita").attr("onclick","guardaVisita("+rutcli+")");
-        }
-
-        function guardaVisita(rutcli){
-            var txtindivisita = $('#txtindivisita').val();
-            var txtfechavisita = $('#txtfechavisita').val();
-
-            $.ajax({
-                data: {
-                    "txtindivisita": txtindivisita,
-                    "txtfechavisita": txtfechavisita,
-                    "rutcli": rutcli
-                },
-                url: "<?php echo $this->guardaVisita; ?>",
-                type: "POST",
-                cache: false,
-                dataType: "html",
-                contentType: "application/x-www-form-urlencoded",
-                beforeSend: function() {
-                    $('.message').html('<div class="sk-wave"> <div class="sk-rect sk-rect1"></div> <div class="sk-rect sk-rect2"></div> <div class="sk-rect sk-rect3"></div> <div class="sk-rect sk-rect4"></div> <div class="sk-rect sk-rect5"></div> </div>');
-                },
-                success: function(respuesta) {
-                    if (respuesta == 1) {
-                        alertify.success('Guardado Exitosamente!');
-                        $('#ModalVisita').modal('hide');
-                        $('#txtindivisita').val('');
-                    } else {
-                        alertify.error('Error al ingresar la información');
-                    }
-                }
-            });
-            return false;
-        }
-
-        function historilVisitas(rutcli){
-            $('#ModalHistorial').modal();
-            $('#cargaHistorial').empty();
-            $.ajax({
-                data: {
-                    "rutcli": rutcli
-                },
-                url: "<?php echo $this->HistorialVisita; ?>",
-                type: "POST",
-                cache: false,
-                dataType: "html",
-                contentType: "application/x-www-form-urlencoded",
-                beforeSend: function() {
-                    $('.message').html('<div class="sk-wave"> <div class="sk-rect sk-rect1"></div> <div class="sk-rect sk-rect2"></div> <div class="sk-rect sk-rect3"></div> <div class="sk-rect sk-rect4"></div> <div class="sk-rect sk-rect5"></div> </div>');
-                },
-                success: function(respuesta) {
-                    $('#cargaHistorial').html(respuesta);
-                }
-            });
-            return false;
         }
 
     </script>

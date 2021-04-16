@@ -63,6 +63,7 @@ class VentaController
         $this->urlultimo   = './view.php?c=' . $this->controller . '&a=ultimo';
         $this->urltable    = './view.php?c=' . $this->controller . '&a=table';
         $this->urlchpass   = './view.php?c=' . $this->controller . '&a=cambiapassword';
+        $this->infoventa   = './view.php?c=' . $this->controller . '&a=infoVenta';
     }
 
     public function index(){
@@ -92,19 +93,17 @@ class VentaController
     }
 
     public function add(){
-        //$condicionRol = " where estado_rol < 3 order by id_rol desc";
-        //$this->modelRol->set("condicion", $condicionRol);
 
         require_once './view/maqueta/header.php';
         require_once './view/maqueta/nav.php';
-        require_once './view/' . $this->controller . '/add_' . $this->controller . '.php';
+        require_once './view/venta/add_' . $this->controller . '.php';
         require_once './view/maqueta/footer.php';
     }
 
     public function edit(){
         $id = base64_decode($_REQUEST['id']);
         if (isset($id)) {
-            $condicion = " where rut_venta='" . $id . "'";
+            $condicion = " and id_venta='" . $id . "'";
             $this->model->set("condicion", $condicion);
         }
 
@@ -150,60 +149,33 @@ class VentaController
     }
 
     public function save(){
-        $rut = stripslashes($_REQUEST['txtRutventa']);
-        $rut = addslashes($rut);
-        $rut = trim($rut);
-        $rut = htmlspecialchars($rut);
-        $rut = str_replace('"', '', $rut);
-        $rut = str_replace(':', '', $rut);
-        $rut = str_replace('.', '', $rut);
-        $rut = str_replace(',', '', $rut);
-        $rut = str_replace(';', '', $rut);
-
-        $position = explode("-", $rut);
-        $rut      = $position[0];
-        $dv       = $position[1];
-
-        $this->model->set("rut", $rut);
-        $this->model->set("dv", $dv);
-        $this->model->set("nombre", $_REQUEST['txtNombreventa']);
-        $this->model->set("apellidop", $_REQUEST['txtApellidoP']);
-        $this->model->set("apellidom", $_REQUEST['txtApellidoM']);
-        $this->model->set("password", $_REQUEST['txtPassword']);
+        $this->model->set("txtValorventa", $_REQUEST['txtValorventa']);
+        $this->model->set("txtFechaventa", $_REQUEST['txtFechaventa']);
+        $this->model->set("txtNombrecventa", $_REQUEST['txtNombrecventa']);
+        $this->model->set("txtDireccioventa", $_REQUEST['txtDireccioventa']);
+        $this->model->set("selTipopago", $_REQUEST['selTipopago']);
+        $this->model->set("txtDetalleventa", $_REQUEST['txtDetalleventa']);
+        $this->model->set("usuario", base64_decode($_SESSION['rutUsuario']));
         $this->model->set("estado", 1);
 
         if ($query = $this->model->add()) {
-            echo "1";
+            echo '1';
         } else {
-            echo "2";
+            echo '2';
         }
     }
 
     public function update(){
-
-        $rut = stripslashes($_REQUEST['txtRutventa']);
-        $rut = addslashes($rut);
-        $rut = trim($rut);
-        $rut = htmlspecialchars($rut);
-        $rut = str_replace('"', '', $rut);
-        $rut = str_replace(':', '', $rut);
-        $rut = str_replace('.', '', $rut);
-        $rut = str_replace(',', '', $rut);
-        $rut = str_replace(';', '', $rut);
-
-        $position = explode("-", $rut);
-        $rut      = $position[0];
-        $dv       = $position[1];
-
-        $this->model->set("rut", $rut);
-        $this->model->set("dv", $dv);
-        $this->model->set("nombre", $_REQUEST['txtNombreventa']);
-        $this->model->set("apellidop", $_REQUEST['txtApellidoP']);
-        $this->model->set("apellidom", $_REQUEST['txtApellidoM']);
-        $this->model->set("password", $_REQUEST['txtPassword']);
+        $this->model->set("txtValorventa", $_REQUEST['txtValorventa']);
+        $this->model->set("txtFechaventa", $_REQUEST['txtFechaventa']);
+        $this->model->set("txtNombrecventa", $_REQUEST['txtNombrecventa']);
+        $this->model->set("txtDireccioventa", $_REQUEST['txtDireccioventa']);
+        $this->model->set("selTipopago", $_REQUEST['selTipopago']);
+        $this->model->set("txtDetalleventa", $_REQUEST['txtDetalleventa']);
+        $this->model->set("usuario", base64_decode($_SESSION['rutUsuario']));
+        $this->model->set("idventa", $_REQUEST['idventa']);
         $this->model->set("estado", 1);
-        $this->model->set("idusu", $_REQUEST['idusu']);
-
+        
         if ($query = $this->model->edit()) {
             echo 1;
         } else {
@@ -246,25 +218,53 @@ class VentaController
         }
     }
 
-    public function delete(){
-        $id = base64_decode($_REQUEST['id']);
-        $this->model->set("rut", $id);
-        $this->model->set("estado", 3);
-        $query = $this->model->delete();
-    }
+    public function infoVenta(){
 
-    public function deshabilitar(){
-        $id = base64_decode($_REQUEST['id']);
-        $this->model->set("rut", $id);
-        $this->model->set("estado", 2);
-        $query = $this->model->estado();
-    }
+        $id = $_REQUEST['idventa'];
+        $condicion = '';
+        $retorno = "";
+        $condicion = 'and a.id_venta= ' .$id.'';
+        $this->model->set("condicion", $condicion);
 
-    public function cambiapassword(){
-        $id = $_REQUEST['idusu'];
-        $pass1 = $_REQUEST['pass1'];
-        $this->model->set("pass", $pass1);
-        $this->model->set("rut_venta", $id);
-        $query = $this->model->cambiaPw();
+            foreach ($this->model->lista() as $rows) :
+            $retorno = '<div class="row card-box">';
+            $retorno.='<h5 class="text-custom m-b-5">DETALLE VENTA</h5>';
+            $retorno .= ' <div class="form-group col-lg-4">
+                            <label for="rut">Valor Venta</label>
+                                <p>'.$rows['valor_venta'].'</p>
+                        </div>';
+            $retorno .= ' <div class="form-group col-lg-4">
+                            <label for="nombres">Fecha Venta</label>
+                                <p>'.$rows['fecha_venta'].'</p>
+                        </div>';
+            $retorno .= ' <div class="form-group col-lg-4">
+                            <label for="nombres">Nombre Cliente</label>
+                                <p>'.$rows['cliente_venta'].'</p>
+                        </div>'; 
+            $retorno .= ' <div class="form-group col-lg-4">
+                            <label for="nombres">Dirección Venta</label>
+                                <p>'.$rows['direccion_venta'].' </p>
+                        </div>'; 
+            $retorno .= ' <div class="form-group col-lg-4">
+                            <label for="nombres">Tipo Pago</label>
+                                <p>'.$rows['descripcion_tipopago'].'</p>
+                        </div>';
+
+            $retorno .= ' <div class="form-group col-lg-4">
+                            <label for="nombres">Detalle</label>
+                                <p>'.$rows['descripcion_venta'].'</p>
+                        </div>';
+
+            if(base64_decode($_SESSION['tipoUsuario'])==1){
+                $retorno .= ' <div class="form-group col-lg-4">
+                <label for="nombres">Fecha de Registro (sistema)</label>
+                    <p>'.$rows['fechaUsuario_venta'].'</p>
+                </div>';
+            }
+            $retorno .= '</div>';                                
+            $retorno .= '</div>';
+        
+        endforeach;
+        echo $retorno;
     }
 }
