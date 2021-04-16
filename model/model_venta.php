@@ -51,7 +51,7 @@ class VentaModel
     public function lista(){
         try {
 
-            $sql = "SELECT a.id_venta,a.descripcion_venta,a.cliente_venta,a.valor_venta,a.direccion_venta,a.fechaUsuario_venta,a.fecha_venta,a.tipoPago_venta,a.estado_venta,a.usuario_venta, b.nombre_usuario ,b.apellido_usuario,c.descripcion_tipoPago,d.descripcion_tipoUsuario FROM tb_venta a,tb_usuario b,tb_tipoPago c, tb_tipoUsuario d WHERE a.usuario_venta = b.rut_usuario and a.tipoPago_venta = c.id_tipoPago and b.tipo_usuario = d.id_tipoUsuario
+            $sql = "SELECT a.id_venta,a.descripcion_venta,a.cliente_venta,a.valor_venta,a.direccion_venta,a.fechaUsuario_venta,a.fecha_venta,a.tipoPago_venta,a.estado_venta,a.usuario_venta, b.nombre_usuario ,b.apellido_usuario,c.descripcion_tipopago,d.descripcion_tipoUsuario,c.descripcion_tipoPago FROM tb_venta a,tb_usuario b,tb_tipoPago c, tb_tipoUsuario d WHERE a.usuario_venta = b.rut_usuario and a.tipoPago_venta = c.id_tipoPago and b.tipo_usuario = d.id_tipoUsuario
             {$this->get('condicion')}";
             $datos = $this->con->consultaRetorno($sql);
             return $datos;
