@@ -5,7 +5,7 @@ class Conexion
         "host" => "localhost",
         "user" => "root",
         "pass" => "",
-        "db"   => "controlventas",
+        "db"   => "bd_controlventas",
         //"host" => "localhost",
         //"user" => "root",
         //"pass" => "",
