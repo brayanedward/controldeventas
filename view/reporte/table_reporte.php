@@ -76,51 +76,59 @@
                                     </select>
                                 </div>
                                 <br>
-                                <button type="button" class="btn btn-danger btn-round btnPdf">Generar PDF</button>
-                                <button type="button" class="btn btn-success btn-round btnExcel">Generar Excel</button>
+                                <button type="button" class="btn btn-danger btn-round btnPdf">Buscar</button>
                                 <a href="<?php echo $this->urlhome; ?>"> <button type="button" class="btn btn-warning btn-round"><i class="zmdi zmdi-long-arrow-return"></i> Volver</button></a>
                             </form>
                         </div>
                     </div>
                 </div>
             </div> <!-- end row -->
-        </div> <!-- content -->
 
-    </div>
-
-
-
-    <div class="modal fade" id="ModalHistorial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body" >
+            <div class="row">
                 <div class="col-sm-12">
-                            <div class="timeline timeline-left" id="cargaHistorial">
+                    <div class="card-box">
+                        <div class="table-rep-plugin">
+                            <div class="table-wrapper">
+                                <div class="table-responsive mb-0 fixed-solution" data-pattern="priority-columns">
+                                    <br>
+                                    <table id="datatable" class="table table-striped mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th id="tech-companies-1-col-0-clone">Fecha Registro</th>
+                                                <th data-priority="1" id="tech-companies-1-col-1-clone">ID</th>
+                                                <th data-priority="3" id="tech-companies-1-col-2-clone">Vendedor</th>
+                                                <th data-priority="1" id="tech-companies-1-col-3-clone">Cliente</th>
+                                                <th data-priority="1" id="tech-companies-1-col-3-clone">Total</th>
+                                                <th data-priority="3" id="tech-companies-1-col-5-clone">Tipo de Pago</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php $o = 0;
+                                            foreach ($this->modelVenta->lista() as $rows) : ?>
+                                                <tr>
+                                                    <th data-org-colspan="1" data-columns="tech-companies-1-col-0"><span class="co-name"><?php echo $rows['fechaUsuario_venta']; ?></span></th>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['id_venta']); ?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['nombre_usuario']); ?> <?php echo strtoupper($rows['apellido_usuario']); ?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['cliente_venta']); ?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo $rows['valor_venta'];?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-5"><?php echo $rows['descripcion_tipoPago'];?></td>
 
+                                                </tr>
+                                            <?php $o++;
+                                            endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
+
                         </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" id="btnGuardaVisita">Guardar</button>
+
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
+        </div> <!-- content -->
 
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="modalInfoCliente">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="mySmallModalLabel">INFORMACIÓN DEL CLIENTE</h4>
-                    </div>
-                    <div class="modal-body" id="contenidoInfoCliente">
-
-                    </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
     </div>
 
 
@@ -142,21 +150,28 @@
                                                 "previous": "Anterior"
                                             },
                                 "loadingRecords": "Cargando...",
-                            }
+                            },
+                            dom: 'Bfrtip',
+                            buttons: [
+                                'copy', 'csv', 'excel', 'pdf', 'print'
+                            ]
 
                 });
+
+
             } );
 
 
         $("body").on('click','button.btnPdf', function(event) {
             //var rutCliente = $(this).attr('attr-rut');
+            alert("entro a la funcion");
             $.ajax({
                 data: {
-                    "txtFechaDesde": txtFechaDesde,
-                    "txtFechaHasta": txtFechaHasta,
-                    "tipoUsuario"  : tipoUsuario,
-                    "tipoPago"     : tipoPago,
-                    "usuario"      : usuario
+                  "txtFechaDesde": $("#txtFechaDesde").val(),
+                  "txtFechaHasta": $("#txtFechaHasta").val(),
+                  "tipoUsuario"  : $("#tipoUsuario").val(),
+                  "tipoPago"     : $("#tipoPago").val(),
+                  "usuario"      : $("#usuario").val()
                 },
                 url: "<?php echo $this->generaPDF; ?>",
                 type: "POST",
@@ -164,14 +179,15 @@
                 dataType: "html",
                 contentType: "application/x-www-form-urlencoded",
                 beforeSend: function() {
+                  alert("paso al before");
                 },
                 success: function(respuesta) {
-                  //  $('#contenidoInfoCliente').html(respuesta);
-                  alert("paso");
-                },
-                error: function(respuesta) {
-                  //  $('#contenidoInfoCliente').html(respuesta);
-                  alert("no paso");
+                  //alert(respuesta);
+                    //$('#html_modelPdf').html("<object data='data:application/pdf;"+respuesta+"' type='application/pdf' width='100%' height='600px;'></object>");
+                    //$('#modelPdf').modal("show");
+                  //alert("paso");
+
+
                 }
             });
             return false;

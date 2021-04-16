@@ -1,9 +1,9 @@
 <?php
 require_once 'mpdf/MPDF57/mpdf.php';
-$rutcliente = $_GET['id'];
+//rutcliente = $_GET['id'];
 
 $mpdf = new mPDF('c', 'A4');
-
+/*
 if ($rows = mysqli_fetch_array($this->model->HistorialVisitarut($rutcliente))) :
 foreach ($this->model->HistorialVisitarut($rutcliente) as $rows) :
   $fechavisita = $rows['fecha_ficha'];
@@ -32,7 +32,7 @@ if ($rows1 = mysqli_fetch_array($this->model->infoClienteCompletarut($rutcliente
     else :
     $obsvisita .= 'CLIENTE SIN OBSERVACIONES PREVIAS...';
     endif;
-
+*/
 $html = '
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -53,7 +53,7 @@ $html = '
 </style>
 </style>
 <div style="text-align:center; "><h4>REPORTE DE CLIENTE</h4></div>
-<div style="text-align:left; " style="font-size:12;"><b>EMITIDO POR:</b>  '. strtoupper(base64_decode( $_SESSION['nombreUsuario'])) .' '. strtoupper(base64_decode($_SESSION['apellidoPaterno'])) .' '. strtoupper(base64_decode($_SESSION['apellidoMaterno'])) .'</div>
+<div style="text-align:left; " style="font-size:12;"><b>EMITIDO POR:</b>  '. strtoupper(base64_decode( $_SESSION['nombreUsuario'])) .' '. strtoupper(base64_decode($_SESSION['apellidoUsuario'])).'</div>
 <div style="text-align:left; "  style="font-size:12;"><b>FECHA EMISIÓN:</b> '. date('d-m-Y H:m').'</div>
 <br><br>
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -62,27 +62,27 @@ $html = '
     </tr>
     <tr>
         <td width="26%" class="small"><b>R.U.T</b></td>
-        <td width="74%" class="small">'.$rutcli.'</td>
+        <td width="74%" class="small">19191919191</td>
     </tr>
     <tr>
         <td class="small"><b>NOMBRES</b></td>
-        <td class="small">'.$nombre.'</td>
+        <td class="small"></td>
     </tr>
     <tr>
         <td class="small"><b>FECHA NACIMIENTO</b></td>
-        <td class="small">'.$fecnac.'</td>
+        <td class="small"></td>
     </tr>
     <tr>
         <td class="small"><b>EDAD ACTUAL</b></td>
-        <td class="small">'.$edad.'</td>
+        <td class="small"></td>
     </tr>
     <tr>
         <td class="small"><b>SEXO</b></td>
-        <td class="small">'.$sexo.'</td>
+        <td class="small"></td>
     </tr>
     <tr>
         <td class="small"><b>CANTIDAD DE HIJOS</b></td>
-        <td class="small">'.$hijos.'</td>
+        <td class="small"></td>
     </tr>
 </table>
 
@@ -92,19 +92,19 @@ $html = '
     </tr>
     <tr>
         <td width="26%" class="small"><b>TELEFONO</b></td>
-        <td width="74%" class="small">'.$fono.'</td>
+        <td width="74%" class="small"></td>
     </tr>
     <tr>
         <td class="small"><b>CALLE / N° CASA</b></td>
-        <td class="small">'.$direcc.'</td>
+        <td class="small"></td>
     </tr>
     <tr>
         <td class="small"><b>CORREO</b></td>
-        <td class="small">'.$correo.'</td>
+        <td class="small"></td>
     </tr>
     <tr>
         <td class="small"><b>COMUNA</b></td>
-        <td class="small">'.$comuna.'</td>
+        <td class="small"></td>
     </tr>
 </table>
 
@@ -114,15 +114,15 @@ $html = '
     </tr>
     <tr>
         <td width="26%" class="small"><b>FONDO DE PENSION</b></td>
-        <td width="74%" class="small">'.$prevision.'</td>
+        <td width="74%" class="small"></td>
     </tr>
     <tr>
         <td class="small"><b>DETALLE FONDO</b></td>
-        <td class="small">'.$fondo.'</td>
+        <td class="small"></td>
     </tr>
     <tr>
         <td class="small"><b>TIPO DE PENSION</b></td>
-        <td class="small">'.$tipoprev.'</td>
+        <td class="small"></td>
     </tr>
 </table>
 
@@ -132,18 +132,16 @@ $html = '
     </tr>
     <tr>
         <td width="26%" class="small"><b>FECHA</b></td>
-        <td width="74%" class="small">'.$fechavisita.'</td>
+        <td width="74%" class="small"></td>
     </tr>
     <tr>
         <td class="small"><b>OBSERVACION</b></td>
-        <td class="small">'.$obsvisita.'</td>
+        <td class="small"></td>
     </tr>
 </table>
 </html>';
 
-
 $mpdf->WriteHTML($html);
 $mpdf->Output();
 exit;
-
-
+echo $html;

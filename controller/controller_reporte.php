@@ -10,6 +10,7 @@ require_once 'model/model_reporte.php';
 require_once 'model/model_tipoPago.php';
 require_once 'model/model_tipoUsuario.php';
 require_once 'model/model_usuario.php';
+require_once 'model/model_venta.php';
 //require_once 'model/model_rol.php';
 
 class ReporteController
@@ -44,6 +45,7 @@ class ReporteController
         $this->modelTipoPago = new tipoPagoModel();
         $this->modelTipoUsuario = new tipoUsuarioModel();
         $this->modelUsuario = new UsuarioModel();
+        $this->modelVenta = new VentaModel();
         $this->datetime   = date('Y-m-d H:i:s');
         $this->date       = date('Y-m-d');
         $this->time       = date('H:i:s');
@@ -69,7 +71,7 @@ class ReporteController
         $this->urlultimo   = './view.php?c=' . $this->controller . '&a=ultimo';
         $this->urltable    = './view.php?c=' . $this->controller . '&a=table';
         $this->urlchpass   = './view.php?c=' . $this->controller . '&a=cambiapassword';
-        $this->generaPDF      = './view.php?c=' . $this->controller . '&a=generaPDF&id=';
+        $this->generaPDF      = './view.php?c=' . $this->controller . '&a=generaPDF';
     }
 
     public function index(){
@@ -85,18 +87,26 @@ class ReporteController
 
 
     public function generaPDF(){
-        $fechaDesde = $_REQUEST['fechaDesde'];
-        $fechaHasta = $_REQUEST['fechaHasta'];
+        $fechaDesde = $_REQUEST['txtFechaDesde'];
+        $fechaHasta = $_REQUEST['txtFechaHasta'];
         $tipoPago = $_REQUEST['tipoPago'];
         $tipoUsuario = $_REQUEST['tipoUsuario'];
-        $vendedor = $_REQUEST['vendedor'];
-        $condicion = '';
+        $vendedor = $_REQUEST['usuario'];
 
-
-        $condicion = 'where rutcliente_ficha = '.$rutcli.'';
-        $condicion = 'where c.rut_cliente= ' .$rutcli.'';
-
-        $this->model->set("condicion", $condicion);
+        $condicionVenta = '';
+        if($fechaDesde != '' && $fechaHasta != ''){
+          $condicionVenta = 'fechaUsuario_venta BETWEEN '.$fechaDesde.' AND '.$fechaHasta.'';
+        }else{
+          if($fechaDesde){
+            $condicionVenta = 'fechaUsuario_venta = '.$fechaDesde.'';
+          }else if($fechaHasta){
+            $condicionVenta = 'fechaUsuario_venta = '.$fechaHasta.'';
+          }else{
+            $fecha = date('d-m-Y'); //HOY
+            $condicionVenta = 'fechaUsuario_venta = '.$fecha.'';
+          }
+        }
+        //$this->model->set("condicion", $condicion);
 
 
         require_once './reportes/reportePdf.php';
