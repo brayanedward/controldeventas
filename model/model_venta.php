@@ -144,6 +144,7 @@ class VentaModel
     }
 
     public function edit(){
+      $fechaActual = date('Y-m-d H:i:s');
         $sql = "UPDATE tb_venta
                 SET
                 descripcion_venta = '{$this->get('txtDetalleventa')}',
@@ -153,9 +154,12 @@ class VentaModel
                 tipoPago_venta = '{$this->get('selTipopago')}',
                 fechaUsuario_venta = '{$this->get('txtFechaventa')}',
                 telefono_venta = '{$this->get('txtTelefonocliente')}',
-                correo_venta = '{$this->get('txtCorreocliente')}'
+                correo_venta = '{$this->get('txtCorreocliente')}',
+                update_venta = '$fechaActual'
                 WHERE
                 id_venta = '{$this->get('idventa')}'";
+
+
         $datos = $this->con->consultaRetorno($sql);
         return $datos;
     }
