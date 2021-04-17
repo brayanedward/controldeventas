@@ -218,7 +218,7 @@
                                 <li><a href="view.php?c=usuario&a=edit2&id=<?php echo $_SESSION['rutUsuario'];?>"><i class="mdi mdi-face-profile m-r-5"></i> Mi Perfil</a></li>
                                 <!-- <li><a href="javascript:void(0)"><i class="mdi mdi-account-settings-variant m-r-5"></i> Settings</a></li>
                                 <li><a href="javascript:void(0)"><i class="mdi mdi-lock m-r-5"></i> Lock screen</a></li> -->
-                                <li><a href="javascript:void(0)"><i class="mdi mdi-logout m-r-5"></i> Cerrar Sesión</a></li>
+                                <li><a href="./view.php?c=login&a=logout"><i class="mdi mdi-logout m-r-5"></i> Cerrar Sesión</a></li>
                             </ul>
                         </div>
 
