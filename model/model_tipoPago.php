@@ -38,7 +38,7 @@ class tipoPagoModel
         try {
 
             $sql = "SELECT id_tipopago,descripcion_tipopago,estado_tipopago
-            FROM tb_tipoPago
+            FROM tb_tipopago
             {$this->get('condicion')}";
             $datos = $this->con->consultaRetorno($sql);
             return $datos;

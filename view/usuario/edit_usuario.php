@@ -46,10 +46,10 @@
                                     <select class="form-control" id="tipoUsuario" name="tipoUsuario">
                                       <option value="0">SELECCIONE TIPO USUARIO</option>
                                       <?php foreach ($this->modelTipoUsuario->lista() as $rows2):?>
-                                       <?php if($rows['tipo_usuario']==$rows2['id_tipoUsuario']){?>
-                                         <option value="<?php echo $rows2['id_tipoUsuario']?>" selected><?php echo $rows2['descripcion_tipoUsuario']?></option>
+                                       <?php if($rows['tipo_usuario']==$rows2['id_tipousuario']){?>
+                                         <option value="<?php echo $rows2['id_tipousuario']?>" selected><?php echo $rows2['descripcion_tipousuario']?></option>
                                        <?php } else{ ?>
-                                         <option value="<?php echo $rows2['id_tipoUsuario']?>"><?php echo $rows2['descripcion_tipoUsuario']?></option>
+                                         <option value="<?php echo $rows2['id_tipousuario']?>"><?php echo $rows2['descripcion_tipousuario']?></option>
                                        <?php } endforeach;?>
                                     </select>
                                 </div>
