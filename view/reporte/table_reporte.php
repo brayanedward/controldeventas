@@ -75,11 +75,11 @@
 
                                 <div class="form-group col-md-2">
                                   <label for="tipoPago">TIPO PAGO</label>
-                                    <select class="form-control" id="tipoPago" name="tipoPago">
+                                    <select class="form-control" id="descripcion_tipoPago" name="tipoPago">
                                       <option value="0">SELECCIONE TIPO PAGO</option>
                                       <option value="3" selected>TODOS</option>
                                       <?php foreach ($this->modelTipoPago->lista() as $rows3):?>
-                                         <option value="<?php echo $rows3['id_tipoPago']?>"><?php echo $rows3['descripcion_tipoPago']?></option>
+                                         <option value="<?php echo $rows3['id_tipopago']?>"><?php echo $rows3['descripcion_tipopago']?></option>
                                        <?php endforeach;?>
                                     </select>
                                 </div>
