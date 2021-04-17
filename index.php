@@ -9,7 +9,7 @@
         <!-- App favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico">
         <!-- App title -->
-        <title>Maria Paz- Control de Ventas</title>
+        <title>Ayelen SPA- Control de Ventas</title>
 
         <!-- App css -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -60,7 +60,7 @@
 
                             <div class="m-t-40 account-pages">
                                 <div class="text-center account-logo-box">
-                                    <h3  style="color:white;">MARIA PAZ</h3>
+                                    <h3  style="color:white;">Ayelen SPA</h3>
                                     <h5 style="color:white;">Sistema Control de Ventas</h5>
                                     <!--<h4 class="text-uppercase font-bold m-b-0">Sign In</h4>-->
                                 </div>
@@ -87,7 +87,7 @@
 
                                         <div class="form-group text-center m-t-30">
                                             <div class="col-sm-12">
-                                                <a href="page-recoverpw.html" class="text-muted"><i class="fa fa-lock m-r-5"></i> ¿Olvidaste la contraseña?</a>
+                                                <!--<a href="page-recoverpw.html" class="text-muted"><i class="fa fa-lock m-r-5"></i> ¿Olvidaste la contraseña?</a>-->
                                             </div>
                                         </div>
 

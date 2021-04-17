@@ -44,13 +44,13 @@
                                         <tbody>
                                             <?php $o = 0;
                                             foreach ($this->model->lista() as $rows) : ?>
-                                            <?php  
-                                            
+                                            <?php
+
                                             $edad_endias = $rows['edad_dias'];
                                             $diasBonoxHijo = 23741.25;
                                             $diasxcumpliredad = $diasBonoxHijo -$edad_endias;
                                             if($diasxcumpliredad<=334 && $diasxcumpliredad>1 && $rows['hijos_cliente'] >0 && $rows['id_sexo'] ==2){
-                                                $alert = '<span class="label label-warning">FALTAN: '.intval($diasxcumpliredad).' DÍAS</span>'; 
+                                                $alert = '<span class="label label-warning">FALTAN: '.intval($diasxcumpliredad).' DÍAS</span>';
                                             }else if($rows['edad_actual'] >= 65 && $rows['hijos_cliente'] >0 && $rows['id_sexo'] ==2){
                                                 $alert = '<span class="label label-success">BONO DISPONIBLE</span>';
                                             }else{
@@ -62,13 +62,13 @@
                                                 }else{
                                                     $alert = '<span class="label label-danger">SIN ALERTAS</span>';
                                                 }
-                                                
+
                                             }
 
 
-                                            
+
                                             ?>
-                                            
+
                                                 <tr>
                                                     <th data-org-colspan="1" data-columns="tech-companies-1-col-0"><span class="co-name"><?php echo $rows['rut_cliente']; ?>-<?php echo $rows['dv_cliente']; ?></span></th>
                                                     <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['nombres_cliente']); ?></td>
@@ -162,7 +162,7 @@
                 <div class="modal-body" >
                 <div class="col-sm-12">
                             <div class="timeline timeline-left" id="cargaHistorial">
-                                
+
                             </div>
                         </div>
                 </div>
@@ -231,11 +231,11 @@
                 },
                 success: function(respuesta) {
                     $('#contenidoInfoCliente').html(respuesta);
-                    
+
                 }
             });
             return false;
-           
+
         });
 
 
@@ -368,6 +368,3 @@
         }
 
     </script>
-
-
- 

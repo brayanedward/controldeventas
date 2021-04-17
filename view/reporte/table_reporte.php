@@ -1,11 +1,19 @@
-
 <script type="text/javascript">
-  $( function() {
-    jQuery('#txtFechaHasta').datepicker();
-    jQuery('#txtFechaDesde').datepicker();
-  } );
-  </script>
+  $(document).ready( function () {
+        $("#txtFechaDesde").datepicker({
+          format : 'dd-mm-yyyy',
+          autoclose:true,
+          locale: 'es'
+      });
 
+        $("#txtFechaHasta").datepicker({
+            format : 'dd-mm-yyyy',
+            autoclose:true,
+            locale:'es'
+        });
+  });
+
+</script>
 <div class="content-page">
     <div class="content">
         <div class="container">
@@ -32,15 +40,15 @@
                             <form class="form" id="form" method="POST">
                               <div class="form-group col-md-2">
                                 <label for="tipoUsuario">FECHA DESDE</label>
-                                  <input type="date" id="txtFechaDesde" name="txtFechaDesde" class="form-control datepicker valid" placeholder="Ej: 30/07/2016" aria-invalid="false" value="<?php echo date('d-m-Y');?>">
+                                  <input type="input" id="txtFechaDesde" name="txtFechaDesde" class="form-control" placeholder="Ej: 30/07/2016" aria-invalid="false" value="<?php echo date('d-m-Y');?>">
                               </div>
 
                               <div class="form-group col-md-2">
                                 <label for="tipoUsuario">FECHA HASTA</label>
-                                  <input type="date" id="txtFechaHasta" name="txtFechaHasta" class="form-control datepicker valid" placeholder="Ej: 30/07/2016" aria-invalid="false" value="<?php echo date('d-m-Y');?>">
+                                  <input type="input" id="txtFechaHasta" name="txtFechaHasta" class="form-control" placeholder="Ej: 30/07/2016" aria-invalid="false" value="<?php echo date('d-m-Y');?>">
                               </div>
 
-                              <div class="form-group col-md-3">
+                              <div class="form-group col-md-2">
                                 <label for="usuario">VENDEDOR</label>
                                   <select class="form-control" id="usuario" name="usuario">
                                     <option value="0">SELECCIONE VENDEDOR</option>
@@ -76,8 +84,8 @@
                                     </select>
                                 </div>
                                 <br>
-                                <button type="button" class="btn btn-danger btn-round btnPdf">Buscar</button>
-                                <a href="<?php echo $this->urlhome; ?>"> <button type="button" class="btn btn-warning btn-round"><i class="zmdi zmdi-long-arrow-return"></i> Volver</button></a>
+                                <button type="button" class="btn btn-danger btn-round btnSearch">Buscar</button>
+                              <!-- <a href="<?php echo $this->urlhome; ?>"> <button type="button" class="btn btn-warning btn-round"><i class="zmdi zmdi-long-arrow-return"></i> Volver</button></a>-->
                             </form>
                         </div>
                     </div>
@@ -93,18 +101,28 @@
                                     <br>
                                     <table id="datatable" class="table table-striped mb-0">
                                         <thead>
+
                                             <tr>
                                                 <th id="tech-companies-1-col-0-clone">Fecha Registro</th>
-                                                <th data-priority="1" id="tech-companies-1-col-1-clone">ID</th>
+                                                <th data-priority="1" id="tech-companies-1-col-1-clone">Código Venta</th>
                                                 <th data-priority="3" id="tech-companies-1-col-2-clone">Vendedor</th>
                                                 <th data-priority="1" id="tech-companies-1-col-3-clone">Cliente</th>
                                                 <th data-priority="1" id="tech-companies-1-col-3-clone">Total</th>
                                                 <th data-priority="3" id="tech-companies-1-col-5-clone">Tipo de Pago</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="tbodyClientes">
                                             <?php $o = 0;
-                                            foreach ($this->modelVenta->lista() as $rows) : ?>
+                                            foreach ($this->modelVenta->lista() as $rows) :
+                                              if($o==0){?>
+                                                <!--<tr class="hidden">
+                                                  <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">Fecha Creación :</td><td><?php echo date('d-m-Y H:i'); ?></td>
+                                                  <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">Usuario:</td><td><?php echo base64_decode($_SESSION['nombreUsuario']); ?> <?php echo base64_decode($_SESSION['apellidoUsuario']);?></td>
+                                                  <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"></td>
+                                                  <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"></td>
+                                                </tr>-->
+                                              <?php }
+                                               ?>
                                                 <tr>
                                                     <th data-org-colspan="1" data-columns="tech-companies-1-col-0"><span class="co-name"><?php echo $rows['fechaUsuario_venta']; ?></span></th>
                                                     <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['id_venta']); ?></td>
@@ -158,13 +176,24 @@
 
                 });
 
+              $("#txtFechaDesde").datetimepicker({
+                  format : 'dd/mm/yyyy hh:ii',
+                  autoclose:true,
+                  locale: 'es'
+              });
 
-            } );
+              $("#txtFechaHasta").datetimepicker({
+                  format : 'dd/mm/yyyy hh:ii',
+                  autoclose:true,
+                  locale:'es'
+              });
+
+    } );
 
 
-        $("body").on('click','button.btnPdf', function(event) {
-            //var rutCliente = $(this).attr('attr-rut');
-            alert("entro a la funcion");
+
+$("body").on('click','button.btnSearch', function(event) {
+
             $.ajax({
                 data: {
                   "txtFechaDesde": $("#txtFechaDesde").val(),
@@ -173,26 +202,23 @@
                   "tipoPago"     : $("#tipoPago").val(),
                   "usuario"      : $("#usuario").val()
                 },
-                url: "<?php echo $this->generaPDF; ?>",
+                url: "<?php echo $this->listaxfiltro; ?>",
                 type: "POST",
                 cache: false,
                 dataType: "html",
                 contentType: "application/x-www-form-urlencoded",
                 beforeSend: function() {
-                  alert("paso al before");
+                    $('.message').html('<div class="sk-wave"> <div class="sk-rect sk-rect1"></div> <div class="sk-rect sk-rect2"></div> <div class="sk-rect sk-rect3"></div> <div class="sk-rect sk-rect4"></div> <div class="sk-rect sk-rect5"></div> </div>');
                 },
                 success: function(respuesta) {
-                  //alert(respuesta);
-                    //$('#html_modelPdf').html("<object data='data:application/pdf;"+respuesta+"' type='application/pdf' width='100%' height='600px;'></object>");
-                    //$('#modelPdf').modal("show");
-                  //alert("paso");
-
-
+                    //$('#resultbusq').show();
+                    //alert(respuesta);
+                    $('#tbodyClientes').html(respuesta);
                 }
             });
             return false;
-
         });
+
 
 
 
