@@ -65,10 +65,10 @@
                                       <option value="0">SELECCIONE TIPO USUARIO</option>
                                       <option value="3" selected>TODOS</option>
                                       <?php foreach ($this->modelTipoUsuario->lista() as $rows2):?>
-                                       <?php if($rows2['id_tipoUsuario']==3){?>
-                                         <option value="<?php echo $rows2['id_tipoUsuario']?>" selected><?php echo $rows2['descripcion_tipoUsuario']?></option>
+                                       <?php if($rows2['id_tipousuario']==3){?>
+                                         <option value="<?php echo $rows2['id_tipousuario']?>" selected><?php echo $rows2['descripcion_tipousuario']?></option>
                                        <?php } else{ ?>
-                                         <option value="<?php echo $rows2['id_tipoUsuario']?>"><?php echo $rows2['descripcion_tipoUsuario']?></option>
+                                         <option value="<?php echo $rows2['id_tipousuario']?>"><?php echo $rows2['descripcion_tipousuario']?></option>
                                        <?php } endforeach;?>
                                     </select>
                                 </div>

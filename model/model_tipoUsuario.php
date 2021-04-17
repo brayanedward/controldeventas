@@ -38,7 +38,7 @@ class tipoUsuarioModel
         try {
 
             $sql = "SELECT id_tipousuario,descripcion_tipousuario,estado_tipousuario
-            FROM tb_tipoUsuario
+            FROM tb_tipousuario
             {$this->get('condicion')}";
             $datos = $this->con->consultaRetorno($sql);
             return $datos;
