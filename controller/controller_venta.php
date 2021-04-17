@@ -68,7 +68,7 @@ class VentaController
 
     public function index(){
       if(base64_decode($_SESSION['tipoUsuario'])==1){
-        $condicion = " and a.estado_venta < 3 order by a.fechaUsuario_venta";
+        $condicion = " and a.estado_venta < 3 order by a.fechaUsuario_venta desc";
       }else {
         $usuario = base64_decode($_SESSION['rutUsuario']);
         $condicion = " and a.estado_venta < 3 and a.usuario_venta = ".$usuario." order by a.fechaUsuario_venta desc";
