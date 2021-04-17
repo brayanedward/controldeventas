@@ -37,7 +37,7 @@ class tipoPagoModel
     public function lista(){
         try {
 
-            $sql = "SELECT id_tipoPago,descripcion_tipoPago,estado_tipoPago
+            $sql = "SELECT id_tipopago,descripcion_tipopago,estado_tipopago
             FROM tb_tipoPago
             {$this->get('condicion')}";
             $datos = $this->con->consultaRetorno($sql);
