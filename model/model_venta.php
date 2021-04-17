@@ -151,7 +151,7 @@ class VentaModel
                 valor_venta = '{$this->get('txtValorventa')}',
                 direccion_venta = '{$this->get('txtDireccioventa')}',
                 tipoPago_venta = '{$this->get('selTipopago')}',
-                fecha_venta = '{$this->get('txtFechaventa')}',
+                fechaUsuario_venta = '{$this->get('txtFechaventa')}',
                 telefono_venta = '{$this->get('txtTelefonocliente')}',
                 correo_venta = '{$this->get('txtCorreocliente')}'
                 WHERE
