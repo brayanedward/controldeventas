@@ -90,7 +90,7 @@
                                     <select id="selTipopago" name="selTipopago" class="form-control" required="">
                                         <option>SELECCIONE ... </option>
                                         <?php foreach ($this->model->listaPagos() as $rowPago) : ?>
-                                        <?php if($rows['tipoPago_venta'] == $rowPago['id_tipopago']){ $selected = 'selected';}else{$selected = '';}?>
+                                        <?php if($rows['tipopago_venta'] == $rowPago['id_tipopago']){ $selected = 'selected';}else{$selected = '';}?>
                                         <option <?php echo $selected; ?> value="<?php echo $rowPago['id_tipopago'] ?>">
                                             <?php echo $rowPago['descripcion_tipopago'] ?></option>
                                         <?php endforeach; ?>

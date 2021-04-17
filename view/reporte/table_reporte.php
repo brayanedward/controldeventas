@@ -77,14 +77,16 @@
                                   <label for="tipoPago">TIPO PAGO</label>
                                     <select class="form-control" id="tipoPago" name="tipoPago">
                                       <option value="0">SELECCIONE TIPO PAGO</option>
-                                      <option value="3" selected>TODOS</option>
+                                      <option value="4" selected>TODOS</option>
                                       <?php foreach ($this->modelTipoPago->lista() as $rows3):?>
                                          <option value="<?php echo $rows3['id_tipopago']?>"><?php echo $rows3['descripcion_tipopago']?></option>
                                        <?php endforeach;?>
                                     </select>
                                 </div>
                                 <br>
-                                <button type="button" class="btn btn-danger btn-round btnSearch">Buscar</button>
+                                <button type="button" class="btn btn-danger btn-round btnSearch">
+                                    Buscar
+                                </button>
                               <!-- <a href="<?php echo $this->urlhome; ?>"> <button type="button" class="btn btn-warning btn-round"><i class="zmdi zmdi-long-arrow-return"></i> Volver</button></a>-->
                             </form>
                         </div>
@@ -150,8 +152,8 @@
         $(document).ready( function () {
                 $('#datatable').DataTable({
                      "language": {
-                                "lengthMenu": "Mostrar _MENU_ clientes",
-                                "zeroRecords": "Cliente No Encontrado",
+                                "lengthMenu": "Mostrar _MENU_ ventas",
+                                "zeroRecords": "Venta No Encontrada",
                                 "info": "Página _PAGE_ de _PAGES_",
                                 "infoEmpty": "Los datos buscados no existen en los registros",
                                 "infoFiltered": "(Buscado entre los _MAX_ registros actuales)",
@@ -168,7 +170,8 @@
                             dom: 'Bfrtip',
                             buttons: [
                                 'copy', 'csv', 'excel', 'pdf', 'print'
-                            ]
+                            ],
+                            refresh:true
 
 
                 });
@@ -205,53 +208,45 @@ $("body").on('click','button.btnSearch', function(event) {
                 dataType: "html",
                 contentType: "application/x-www-form-urlencoded",
                 beforeSend: function() {
-                    $('.message').html('<div class="sk-wave"> <div class="sk-rect sk-rect1"></div> <div class="sk-rect sk-rect2"></div> <div class="sk-rect sk-rect3"></div> <div class="sk-rect sk-rect4"></div> <div class="sk-rect sk-rect5"></div> </div>');
+                  alertify.success('Buscando ...');
+
                 },
                 success: function(respuesta) {
-                    //$('#resultbusq').show();
-                    alert(respuesta);
+
+                    alertify.success('Listo!');
+
+                    $('#datatable').DataTable().destroy();
                     $('#tbodyClientes').html(respuesta);
+                    $('#datatable').DataTable({
+                         "language": {
+                                    "lengthMenu": "Mostrar _MENU_ ventas",
+                                    "zeroRecords": "Venta No Encontrada",
+                                    "info": "Página _PAGE_ de _PAGES_",
+                                    "infoEmpty": "Los datos buscados no existen en los registros",
+                                    "infoFiltered": "(Buscado entre los _MAX_ registros actuales)",
+                                    "search": "Buscar",
+                                    "paginate": {
+                                                    "first": "Primero",
+                                                    "last": "Ultimo",
+                                                    "next": "Siguiente",
+                                                    "previous": "Anterior"
+                                                },
+                                    "loadingRecords": "Cargando...",
+                                },
+                                ordering:false,
+                                dom: 'Bfrtip',
+                                buttons: [
+                                    'copy', 'csv', 'excel', 'pdf', 'print'
+                                ],
+                                refresh:true
+
+
+                    });
+
+
                 }
             });
             return false;
         });
-
-
-
-
-        function compbusqueda() {
-            $('#buscaDireccion').hide();
-            $('#buscaRut').hide();
-            $('#buscaNombre').hide();
-            $('#Buscar').hide();
-            $('button[type="submit"]').attr("disabled", false);
-            $('button.btnSave').html('Buscar');
-
-            if ($('#selTipoBusq').val() == 1) {
-                $('#buscaDireccion').show();
-                $('#Buscar').show();
-                $('#rut').val('');
-                $('#nombre').val('');
-                $('#apellidop').val('');
-                $('#apellidom').val('');
-            }
-            if ($('#selTipoBusq').val() == 2) {
-                $('#buscaRut').show();
-                $('#Buscar').show();
-                $('#nombre').val('');
-                $('#apellidop').val('');
-                $('#apellidom').val('');
-                $('#direccion').val('');
-                $('#direccionnum').val('');
-            }
-            if ($('#selTipoBusq').val() == 3) {
-                $('#buscaNombre').show();
-                $('#Buscar').show();
-                $('#direccion').val('');
-                $('#direccionnum').val('');
-                $('#rut').val('');
-            }
-        }
-
 
     </script>

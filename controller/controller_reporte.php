@@ -121,7 +121,7 @@ class ReporteController
           }
         }
 
-        if($tipoPago<3){
+        if($tipoPago<4){
             $condicionVenta.= 'AND a.tipopago_venta='.$tipoPago.' ';
         }
 
@@ -146,12 +146,14 @@ class ReporteController
                     <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">' . strtoupper($rows['nombre_usuario']) . ' ' . strtoupper($rows['apellido_usuario']) . '</td>
                     <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">' . $rows['cliente_venta'] . '</td>
                     <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">$' .$valorVentaF. '</td>
-                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">' . $rows['descripcion_tipoPago'] . '</td>
+                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">' . $rows['descripcion_tipopago'] . '</td>
                 </tr>';
             endforeach;
         else :
-            $retorno .= '<tr><th data-org-colspan="1" colspan="7" data-columns="tech-companies-1-col-0"><b>No se encontraron ventas registradas con los parametros de búsqueda actual</b></th></tr>';
+            $retorno .= '<tr><th data-org-colspan="1" colspan="6" data-columns="tech-companies-1-col-0"><b>No se encontraron ventas registradas con los parametros de búsqueda actual</b></th><td></td><td></td><td></td><td></td><td></td></tr>';
         endif;
+
+
 
         echo $retorno;
 
