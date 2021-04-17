@@ -44,7 +44,7 @@
                                     <select class="form-control" id="tipoUsuario" name="tipoUsuario">
                                       <option value="0">SELECCIONE TIPO USUARIO</option>
                                       <?php foreach ($this->modelTipoUsuario->lista() as $rows2):?>
-                                         <option value="<?php echo $rows2['id_tipoUsuario']?>"><?php echo $rows2['descripcion_tipoUsuario']?></option>
+                                         <option value="<?php echo $rows2['id_tipousuario']?>"><?php echo $rows2['descripcion_tipousuario']?></option>
                                        <?php endforeach; ?>
                                     </select>
                                 </div>
