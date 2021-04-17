@@ -59,18 +59,7 @@
                                                             </a>
                                                         </span>
 
-                                                        <span class="hint  hint--left iconPerfil" data-hint="Exportar Excel" attr-rut="<?php echo $rows['id_venta'] ?>">
-                                                            <a class="btn btn-icon waves-effect waves-light btn-success">
-                                                                <i style="cursor: pointer;" class="mdi mdi-file-excel "></i>
-                                                            </a>
-                                                        </span>
 
-                                                        <span class="hint  hint--left iconPerfil" data-hint="Exportar Pdf" attr-rut="<?php echo $rows['id_venta'] ?>">
-                                                            <a class="btn btn-icon waves-effect waves-light btn-danger">
-                                                                <i style="cursor: pointer;" class="mdi mdi-file-pdf "></i>
-                                                            </a>
-                                                        </span>
-                                                
                                                         <span class="hint  hint--left" data-hint="Editar Venta">
                                                             <a class="btn btn-icon waves-effect waves-light btn-primary" href="<?php echo $this->urledit . base64_encode($rows['id_venta']); ?>">
                                                                 <i style="cursor: pointer;" class="mdi mdi-pen " id="iconHistorial"></i>
