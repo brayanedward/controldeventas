@@ -68,10 +68,10 @@ class VentaController
 
     public function index(){
       if(base64_decode($_SESSION['tipoUsuario'])==1){
-        $condicion = " and a.estado_venta < 3 order by a.id_venta desc";
+        $condicion = " and a.estado_venta < 3 order by a.fechaUsuario_venta";
       }else {
         $usuario = base64_decode($_SESSION['rutUsuario']);
-        $condicion = " and a.estado_venta < 3 and a.usuario_venta = ".$usuario." order by a.id_venta desc";
+        $condicion = " and a.estado_venta < 3 and a.usuario_venta = ".$usuario." order by a.fechaUsuario_venta desc";
       }
         $this->model->set("condicion", $condicion);
         require_once './view/maqueta/header.php';

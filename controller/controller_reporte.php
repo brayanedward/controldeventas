@@ -76,7 +76,7 @@ class ReporteController
     }
 
     public function index(){
-        $condicion = "order by a.id_venta desc";
+        $condicion = "order by a.fechaUsuario_venta desc";
         $condicionUsuario = '';
         $this->modelVenta->set("condicion",$condicion);
         //$this->model->set("condicion", $condicion);
@@ -87,7 +87,7 @@ class ReporteController
     }
 
     public function lista(){
-        $condicion = "order by a.id_venta desc";
+        $condicion = "order by a.fechaUsuario_venta desc";
         $condicionUsuario = '';
         $this->modelVenta->set("condicion",$condicion);
         //$this->model->set("condicion", $condicion);
@@ -131,7 +131,7 @@ class ReporteController
         if($vendedor!=3){
             $condicionVenta.= 'AND a.usuario_venta='.$vendedor.' ';
         }
-        $condicionVenta.= 'ORDER BY a.id_venta desc';
+        $condicionVenta.= 'ORDER BY a.fechaUsuario_venta desc';
 
         $this->modelVenta->set("condicion", $condicionVenta);
 
