@@ -1,7 +1,7 @@
 <?php
 require_once "core/conexion.php";
 
-class VentaModel
+class ventaModel
 {
 
     private $id;
@@ -71,7 +71,7 @@ class VentaModel
     }
 
     public function count(){
-        $sql = "SELECT count(id_venta)as num FROM tb_Venta";
+        $sql = "SELECT count(id_venta)as num FROM tb_venta";
 
         $datos = $this->con->consultaRetorno($sql);
 
@@ -83,8 +83,8 @@ class VentaModel
 
     public function countHoy(){
         $hoy = date('Y-m-d');
-        $sql = "SELECT count(id_venta)as num FROM tb_Venta WHERE fechaUsuario_venta BETWEEN '$hoy 00:00:00' AND '$hoy 23:59:59'";
-
+        $sql = "SELECT count(id_venta)as num FROM tb_venta WHERE fechaUsuario_venta BETWEEN '$hoy 00:00:00' AND '$hoy 23:59:59'";
+        //echo $sql;
         $datos = $this->con->consultaRetorno($sql);
 
         if ($rows = mysqli_fetch_array($datos)) {
@@ -94,7 +94,7 @@ class VentaModel
     }
 
     public function countSiete(){
-        $sql = "SELECT count(id_venta)as num FROM tb_Venta WHERE YEAR(fechaUsuario_venta) = YEAR(CURRENT_DATE())
+        $sql = "SELECT count(id_venta)as num FROM tb_venta WHERE YEAR(fechaUsuario_venta) = YEAR(CURRENT_DATE())
         AND MONTH(fechaUsuario_venta)  = MONTH(CURRENT_DATE())";
 
         $datos = $this->con->consultaRetorno($sql);
@@ -106,7 +106,7 @@ class VentaModel
     }
 
     public function countMes(){
-        $sql = "SELECT count(id_venta)as num FROM tb_Venta ";
+        $sql = "SELECT count(id_venta)as num FROM tb_venta ";
 
         $datos = $this->con->consultaRetorno($sql);
 
@@ -138,7 +138,7 @@ class VentaModel
     }
 
     public function delete(){
-        $sql = "UPDATE tb_Venta SET estado_Venta = '{$this->get('estado')}' WHERE id_venta ='{$this->get('id')}'";
+        $sql = "UPDATE tb_venta SET estado_venta = '{$this->get('estado')}' WHERE id_venta ='{$this->get('id')}'";
         //echo $sql;
         $this->con->consultaSimple($sql);
     }
@@ -165,8 +165,8 @@ class VentaModel
     }
 
     public function estado(){
-        $sql = "UPDATE tb_Venta
-                SET estado_Venta = '{$this->get('estado')}'
+        $sql = "UPDATE tb_venta
+                SET estado_venta = '{$this->get('estado')}'
                 WHERE id_venta = '{$this->get('id')}'";
         $this->con->consultaSimple($sql);
     }
