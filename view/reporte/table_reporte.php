@@ -74,8 +74,8 @@
                                 </div>
 
                                 <div class="form-group col-md-2">
-                                  <label for="tipoPago">TIPO PAGO</label>
-                                    <select class="form-control" id="descripcion_tipoPago" name="tipoPago">
+                                  <label for="descripcion_tipoPago">TIPO PAGO</label>
+                                    <select class="form-control" id="descripcion_tipoPago" name="descripcion_tipoPago">
                                       <option value="0">SELECCIONE TIPO PAGO</option>
                                       <option value="3" selected>TODOS</option>
                                       <?php foreach ($this->modelTipoPago->lista() as $rows3):?>
