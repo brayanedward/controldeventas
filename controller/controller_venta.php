@@ -155,6 +155,8 @@ class VentaController
         $this->model->set("txtDireccioventa", $_REQUEST['txtDireccioventa']);
         $this->model->set("selTipopago", $_REQUEST['selTipopago']);
         $this->model->set("txtDetalleventa", $_REQUEST['txtDetalleventa']);
+        $this->model->set("txtTelefonocliente", $_REQUEST['txtTelefonocliente']);
+        $this->model->set("txtCorreocliente", $_REQUEST['txtCorreocliente']);
         $this->model->set("usuario", base64_decode($_SESSION['rutUsuario']));
         $this->model->set("estado", 1);
 
@@ -175,6 +177,8 @@ class VentaController
         $this->model->set("usuario", base64_decode($_SESSION['rutUsuario']));
         $this->model->set("idventa", $_REQUEST['idventa']);
         $this->model->set("estado", 1);
+        $this->model->set("txtTelefonocliente", $_REQUEST['txtTelefonocliente']);
+        $this->model->set("txtCorreocliente", $_REQUEST['txtCorreocliente']);
         
         if ($query = $this->model->edit()) {
             echo 1;
@@ -254,6 +258,16 @@ class VentaController
                             <label for="nombres">Detalle</label>
                                 <p>'.$rows['descripcion_venta'].'</p>
                         </div>';
+            
+            $retorno .= ' <div class="form-group col-lg-4">
+                        <label for="nombres">Correo Cliente</label>
+                            <p>'.$rows['correo_venta'].'</p>
+                    </div>';
+
+            $retorno .= ' <div class="form-group col-lg-4">
+                    <label for="nombres">Telefono Cliente</label>
+                        <p>'.$rows['telefono_venta'].'</p>
+                </div>';        
 
             if(base64_decode($_SESSION['tipoUsuario'])==1){
                 $retorno .= ' <div class="form-group col-lg-4">
