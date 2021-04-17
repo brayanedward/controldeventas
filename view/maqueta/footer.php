@@ -5,8 +5,8 @@
             <!-- End Right content here -->
             <!-- ============================================================== -->
 
-            <footer class="footer text-right" >© Copyright <?php echo date('Y'); ?>  
-                  <a  href="https://desarrolloplus.net/" target="_blank">Desarrollo Plus.</a> Todos los derechos reservados.
+            <footer class="footer text-right" >© Copyright <?php echo date('Y'); ?>
+                  <a  href="https://mscode.cl/" target="_blank">MSCODE.</a> Todos los derechos reservados.
             </footer>
             <!-- Right Sidebar -->
             <div class="side-bar right-bar">
@@ -68,7 +68,7 @@
 
         <!-- jQuery  -->
 
-        
+
         <script src="assets/js/bootstrap.min.js"></script>
         <script src="assets/js/detect.js"></script>
         <script src="assets/js/fastclick.js"></script>
@@ -98,20 +98,20 @@
         <!--<script src="assets/plugins/nestable/jquery.nestable.js"></script>
         <script src="assets/pages/jquery.nestable.init.js"></script>-->
 
-        
+
         <!--BEGIN PAGE SCRIPTS -->
         <script src="assets/plugins/moment/moment.js"></script>
         <script src="assets/plugins/fullcalendar/js/fullcalendar.min.js"></script>
         <script src="assets/pages/jquery.fullcalendar.js"></script>
 
         <!--AUTOCOMPLETE -->
-       
+
        <!-- <script type="text/javascript" src="assets/plugins/autocomplete/jquery.mockjax.js"></script>
-        <script type="text/javascript" src="assets/plugins/autocomplete/jquery.autocomplete.min.js"></script> 
+        <script type="text/javascript" src="assets/plugins/autocomplete/jquery.autocomplete.min.js"></script>
         <script type="text/javascript" src="assets/js/system/agenda.js"></script>
         <script type="text/javascript" src="assets/pages/jquery.autocomplete.init.js"></script>-->
-        
-        
+
+
         <!-- SCRIPT HORA CALENDARIO -->
         <script src="assets/plugins/timepicker/bootstrap-timepicker.js"></script>
         <script src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
@@ -175,7 +175,7 @@
         <script src="assets/js/vex.combined.min.js"></script>
         <script>vex.defaultOptions.className = 'vex-theme-os'</script>
         <script src="assets/js/bootstrap-maxlength.min.js"></script>
-        
+
 
     </body>
 </html>

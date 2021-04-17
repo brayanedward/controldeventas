@@ -170,7 +170,8 @@
                                                 "previous": "Anterior"
                                             },
                                 "loadingRecords": "Cargando...",
-                            }
+                            },
+                            ordering:false
 
                 });
             } );

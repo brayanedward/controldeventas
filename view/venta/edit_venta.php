@@ -47,8 +47,8 @@
                                 </div>
                                 <div class="form-group col-lg-6">
                                     <label for="txtFechaventa">Fecha Venta</label>
-                                    <input type="date" id="txtFechaventa" name="txtFechaventa" class="form-control"
-                                        placeholder="" value="<?php echo $rows['fecha_venta']?>">
+                                    <input type="datetime-local" id="txtFechaventa" name="txtFechaventa" class="form-control"
+                                        placeholder="" value="<?php echo $rows['fechaUsuario_venta']?>">
                                 </div>
 
                                 <div class="form-group col-lg-6">
@@ -57,7 +57,7 @@
                                         <span class="input-group-addon"><i class="zmdi zmdi-account-box-o"></i></span>
                                         <input type="text" id="txtNombrecventa" name="txtNombrecventa"
                                             class="form-control" placeholder="Ingrese los Nombres de Cliente"
-                                            maxlength="500" value="<?php echo $rows['cliente_venta']?>">
+                                            maxlength="100" value="<?php echo $rows['cliente_venta']?>">
                                     </div>
                                 </div>
 
@@ -65,7 +65,7 @@
                                     <label for="txtDireccioventa">Dirección Venta</label>
                                     <input type="text" id="txtDireccioventa" name="txtDireccioventa"
                                         class="form-control" placeholder="Ingrese Direccion de la Venta"
-                                        maxlength="500" value="<?php echo $rows['direccion_venta']?>">
+                                        maxlength="100" value="<?php echo $rows['direccion_venta']?>">
                                 </div>
                                 <br>
                                 <div class="form-group col-lg-6">
@@ -74,14 +74,14 @@
                                         <span class="input-group-addon"><i class="zmdi zmdi-phone"></i></span>
                                         <input type="text" id="txtTelefonocliente" name="txtTelefonocliente"
                                             class="form-control" placeholder="Ingrese Telefono Cliente"
-                                            maxlength="500" value="<?php echo $rows['telefono_venta']?>"> 
+                                            maxlength="10" value="<?php echo $rows['telefono_venta']?>">
                                     </div>
                                 </div>
                                 <div class="form-group col-lg-6">
                                     <label for="txtCorreocliente">Correo Cliente </label>
                                     <input type="text" id="txtCorreocliente" name="txtCorreocliente"
                                         class="form-control" placeholder="Ingrese el Correo Electrónico"
-                                        maxlength="500" value="<?php echo $rows['correo_venta']?>">
+                                        maxlength="50" value="<?php echo $rows['correo_venta']?>">
                                 </div>
                                 <br>
                                 <label for="txtCorreoElectronico">Tipo de Pago</label>
@@ -104,7 +104,7 @@
                                         <textarea class="form-control" name="txtDetalleventa" id="txtDetalleventa" rows="3" style="width:100%;"  maxlength="500"><?php echo $rows['descripcion_venta']?></textarea>
                                     </div>
                                 </div>
-                                
+
                                 <br>
                                 <button type="button" onclick="grabar(<?php echo $rows['id_venta']?>)" class="btn btn-info btn-round"><i class="zmdi zmdi-floppy"></i> Guardar</button>
                                 <a href="<?php echo $this->urlhome; ?>"> <button type="button" class="btn btn-danger btn-round"><i class="zmdi zmdi-long-arrow-return"></i> Volver</button></a>

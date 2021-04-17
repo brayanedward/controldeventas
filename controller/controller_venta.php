@@ -68,10 +68,10 @@ class VentaController
 
     public function index(){
       if(base64_decode($_SESSION['tipoUsuario'])==1){
-        $condicion = " and a.estado_venta < 3 order by a.fechaUsuario_venta desc";
+        $condicion = " and a.estado_venta < 3 order by a.id_venta desc";
       }else {
         $usuario = base64_decode($_SESSION['rutUsuario']);
-        $condicion = " and a.estado_venta < 3 and a.usuario_venta = ".$usuario." order by a.fechaUsuario_venta desc";
+        $condicion = " and a.estado_venta < 3 and a.usuario_venta = ".$usuario." order by a.id_venta desc";
       }
         $this->model->set("condicion", $condicion);
         require_once './view/maqueta/header.php';
@@ -179,7 +179,7 @@ class VentaController
         $this->model->set("estado", 1);
         $this->model->set("txtTelefonocliente", $_REQUEST['txtTelefonocliente']);
         $this->model->set("txtCorreocliente", $_REQUEST['txtCorreocliente']);
-        
+
         if ($query = $this->model->edit()) {
             echo 1;
         } else {
@@ -244,21 +244,18 @@ class VentaController
             $retorno .= ' <div class="form-group col-lg-4">
                             <label for="nombres">Nombre Cliente</label>
                                 <p>'.$rows['cliente_venta'].'</p>
-                        </div>'; 
+                        </div>';
             $retorno .= ' <div class="form-group col-lg-4">
                             <label for="nombres">Dirección Venta</label>
                                 <p>'.$rows['direccion_venta'].' </p>
-                        </div>'; 
+                        </div>';
             $retorno .= ' <div class="form-group col-lg-4">
                             <label for="nombres">Tipo Pago</label>
                                 <p>'.$rows['descripcion_tipopago'].'</p>
                         </div>';
 
-            $retorno .= ' <div class="form-group col-lg-4">
-                            <label for="nombres">Detalle</label>
-                                <p>'.$rows['descripcion_venta'].'</p>
-                        </div>';
-            
+
+
             $retorno .= ' <div class="form-group col-lg-4">
                         <label for="nombres">Correo Cliente</label>
                             <p>'.$rows['correo_venta'].'</p>
@@ -267,17 +264,26 @@ class VentaController
             $retorno .= ' <div class="form-group col-lg-4">
                     <label for="nombres">Telefono Cliente</label>
                         <p>'.$rows['telefono_venta'].'</p>
-                </div>';        
+                </div>';
 
             if(base64_decode($_SESSION['tipoUsuario'])==1){
                 $retorno .= ' <div class="form-group col-lg-4">
-                <label for="nombres">Fecha de Registro (sistema)</label>
+                <label for="nombres">Fecha de Registro (Sistema)</label>
                     <p>'.$rows['fechaUsuario_venta'].'</p>
                 </div>';
             }
-            $retorno .= '</div>';                                
+
+            $retorno .= ' <div class="form-group col-lg-12">
+                            <label for="nombres">Detalle</label>
+                                <p>'.$rows['descripcion_venta'].'</p>
+                        </div>';
             $retorno .= '</div>';
-        
+            $retorno .= '</div>';
+
+            $retorno .= '<div class="row card-box">';
+            $retorno .= '<b>Fecha Venta:</b> Indicada por el vendedor como la fecha real en que realizo la venta<br><b>Fecha Venta (sistema):</b> Fecha en la que se realizo el registro.';
+            $retorno .= '</div>';
+
         endforeach;
         echo $retorno;
     }

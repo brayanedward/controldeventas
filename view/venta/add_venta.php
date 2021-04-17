@@ -1,3 +1,5 @@
+
+
 <div class="content-page">
     <div class="content">
         <div class="container">
@@ -46,7 +48,7 @@
                                 </div>
                                 <div class="form-group col-lg-6">
                                     <label for="txtFechaventa">Fecha Venta</label>
-                                    <input type="date" id="txtFechaventa" name="txtFechaventa" class="form-control"
+                                    <input type="datetime-local" id="txtFechaventa" name="txtFechaventa" class="form-control"
                                         placeholder="">
                                 </div>
 

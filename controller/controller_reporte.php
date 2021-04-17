@@ -76,10 +76,10 @@ class ReporteController
     }
 
     public function index(){
-        $condicion = "";
-        $condicionUsuario = 'order by nombre_usuario asc';
-        $this->modelUsuario->set("condicion",$condicionUsuario);
-        $this->model->set("condicion", $condicion);
+        $condicion = "order by a.id_venta desc";
+        $condicionUsuario = '';
+        $this->modelVenta->set("condicion",$condicion);
+        //$this->model->set("condicion", $condicion);
         require_once './view/maqueta/header.php';
         require_once './view/maqueta/nav.php';
         require_once './view/reporte/table_' . $this->controller . '.php';
@@ -87,10 +87,10 @@ class ReporteController
     }
 
     public function lista(){
-        $condicion = "";
-        $condicionUsuario = 'order by nombre_usuario asc';
-        $this->modelVenta->set("condicion",$condicionUsuario);
-        $this->model->set("condicion", $condicion);
+        $condicion = "order by a.id_venta desc";
+        $condicionUsuario = '';
+        $this->modelVenta->set("condicion",$condicion);
+        //$this->model->set("condicion", $condicion);
         require_once './view/maqueta/header.php';
         require_once './view/maqueta/nav.php';
         require_once './view/reporte/table_' . $this->controller . '.php';
@@ -131,17 +131,21 @@ class ReporteController
         if($vendedor!=3){
             $condicionVenta.= 'AND a.usuario_venta='.$vendedor.' ';
         }
+        $condicionVenta.= 'ORDER BY a.id_venta desc';
 
         $this->modelVenta->set("condicion", $condicionVenta);
 
+
         if ($rows = mysqli_fetch_array($this->modelVenta->lista())) :
             foreach ($this->modelVenta->lista() as $rows) :
-    $retorno = '<tr>
+            $valorVenta = number_format($rows['valor_venta']);
+            $valorVentaF =str_ireplace(',','.',$valorVenta);
+    $retorno .= '<tr>
                     <th data-org-colspan="1" data-columns="tech-companies-1-col-0"><span class="co-name">' . $rows['fechaUsuario_venta'] . '</span></th>
                     <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">' . $rows['id_venta'] . '</td>
-                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">' . $rows['nombre_usuario'] . ' ' . $rows['apellido_usuario'] . '</td>
+                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">' . strtoupper($rows['nombre_usuario']) . ' ' . strtoupper($rows['apellido_usuario']) . '</td>
                     <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">' . $rows['cliente_venta'] . '</td>
-                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">$' . $rows['valor_venta'] . '/ N° Casa:</td>
+                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">$' .$valorVentaF. '</td>
                     <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">' . $rows['descripcion_tipoPago'] . '</td>
                 </tr>';
             endforeach;

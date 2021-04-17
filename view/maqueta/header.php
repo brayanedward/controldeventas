@@ -74,4 +74,6 @@ echo '<script> location.href ="./index.php"; </script>';
         <script src="assets/js/jsvalidate/jquery.validate.js"></script>
         <script src="assets/js/jsvalidate/additional-methods.js"></script>
 
+        
+
     </head>
