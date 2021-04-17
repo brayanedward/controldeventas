@@ -122,7 +122,7 @@ class ReporteController
         }
 
         if($tipoPago<3){
-            $condicionVenta.= 'AND a.tipoPago_venta='.$tipoPago.' ';
+            $condicionVenta.= 'AND a.tipopago_venta='.$tipoPago.' ';
         }
 
         if($tipoUsuario<3){
