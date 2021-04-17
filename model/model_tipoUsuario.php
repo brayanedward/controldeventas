@@ -37,7 +37,7 @@ class tipoUsuarioModel
     public function lista(){
         try {
 
-            $sql = "SELECT id_tipoUsuario,descripcion_tipoUsuario,estado_tipoUsuario
+            $sql = "SELECT id_tipousuario,descripcion_tipousuario,estado_tipousuario
             FROM tb_tipoUsuario
             {$this->get('condicion')}";
             $datos = $this->con->consultaRetorno($sql);
@@ -49,7 +49,7 @@ class tipoUsuarioModel
     }
 
     public function count(){
-        $sql = "SELECT count(id_tipoUsuario)as num FROM tb_";
+        $sql = "SELECT count(id_tipousuario)as num FROM tb_";
 
         $datos = $this->con->consultaRetorno($sql);
 

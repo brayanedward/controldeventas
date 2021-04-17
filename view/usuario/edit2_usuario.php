@@ -44,10 +44,10 @@
                                     <select class="form-control" id="tipoUsuario" name="tipoUsuario">
                                       <option value="0">SELECCIONE TIPO USUARIO</option>
                                       <?php foreach ($this->modelTipoUsuario->lista() as $rows2):?>
-                                       <?php if($rows['tipo_usuario']==$rows2['id_tipoUsuario']){?>
-                                         <option value="<?php echo $rows2['id_tipoUsuario']?>" selected><?php echo $rows2['descripcion_tipoUsuario']?></option>
+                                       <?php if($rows['tipo_usuario']==$rows2['id_tipousuario']){?>
+                                         <option value="<?php echo $rows2['id_tipousuario']?>" selected><?php echo $rows2['descripcion_tipousuario']?></option>
                                        <?php } else{ ?>
-                                         <option value="<?php echo $rows2['id_tipoUsuario']?>"><?php echo $rows2['descripcion_tipoUsuario']?></option>
+                                         <option value="<?php echo $rows2['id_tipousuario']?>"><?php echo $rows2['descripcion_tipousuario']?></option>
                                        <?php } endforeach;?>
                                     </select>
                                 </div>
@@ -132,7 +132,7 @@
                     $('.message').html('<div class="sk-wave"> <div class="sk-rect sk-rect1"></div> <div class="sk-rect sk-rect2"></div> <div class="sk-rect sk-rect3"></div> <div class="sk-rect sk-rect4"></div> <div class="sk-rect sk-rect5"></div> </div>');
                 },
                 success: function(respuesta) {
-                  alert(respuesta);
+                  //alert(respuesta);
                     if (respuesta == 1) {
                         alertify.success('Guardado Exitosamente!');
                         limpiar();

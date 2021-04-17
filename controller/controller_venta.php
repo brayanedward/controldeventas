@@ -116,7 +116,7 @@ class VentaController
     public function edit2(){
         $id = base64_decode($_REQUEST['id']);
         if (isset($id)) {
-            $condicion = " where rut_venta='" . $id . "'";
+            $condicion = " where rut_usuario='" . $id . "'";
             $this->model->set("condicion", $condicion);
         }
 
