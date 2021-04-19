@@ -97,6 +97,11 @@
                                     </select>
                                 </div>
                                 <br>
+                                <div class="form-group col-lg-12">
+                                    <label for="txtCorreoElectronico">Adjuntar Archivo</label>
+                                    <input type="file" name="archivo[]" value="" class="form-control file-input">
+                                </div>
+                                <br>
                                 <div class="form-group">
                                     <label for="txtDetalleventa">Detalle Venta</label>
                                     <div class="input-group">

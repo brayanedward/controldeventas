@@ -287,4 +287,70 @@ class VentaController
         endforeach;
         echo $retorno;
     }
+
+    public function subirArchivos()
+ {
+
+     $files = '';
+     $return= '';
+     $idVenta = $_GET["idVenta"];
+     $time = md5(rand(20, 1000) . time());
+     $name = $idsolicitud;
+     //comprobamos que sea una petición ajax
+     if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+
+         // si hay algun archivo que subir
+         if ($_FILES["archivo"]["name"])  {
+
+             $ruta = "/var/www/html/assets/ssan_bo_recepciondedespachos/files/$name/";
+             if (!is_dir($ruta)) {
+                 mkdir($ruta, 0777);
+             }
+
+             for ($i = 0; $i < count($_FILES["archivo"]["name"]); $i++) {
+
+                 //obtenemos el archivo a subir
+                 //$file = time() . '_' . $_FILES["archivo"]["name"][$i];
+                 //$file = str_replace(' ', '', $file);
+                 $file = $idVenta . '_' .$i. '_' . $_FILES["archivo"]["name"][$i];
+                 $file = str_replace(' ', '', $file);
+                 //comprobamos si existe un directorio para subir el archivo
+                 //si no es así, lo creamos
+                 if (!is_dir($ruta)) {
+                     mkdir($ruta, 0777);
+                 }
+                  //comprobamos si el archivo ha subido
+                  if (move_uploaded_file($_FILES['archivo']['tmp_name'][$i], $ruta . '/' . $file)) {
+                     sleep(3); //retrasamos la petición 3 segundos
+                     $files = $file;
+                     if ($i == 0) {
+                         $url = $ruta . '/' .$file;
+                     } else if ($i == 1) {
+                         $url = $ruta . '/' .$file;
+                     }
+                 }
+             }
+
+         } else {
+             echo 'No detecta File ';
+         }
+
+     } else {
+         $return = false;
+     }
+
+      //Confirma subida de archivos
+      if (!empty($files)) {
+         $return = true;
+     }
+
+     $html = '';
+     if ($return) {
+         $html = "<script>jAlert('Recepción realizada con documentos adjuntados');</script>";
+
+     }
+
+     echo $html;
+
+ }
 }
