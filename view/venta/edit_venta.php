@@ -48,7 +48,7 @@
                                 <div class="form-group col-lg-6">
                                     <label for="txtFechaventa">Fecha Venta</label>
                                     <input type="datetime-local" id="txtFechaventa" name="txtFechaventa" class="form-control"
-                                        placeholder="" value="<?php echo $rows['fechaUsuario_venta']?>">
+                                        value="<?php echo $rows['fechaUsuario_venta1']?>">
                                 </div>
 
                                 <div class="form-group col-lg-6">
@@ -106,7 +106,7 @@
                                 </div>
 
                                 <br>
-                                <button type="button" onclick="grabar(<?php echo $rows['id_venta']?>)" class="btn btn-info btn-round"><i class="zmdi zmdi-floppy"></i> Guardar</button>
+                                <button type="button" onclick="grabar(<?php echo $rows['id_venta']?>)" class="btn btn-info btn-round"><i class="zmdi zmdi-floppy"></i> Editar</button>
                                 <a href="<?php echo $this->urlhome; ?>"> <button type="button" class="btn btn-danger btn-round"><i class="zmdi zmdi-long-arrow-return"></i> Volver</button></a>
                             </div>
                         </div>
@@ -179,7 +179,7 @@ function grabar(idventa) {
             success: function(respuesta) {
                 console.log(respuesta);
                 if (respuesta == 1) {
-                    alertify.success('Guardado Exitosamente!');
+                    alertify.success('Editado Exitosamente!');
                     limpiar();
                 } else {
                     alertify.error('Error al ingresar la información');
@@ -188,7 +188,7 @@ function grabar(idventa) {
         });
         return false;
     } else {
-        alert(validacionesUsu());
+        alertify.error(validacionesUsu());
     }
 
 }
@@ -197,22 +197,22 @@ function validacionesUsu() {
     var errores = '';
 
     if ($('#txtValorventa').val() == '') {
-        errores += '- Debe completar el Valor de la venta \n';
+        errores += '- Debe completar el Valor de la venta <br>';
     }
     if ($('#txtFechaventa').val() == '') {
-        errores += '- Debe completar la Fecha de la venta \n';
+        errores += '- Debe completar la Fecha de la venta <br>';
     }
     if ($('#txtNombrecventa').val() == '') {
-        errores += '- Debe completar Nombre Cliente venta\n';
+        errores += '- Debe completar Nombre Cliente venta <br>';
     }
     if ($('#txtDireccioventa').val() == '') {
-        errores += '- Debe completar la dirección de la venta \n';
+        errores += '- Debe completar la dirección de la venta <br>';
     }
     if ($('#selTipopago').val() == '') {
-        errores += '- Debe completar el Tipo de pago \n';
+        errores += '- Debe completar el Tipo de pago <br>';
     }
     if ($('#txtDetalleventa').val() == '') {
-        errores += '- Debe completar el detalle de la venta \n';
+        errores += '- Debe completar el detalle de la venta <br>';
     }
 
     return errores;

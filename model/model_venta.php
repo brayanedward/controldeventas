@@ -52,8 +52,9 @@ class ventaModel
 
     public function lista(){
         try {
-            $sql = "SELECT a.id_venta,a.descripcion_venta,a.cliente_venta,a.valor_venta,a.direccion_venta,DATE_FORMAT(a.fechaUsuario_venta,'%d-%m-%Y %H:%i ')as fechaUsuario_venta,DATE_FORMAT(a.fecha_venta,'%d-%m-%Y %H:%i ')as fecha_venta,a.tipoPago_venta,a.estado_venta,a.usuario_venta,
-                    b.nombre_usuario ,b.apellido_usuario, c.descripcion_tipoPago, a.telefono_venta, a.correo_venta
+            $sql = "SELECT a.id_venta,a.descripcion_venta,a.cliente_venta,a.valor_venta,a.direccion_venta,DATE_FORMAT(a.fechaUsuario_venta,'%d-%m-%Y %H:%i')as fechaUsuario_venta, 
+                    DATE_FORMAT(a.fechaUsuario_venta,'%Y-%m-%dT%H:%i')as fechaUsuario_venta1, DATE_FORMAT(a.fecha_venta,'%d-%m-%Y %H:%i ')as fecha_venta,a.tipoPago_venta,a.estado_venta,a.usuario_venta,
+                    b.nombre_usuario ,b.apellido_usuario, c.descripcion_tipopago, a.telefono_venta, a.correo_venta
             FROM tb_venta a,tb_usuario b, tb_tipopago c
             WHERE
             a.usuario_venta = b.rut_usuario and a.tipoPago_venta = c.id_tipopago
