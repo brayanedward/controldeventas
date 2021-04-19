@@ -126,7 +126,7 @@
                                                     <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['nombre_usuario']); ?> <?php echo strtoupper($rows['apellido_usuario']); ?></td>
                                                     <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['cliente_venta']); ?></td>
                                                     <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">$<?php echo $valorVentaF;?></td>
-                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-5"><?php echo $rows['descripcion_tipoPago'];?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-5"><?php echo $rows['descripcion_tipopago'];?></td>
 
                                                 </tr>
                                             <?php $o++;
