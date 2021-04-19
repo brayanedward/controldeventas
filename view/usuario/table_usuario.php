@@ -60,16 +60,16 @@
 
                                             <ul class="social-links list-inline m-t-30">
                                                 <li class="list-inline-item">
-                                                    <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="<?php echo $this->urledit . base64_encode($rows['rut_usuario']); ?>" data-original-title="Editar"><i class="fas fa-pen"></i></a>
+                                                    <a class="hint  hint--left" data-hint="Editar" href="<?php echo $this->urledit . base64_encode($rows['rut_usuario']); ?>"><i class="fas fa-pen"></i></a>
                                                 </li>
                                                 <?php if ($rows['estado_usuario']  == 1) { ?>
                                                     <li class="list-inline-item">
-                                                        <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="<?php echo $this->urlstatus . base64_encode($rows['rut_usuario']); ?>" data-original-title="Desactivar"><i class="fas fa-times"></i></a>
+                                                        <a class="hint  hint--left" data-hint="Desactivar" href="<?php echo $this->urlstatus . base64_encode($rows['rut_usuario']); ?>"><i class="fas fa-times"></i></a>
                                                     </li>
                                                 <?php } ?>
                                                 <?php if ($rows['estado_usuario']  == 2) { ?>
                                                     <li class="list-inline-item">
-                                                        <a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="<?php echo $this->urlstatus . base64_encode($rows['rut_usuario']); ?>" data-original-title="Activar"><i class="fas fa-check"></i></a>
+                                                        <a class="hint  hint--left" data-hint="Activar" href="<?php echo $this->urlstatus . base64_encode($rows['rut_usuario']); ?>"><i class="fas fa-check"></i></a>
                                                     </li>
                                                 <?php } ?>
                                             </ul>
