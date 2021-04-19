@@ -191,7 +191,7 @@ function grabar() {
         });
         return false;
     } else {
-        alert(validacionesUsu());
+        alertify.error(validacionesUsu());
     }
 
 }
@@ -200,22 +200,22 @@ function validacionesUsu() {
     var errores = '';
 
     if ($('#txtValorventa').val() == '') {
-        errores += '- Debe completar el Valor de la venta \n';
+        errores += '- Debe completar el Valor de la venta <br>';
     }
     if ($('#txtFechaventa').val() == '') {
-        errores += '- Debe completar la Fecha de la venta \n';
+        errores += '- Debe completar la Fecha de la venta <br>';
     }
     if ($('#txtNombrecventa').val() == '') {
-        errores += '- Debe completar Nombre Cliente venta\n';
+        errores += '- Debe completar Nombre Cliente venta <br>';
     }
     if ($('#txtDireccioventa').val() == '') {
-        errores += '- Debe completar la dirección de la venta \n';
+        errores += '- Debe completar la dirección de la venta <br>';
     }
     if ($('#selTipopago').val() == '') {
-        errores += '- Debe completar el Tipo de pago \n';
+        errores += '- Debe completar el Tipo de pago <br>';
     }
     if ($('#txtDetalleventa').val() == '') {
-        errores += '- Debe completar el detalle de la venta \n';
+        errores += '- Debe completar el detalle de la venta <br>';
     }
 
     return errores;
