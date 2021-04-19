@@ -125,7 +125,7 @@ class UsuarioController
 
     public function status(){
         $id        = base64_decode($_REQUEST['id']);
-        $condicion = " where estado_usuario = 1 and rut_usuario='" . $id . "'";
+        $condicion = " where rut_usuario='" . $id . "'";
         $this->model->set("condicion", $condicion);
         if ($rows = mysqli_fetch_array($this->model->lista())) {
             if ($rows['estado_usuario'] == 1) {
