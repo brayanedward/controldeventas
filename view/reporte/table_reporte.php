@@ -185,7 +185,7 @@
                             ordering:false,
                             dom: 'Bfrtip',
                             buttons: [
-                                'copy', 'csv', 'excel', 'pdf', 'print'
+                                'copy', 'excel'
                             ],
                             refresh:true
 
@@ -230,7 +230,7 @@ $("body").on('click','button.btnSearch', function(event) {
                 success: function(respuesta) {
 
                     alertify.success('Listo!');
-                    alert(respuesta);
+          
                     $('#datatable').DataTable().destroy();
                     $('#tbodyClientes').html(respuesta);
                     $('#datatable').DataTable({

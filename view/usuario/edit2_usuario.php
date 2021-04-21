@@ -39,10 +39,11 @@
                                 <div class="form-group">
                                     <input type="text" id="txtCorreoElectronico" name="txtCorreoElectronico" value="<?php echo $rows['correo_usuario']?>" class="form-control" placeholder="Ingrese el Apellido de Usuario">
                                 </div>
+
                                 <label for="tipoUsuario">Tipo Usuario</label>
                                 <div class="form-group">
+                                  <?php if($_SESSION['tipoUsuario']==1){ ?>
                                     <select class="form-control" id="tipoUsuario" name="tipoUsuario">
-                                      <option value="0">SELECCIONE TIPO USUARIO</option>
                                       <?php foreach ($this->modelTipoUsuario->lista() as $rows2): ?>
                                        <?php if($rows['tipo_usuario']==$rows2['id_tipousuario']){ ?>
                                          <option value="<?php echo $rows2['id_tipousuario'] ?>" selected><?php echo $rows2['descripcion_tipousuario'] ?></option>
@@ -50,7 +51,16 @@
                                          <option value="<?php echo $rows2['id_tipousuario'] ?>"><?php echo $rows2['descripcion_tipousuario'] ?></option>
                                        <?php } endforeach;?>
                                     </select>
+                                  <?php }else{ ?>
+                                    <select class="form-control" id="tipoUsuario" name="tipoUsuario">
+                                      <?php foreach ($this->modelTipoUsuario->lista() as $rows2): ?>
+                                       <?php if($rows['tipo_usuario']==$rows2['id_tipousuario']){ ?>
+                                         <option value="<?php echo $rows2['id_tipousuario'] ?>" selected><?php echo $rows2['descripcion_tipousuario'] ?></option>
+                                       <?php } endforeach;?>
+                                    </select>
+                                  <?php } ?>
                                 </div>
+
                                 <label for="txtPassword">Contraseña</label>
                                 <div class="form-group">
                                     <input onblur="validapwIguales()" type="password" id="txtPassword" name="txtPassword" value="<?php echo $rows['password_usuario']?>" class="form-control" placeholder="Contraseña" style="width: 50%;">
