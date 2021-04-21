@@ -105,12 +105,21 @@
                                         <thead>
 
                                             <tr>
-                                                <th id="tech-companies-1-col-0-clone">Fecha Registro</th>
-                                                <th data-priority="1" id="tech-companies-1-col-1-clone">Código Venta</th>
+                                                <th id="tech-companies-1-col-0-clone">Código Venta</th>
+                                                <th data-priority="1" id="tech-companies-1-col-1-clone">Fecha Venta</th>
                                                 <th data-priority="3" id="tech-companies-1-col-2-clone">Vendedor</th>
-                                                <th data-priority="1" id="tech-companies-1-col-3-clone">Cliente</th>
-                                                <th data-priority="1" id="tech-companies-1-col-3-clone">Total</th>
+                                                <th data-priority="1" id="tech-companies-1-col-3-clone">Rut Cliente Premium</th>
+                                                <th data-priority="1" id="tech-companies-1-col-3-clone">Nombre Cliente Premium</th>
+                                                <th data-priority="1" id="tech-companies-1-col-3-clone">Correo Cliente Premium</th>
                                                 <th data-priority="3" id="tech-companies-1-col-5-clone">Tipo de Pago</th>
+                                                <th data-priority="3" id="tech-companies-1-col-5-clone">Valor Venta</th>
+                                                <th data-priority="3" id="tech-companies-1-col-5-clone">Cupón</th>
+                                                <th data-priority="3" id="tech-companies-1-col-5-clone">Váucher</th>
+                                                <th data-priority="3" id="tech-companies-1-col-5-clone">Rut Invitado</th>
+                                                <th data-priority="3" id="tech-companies-1-col-5-clone">Nombre Invitado</th>
+                                                <th data-priority="3" id="tech-companies-1-col-5-clone">Correo Invitado</th>
+
+
                                             </tr>
                                         </thead>
                                         <tbody id="tbodyClientes">
@@ -121,12 +130,19 @@
                                               ?>
 
                                                 <tr>
-                                                    <th data-org-colspan="1" data-columns="tech-companies-1-col-0"><span class="co-name"><?php echo $rows['fechaUsuario_venta']; ?></span></th>
-                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['id_venta']); ?></td>
+                                                    <th data-org-colspan="1" data-columns="tech-companies-1-col-0"><span class="co-name"><?php echo $rows['id_venta']; ?></span></th>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['fechaUsuario_venta']); ?></td>
                                                     <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['nombre_usuario']); ?> <?php echo strtoupper($rows['apellido_usuario']); ?></td>
-                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['cliente_venta']); ?></td>
-                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">$<?php echo $valorVentaF;?></td>
-                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-5"><?php echo $rows['descripcion_tipopago'];?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['rutCliente_venta']); ?>-<?php echo strtoupper($rows['dvCliente_venta']); ?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['nombreCliente_venta']); ?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['correoCliente_venta']); ?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo $rows['descripcion_tipopago'];?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-5">$<?php echo $valorVentaF;?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-5"><?php echo $rows['cupon_venta'];?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-5"><?php echo $rows['vaucher_venta'];?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-5"><?php echo $rows['rutInvitado_venta'];?>-<?php echo $rows['dvInvitado_venta'];?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-5"><?php echo $rows['nombreInvitado_venta'];?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-5"><?php echo $rows['correoInvitado_venta'];?></td>
 
                                                 </tr>
                                             <?php $o++;
@@ -214,7 +230,7 @@ $("body").on('click','button.btnSearch', function(event) {
                 success: function(respuesta) {
 
                     alertify.success('Listo!');
-
+                    alert(respuesta);
                     $('#datatable').DataTable().destroy();
                     $('#tbodyClientes').html(respuesta);
                     $('#datatable').DataTable({

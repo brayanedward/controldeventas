@@ -149,16 +149,59 @@ class VentaController
     }
 
     public function save(){
+        $rut = stripslashes($_REQUEST['txtRutPremium']);
+        $rut = addslashes($rut);
+        $rut = trim($rut);
+        $rut = htmlspecialchars($rut);
+        $rut = str_replace('"', '', $rut);
+        $rut = str_replace(':', '', $rut);
+        $rut = str_replace('.', '', $rut);
+        $rut = str_replace(',', '', $rut);
+        $rut = str_replace(';', '', $rut);
+
+        $position = explode("-", $rut);
+        $rutPremium      = $position[0];
+        $dvPremium      = $position[1];
+
+        $rut2 = stripslashes($_REQUEST['txtRutInvitado']);
+        $rut2 = addslashes($rut2);
+        $rut2 = trim($rut2);
+        $rut2 = htmlspecialchars($rut2);
+        $rut2 = str_replace('"', '', $rut2);
+        $rut2 = str_replace(':', '', $rut2);
+        $rut2 = str_replace('.', '', $rut2);
+        $rut2 = str_replace(',', '', $rut2);
+        $rut2 = str_replace(';', '', $rut2);
+
+        $position2 = explode("-", $rut2);
+        $rutInvitado     = $position2[0];
+        $dvInvitado      = $position2[1];
+
         $this->model->set("txtValorventa", $_REQUEST['txtValorventa']);
         $this->model->set("txtFechaventa", $_REQUEST['txtFechaventa']);
-        $this->model->set("txtNombrecventa", $_REQUEST['txtNombrecventa']);
-        $this->model->set("txtDireccioventa", $_REQUEST['txtDireccioventa']);
+        //$this->model->set("txtDireccioventa", $_REQUEST['txtDireccioventa']);
         $this->model->set("selTipopago", $_REQUEST['selTipopago']);
         $this->model->set("txtDetalleventa", $_REQUEST['txtDetalleventa']);
-        $this->model->set("txtTelefonocliente", $_REQUEST['txtTelefonocliente']);
-        $this->model->set("txtCorreocliente", $_REQUEST['txtCorreocliente']);
+        //$this->model->set("txtTelefonocliente", $_REQUEST['txtTelefonocliente']);
+
         $this->model->set("usuario", base64_decode($_SESSION['rutUsuario']));
         $this->model->set("estado", 1);
+
+        //data cliente premium
+        $this->model->set("nombrePremium", $_REQUEST['txtNombrePremium']);
+        $this->model->set("correoPremium", $_REQUEST['txtCorreoPremium']);
+        $this->model->set("rutPremium", $rutPremium);
+        $this->model->set("dvPremium", $dvPremium);
+
+        //data cliente invitado (no obligatorio)
+        $this->model->set("nombreInvitado", $_REQUEST['txtNombreInvitado']);
+        $this->model->set("correoInvitado", $_REQUEST['txtCorreoInvitado']);
+        $this->model->set("rutInvitado", $rutInvitado);
+        $this->model->set("dvInvitado", $dvInvitado);
+
+        //codigo verificador
+        $this->model->set("codigoCupon", $_REQUEST['txtCodigoCupon']);
+        $this->model->set("codigoVaucher", $_REQUEST['txtCodigoVaucher']);
 
         if ($query = $this->model->add()) {
             echo '1';
@@ -168,17 +211,65 @@ class VentaController
     }
 
     public function update(){
-        $this->model->set("txtValorventa", $_REQUEST['txtValorventa']);
-        $this->model->set("txtFechaventa", $_REQUEST['txtFechaventa']);
-        $this->model->set("txtNombrecventa", $_REQUEST['txtNombrecventa']);
-        $this->model->set("txtDireccioventa", $_REQUEST['txtDireccioventa']);
-        $this->model->set("selTipopago", $_REQUEST['selTipopago']);
-        $this->model->set("txtDetalleventa", $_REQUEST['txtDetalleventa']);
-        $this->model->set("usuario", base64_decode($_SESSION['rutUsuario']));
-        $this->model->set("idventa", $_REQUEST['idventa']);
-        $this->model->set("estado", 1);
-        $this->model->set("txtTelefonocliente", $_REQUEST['txtTelefonocliente']);
-        $this->model->set("txtCorreocliente", $_REQUEST['txtCorreocliente']);
+      $rut = stripslashes($_REQUEST['txtRutPremium']);
+      $rut = addslashes($rut);
+      $rut = trim($rut);
+      $rut = htmlspecialchars($rut);
+      $rut = str_replace('"', '', $rut);
+      $rut = str_replace(':', '', $rut);
+      $rut = str_replace('.', '', $rut);
+      $rut = str_replace(',', '', $rut);
+      $rut = str_replace(';', '', $rut);
+
+      $position = explode("-", $rut);
+      $rutPremium      = $position[0];
+      $dvPremium      = $position[1];
+
+      if(isset($_REQUEST['txtRutInvitado'])){
+        $rut2 = stripslashes($_REQUEST['txtRutInvitado']);
+        $rut2 = addslashes($rut2);
+        $rut2 = trim($rut2);
+        $rut2 = htmlspecialchars($rut2);
+        $rut2 = str_replace('"', '', $rut2);
+        $rut2 = str_replace(':', '', $rut2);
+        $rut2 = str_replace('.', '', $rut2);
+        $rut2 = str_replace(',', '', $rut2);
+        $rut2 = str_replace(';', '', $rut2);
+
+        $position2 = explode("-", $rut2);
+        $rutInvitado     = $position2[0];
+        $dvInvitado      = $position2[1];
+      }else{
+        $rutInvitado = '';
+        $dvInvitado = '';
+      }
+
+      $this->model->set("id", $_REQUEST['idventa']);
+      $this->model->set("txtValorventa", $_REQUEST['txtValorventa']);
+      $this->model->set("txtFechaventa", $_REQUEST['txtFechaventa']);
+      //$this->model->set("txtDireccioventa", $_REQUEST['txtDireccioventa']);
+      $this->model->set("selTipopago", $_REQUEST['selTipopago']);
+      $this->model->set("txtDetalleventa", $_REQUEST['txtDetalleventa']);
+      //$this->model->set("txtTelefonocliente", $_REQUEST['txtTelefonocliente']);
+
+      $this->model->set("usuario", base64_decode($_SESSION['rutUsuario']));
+      $this->model->set("estado", 1);
+
+      //data cliente premium
+      $this->model->set("nombrePremium", $_REQUEST['txtNombrePremium']);
+      $this->model->set("correoPremium", $_REQUEST['txtCorreoPremium']);
+      $this->model->set("rutPremium", $rutPremium);
+      $this->model->set("dvPremium", $dvPremium);
+
+      //data cliente invitado (no obligatorio)
+      $this->model->set("nombreInvitado", $_REQUEST['txtNombreInvitado']);
+      $this->model->set("correoInvitado", $_REQUEST['txtCorreoInvitado']);
+      $this->model->set("rutInvitado", $rutInvitado);
+      $this->model->set("dvInvitado", $dvInvitado);
+
+      //codigo verificador
+      $this->model->set("codigoCupon", $_REQUEST['txtCodigoCupon']);
+      $this->model->set("codigoVaucher", $_REQUEST['txtCodigoVaucher']);
 
         if ($query = $this->model->edit()) {
             echo 1;
@@ -234,37 +325,60 @@ class VentaController
             $retorno = '<div class="row card-box">';
             $retorno.='<h5 class="text-custom m-b-5">DETALLE VENTA</h5>';
             $retorno .= ' <div class="form-group col-lg-4">
-                            <label for="rut">Valor Venta</label>
+                            <label for="valorVenta">Valor Venta</label>
                                 <p>'.$rows['valor_venta'].'</p>
                         </div>';
             $retorno .= ' <div class="form-group col-lg-4">
-                            <label for="nombres">Fecha Venta</label>
+                            <label for="fechaVenta">Fecha Venta</label>
                                 <p>'.$rows['fecha_venta'].'</p>
                         </div>';
             $retorno .= ' <div class="form-group col-lg-4">
-                            <label for="nombres">Nombre Cliente</label>
-                                <p>'.$rows['cliente_venta'].'</p>
-                        </div>';
-            $retorno .= ' <div class="form-group col-lg-4">
-                            <label for="nombres">Dirección Venta</label>
-                                <p>'.$rows['direccion_venta'].' </p>
-                        </div>';
-            $retorno .= ' <div class="form-group col-lg-4">
-                            <label for="nombres">Tipo Pago</label>
+                              <label for="tipoPago">Tipo Pago</label>
                                 <p>'.$rows['descripcion_tipopago'].'</p>
+                          </div>';
+            $retorno .= ' <div class="form-group col-lg-4">
+                            <label for="rutPremium">Rut Cliente Premium</label>
+                                <p>'.$rows['rutCliente_venta'].'-'.$rows['dvCliente_venta'].'</p>
+                        </div>';
+            $retorno .= ' <div class="form-group col-lg-4">
+                            <label for="nombrePremium">Nombre Cliente Premium</label>
+                                <p>'.$rows['nombreCliente_venta'].' </p>
+                        </div>';
+            $retorno .= ' <div class="form-group col-lg-4">
+                           <label for="correoPremium">Correo Cliente Premium</label>
+                           <p>'.$rows['correoCliente_venta'].' </p>
                         </div>';
 
+           if($rows['rutInvitado_venta']){
+
+             $retorno .= ' <div class="form-group col-lg-4">
+                                 <label for="rutInvitado">Rut Cliente Invitado</label>
+                                 <p>'.$rows['rutInvitado_venta'].'-'.$rows['dvInvitado_venta'].'</p>
+                           </div>';
+             $retorno .= ' <div class="form-group col-lg-4">
+                                 <label for="nombreInvitado">Nombre Cliente Invitado</label>
+                                 <p>'.$rows['nombreInvitado_venta'].' </p>
+                           </div>';
+             $retorno .= ' <div class="form-group col-lg-4">
+                                 <label for="correoInvitado">Correo Cliente Correo</label>
+                                 <p>'.$rows['correoInvitado_venta'].' </p>
+                           </div> ';
+           }
+
+           if($rows['cupon_venta']){
+             $retorno .= ' <div class="form-group col-lg-4">
+                                 <label for="cupon">Código Cupón</label>
+                                 <p>'.$rows['cupon_venta'].'</p>
+                           </div>';
+           }
+           if($rows['vaucher_venta']){
+             $retorno .= ' <div class="form-group col-lg-4">
+                                 <label for="vaucher">Código Váucher (Transacción)</label>
+                                 <p>'.$rows['vaucher_venta'].' </p>
+                           </div>';
+           }
 
 
-            $retorno .= ' <div class="form-group col-lg-4">
-                        <label for="nombres">Correo Cliente</label>
-                            <p>'.$rows['correo_venta'].'</p>
-                    </div>';
-
-            $retorno .= ' <div class="form-group col-lg-4">
-                    <label for="nombres">Telefono Cliente</label>
-                        <p>'.$rows['telefono_venta'].'</p>
-                </div>';
 
             if(base64_decode($_SESSION['tipoUsuario'])==1){
                 $retorno .= ' <div class="form-group col-lg-4">

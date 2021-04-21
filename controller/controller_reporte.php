@@ -140,17 +140,24 @@ class ReporteController
             foreach ($this->modelVenta->lista() as $rows) :
             $valorVenta = number_format($rows['valor_venta']);
             $valorVentaF =str_ireplace(',','.',$valorVenta);
-    $retorno .= '<tr>
-                    <th data-org-colspan="1" data-columns="tech-companies-1-col-0"><span class="co-name">' . $rows['fechaUsuario_venta'] . '</span></th>
-                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">' . $rows['id_venta'] . '</td>
-                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">' . strtoupper($rows['nombre_usuario']) . ' ' . strtoupper($rows['apellido_usuario']) . '</td>
-                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">' . $rows['cliente_venta'] . '</td>
-                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">$' .$valorVentaF. '</td>
-                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">' . $rows['descripcion_tipopago'] . '</td>
-                </tr>';
+            $retorno .= '<tr>
+                              <th data-org-colspan="1" data-columns="tech-companies-1-col-0"><span class="co-name"><?php echo '.$rows['id_venta'].'; ?></span></th>
+                              <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper('.$rows['fechaUsuario_venta'].'); ?></td>
+                              <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper('.$rows['nombre_usuario'].'); ?> <?php echo strtoupper('.$rows['apellido_usuario'].'); ?></td>
+                              <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper('.$rows['rutCliente_venta'].'); ?>-<?php echo strtoupper('.$rows['dvCliente_venta'].'); ?></td>
+                              <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper('.$rows['nombreCliente_venta'].'); ?></td>
+                              <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper('.$rows['correoCliente_venta'].'); ?></td>
+                              <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo '.$rows['descripcion_tipopago'].';?></td>
+                              <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-5">$<?php echo '.$valorVentaF.';?></td>
+                              <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-5"><?php echo '.$rows['cupon_venta'].';?></td>
+                              <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-5"><?php echo '.$rows['vaucher_venta'].';?></td>
+                              <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-5"><?php echo '.$rows['rutInvitado_venta'].';?>-<?php echo '.$rows['dvInvitado_venta'].';?></td>
+                              <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-5"><?php echo '.$rows['nombreInvitado_venta'].';?></td>
+                              <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-5"><?php echo '.$rows['correoInvitado_venta'].';?></td>
+                       </tr>';
             endforeach;
         else :
-            $retorno .= '<tr><th data-org-colspan="1" colspan="6" data-columns="tech-companies-1-col-0"><b>No se encontraron ventas registradas con los parametros de búsqueda actual</b></th><td></td><td></td><td></td><td></td><td></td></tr>';
+            $retorno .= '<tr><th data-org-colspan="1" colspan="13" data-columns="tech-companies-1-col-0"><bNo se encontraron ventas registradas con los parametros de búsqueda actual</b></th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>';
         endif;
 
 

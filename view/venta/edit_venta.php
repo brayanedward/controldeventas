@@ -37,7 +37,7 @@
                         <?php foreach ($this->model->lista() as $rows); ?>
                         <div id="ventas" class="panel-collapse collapse in">
                             <div class="portlet-body">
-                                <div class="form-group col-lg-6">
+                                <div class="form-group col-lg-4">
                                     <label for="txtValorventa">Valor Venta</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="zmdi zmdi-money"></i></span>
@@ -45,45 +45,11 @@
                                             class="form-control" placeholder="" maxlength="9" value="<?php echo $rows['valor_venta']?>">
                                     </div>
                                 </div>
-                                <div class="form-group col-lg-6">
+                                <div class="form-group col-lg-4">
                                     <label for="txtFechaventa">Fecha Venta</label>
                                     <input type="datetime-local" id="txtFechaventa" name="txtFechaventa" class="form-control"
                                         value="<?php echo $rows['fechaUsuario_venta1']?>">
                                 </div>
-
-                                <div class="form-group col-lg-6">
-                                    <label for="txtNombrecventa">Nombres Cliente Venta</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="zmdi zmdi-account-box-o"></i></span>
-                                        <input type="text" id="txtNombrecventa" name="txtNombrecventa"
-                                            class="form-control" placeholder="Ingrese los Nombres de Cliente"
-                                            maxlength="100" value="<?php echo $rows['cliente_venta']?>">
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-lg-6">
-                                    <label for="txtDireccioventa">Dirección Venta</label>
-                                    <input type="text" id="txtDireccioventa" name="txtDireccioventa"
-                                        class="form-control" placeholder="Ingrese Direccion de la Venta"
-                                        maxlength="100" value="<?php echo $rows['direccion_venta']?>">
-                                </div>
-                                <br>
-                                <div class="form-group col-lg-6">
-                                    <label for="txtTelefonocliente">Teléfono Cliente </label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="zmdi zmdi-phone"></i></span>
-                                        <input type="text" id="txtTelefonocliente" name="txtTelefonocliente"
-                                            class="form-control" placeholder="Ingrese Telefono Cliente"
-                                            maxlength="10" value="<?php echo $rows['telefono_venta']?>">
-                                    </div>
-                                </div>
-                                <div class="form-group col-lg-6">
-                                    <label for="txtCorreocliente">Correo Cliente </label>
-                                    <input type="text" id="txtCorreocliente" name="txtCorreocliente"
-                                        class="form-control" placeholder="Ingrese el Correo Electrónico"
-                                        maxlength="50" value="<?php echo $rows['correo_venta']?>">
-                                </div>
-                                <br>
                                 <label for="txtCorreoElectronico">Tipo de Pago</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="zmdi zmdi-card"></i></span>
@@ -97,6 +63,68 @@
                                     </select>
                                 </div>
                                 <br>
+                                <div class="form-group col-lg-4">
+                                    <label for="txtNombrePremium">Nombres Cliente Premium</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-account-box-o"></i></span>
+                                        <input type="text" id="txtNombrePremium" name="txtNombrePremium"
+                                            class="form-control" placeholder="Ingrese los Nombres de Cliente Premium"
+                                            maxlength="500" value="<?php echo $rows['nombreCliente_venta'];?>">
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="txtRutPremium">Rut Cliente Premium</label>
+                                    <input type="text" id="txtRutPremium" name="txtRutPremium"
+                                        class="form-control" placeholder="Ingrese el Correo Electrónico Premium"
+                                        maxlength="12" value="<?php echo $rows['rutCliente_venta'];?>-<?php echo $rows['dvCliente_venta'];?>">
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="txtCorreoPremium">Correo Cliente Premium</label>
+                                    <input type="text" id="txtCorreoPremium" name="txtCorreoPremium"
+                                        class="form-control" placeholder="Ingrese el Correo Electrónico Premium"
+                                        maxlength="50" value="<?php echo $rows['correoCliente_venta'];?>">
+                                </div>
+
+                                <div class="form-group col-lg-4">
+                                    <label for="txtNombreInvitado">Nombres Cliente Invitado</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="zmdi zmdi-account-box-o"></i></span>
+                                        <input type="text" id="txtNombreInvitado" name="txtNombreInvitado"
+                                            class="form-control" placeholder="Ingrese Nombres de Invitado"
+                                            maxlength="500" value="<?php echo $rows['nombreInvitado_venta'];?>">
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="txtRutInvitado">Rut Cliente Invitado</label>
+                                    <input type="text" id="txtRutInvitado" name="txtRutInvitado"
+                                        class="form-control" placeholder="Ingrese Rut Invitado"
+                                        maxlength="12" value="<?php echo $rows['rutInvitado_venta'];?>-<?php echo $rows['dvInvitado_venta'];?>">
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="txtCorreoInvitado">Correo Cliente Invitado</label>
+                                    <input type="text" id="txtCorreoInvitado" name="txtCorreoInvitado"
+                                        class="form-control" placeholder="Ingrese el Correo Electrónico Invitado"
+                                        maxlength="50" value="<?php echo $rows['correoInvitado_venta'];?>">
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="txtCodigoCupon">Código Cupón</label>
+                                    <input type="text" id="txtCodigoCupon" name="txtCodigoCupon"
+                                        class="form-control" placeholder="Ingrese el Correo Electrónico Invitado"
+                                        maxlength="500" value="<?php echo $rows['cupon_venta'];?>">
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="txtCodigoVaucher">Código Váucher (Transferencia)</label>
+                                    <input type="text" id="txtCodigoVaucher" name="txtCodigoVaucher"
+                                        class="form-control" placeholder="Ingrese el Correo Electrónico Invitado"
+                                        maxlength="500" value="<?php echo $rows['vaucher_venta'];?>">
+                                </div>
+
+                               <div class="form-group col-lg-4">
+                                    <label for="txtCorreoElectronico">Adjuntar Archivo</label>
+                                    <input type="file" name="archivo[]" value="" class="form-control file-input">
+                                </div>
+                                <br>
+
                                 <div class="form-group">
                                     <label for="txtDetalleventa">Detalle Venta</label>
                                     <div class="input-group">
@@ -129,15 +157,32 @@ $('.form-control').maxlength({
 });
 
 //vlida el rut
-$('input[name="txtRutUsuario"]').Rut({
+$('input[name="txtRutPremium"]').Rut({
     on_error: function() {
-        $('button[type="submit"]').attr("disabled", true);
-        $('button.btnlogin').html('Ops! Rut incorrecto');
+        $('button[type="button"]').attr("disabled", true);
+        alertify.error('Run Incorrecto');
+    },
+    on_success: function() {
+        $('button[type="button"]').attr("disabled", false);
+        alertify.success('Run Correcto');
     },
     format_on: 'keyup'
 });
 
 var errores = 0;
+
+$('input[name="txtRutInvitado"]').Rut({
+    on_error: function() {
+        $('button[type="button"]').attr("disabled", true);
+        alertify.error('Run Incorrecto');
+    },
+    on_success: function() {
+        $('button[type="button"]').attr("disabled", false);
+        alertify.success('Run Correcto');
+    },
+    format_on: 'keyup'
+});
+
 
 $('input[name="txtRutUsuario"]').Rut({
     on_error: function() {
@@ -156,15 +201,20 @@ function grabar(idventa) {
     if (validacionesUsu() == '') {
         $.ajax({
             data: {
-                "txtValorventa": $('#txtValorventa').val(),
-                "txtFechaventa": $('#txtFechaventa').val(),
-                "txtNombrecventa": $('#txtNombrecventa').val(),
-                "txtDireccioventa": $('#txtDireccioventa').val(),
-                "selTipopago": $('#selTipopago').val(),
-                "txtDetalleventa": $('#txtDetalleventa').val(),
-                "idventa": idventa,
-                "txtTelefonocliente": $('#txtTelefonocliente').val(),
-                "txtCorreocliente": $('#txtCorreocliente').val()
+              "txtValorventa": $('#txtValorventa').val(),
+              "txtFechaventa": $('#txtFechaventa').val(),
+              "txtDireccioventa": $('#txtDireccioventa').val(),
+              "selTipopago": $('#selTipopago').val(),
+              "txtDetalleventa": $('#txtDetalleventa').val(),
+              "txtNombrePremium" : $("#txtNombrePremium").val(),
+              "txtRutPremium" : $("#txtRutPremium").val(),
+              "txtCorreoPremium": $("#txtCorreoPremium").val(),
+              "txtNombreInvitado" : $("#txtNombreInvitado").val(),
+              "txtRutInvitado" : $("#txtRutInvitado").val(),
+              "txtCorreoInvitado" : $("#txtCorreoInvitado").val(),
+              "txtCodigoCupon" : $("#txtCodigoCupon").val(),
+              "txtCodigoVaucher" : $("#txtCodigoVaucher").val(),
+              "idventa" : idventa
             },
             url: "<?php echo $this->urlupdate; ?>",
             type: "POST",
@@ -205,27 +255,32 @@ function validacionesUsu() {
     if ($('#txtNombrecventa').val() == '') {
         errores += '- Debe completar Nombre Cliente venta <br>';
     }
-    if ($('#txtDireccioventa').val() == '') {
-        errores += '- Debe completar la dirección de la venta <br>';
-    }
     if ($('#selTipopago').val() == '') {
         errores += '- Debe completar el Tipo de pago <br>';
-    }
-    if ($('#txtDetalleventa').val() == '') {
-        errores += '- Debe completar el detalle de la venta <br>';
     }
 
     return errores;
 }
 
 function limpiar() {
-    $('#txtValorventa').val('');
-    $('#txtFechaventa').val('');
-    $('#txtNombrecventa').val('');
-    $('#txtDireccioventa').val('');
-    $('#selTipopago').val('');
-    $('#txtDetalleventa').val('');
-    $('#txtTelefonocliente').val('');
-    $('#txtCorreocliente').val('');
+  $('#txtValorventa').val('');
+  $('#txtFechaventa').val('');
+  $('#txtNombrecventa').val('');
+  $('#txtDireccioventa').val('');
+  $('#selTipopago').val('');
+  $('#txtDetalleventa').val('');
+  $('#txtTelefonocliente').val('');
+  $('#txtCorreocliente').val('');
+
+  $('#txtNombrePremium').val();
+  $('#txtRutPremium').val();
+  $('#txtCorreoPremium').val();
+
+  $('#txtNombreInvitado').val();
+  $('#txtRutInvitado').val();
+  $('#txtCorreoInvitado').val();
+
+  $('#txtCodigoCupon').val();
+  $('#txtCodigoVaucher').val();
 }
 </script>

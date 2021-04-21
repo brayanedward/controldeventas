@@ -36,21 +36,32 @@
                                                 <th data-priority="1" id="tech-companies-1-col-1-clone">ID</th>
                                                 <th data-priority="1" id="tech-companies-1-col-1-clone">Fecha</th>
                                                 <th data-priority="3" id="tech-companies-1-col-2-clone">Vendedor</th>
-                                                <th data-priority="1" id="tech-companies-1-col-3-clone">Cliente</th>
-                                                <th data-priority="1" id="tech-companies-1-col-3-clone">Valor</th>
+                                                <th data-priority="1" id="tech-companies-1-col-3-clone">Rut Premium</th>
+                                                <th data-priority="1" id="tech-companies-1-col-3-clone">Cliente Premium</th>
+                                                <th data-priority="1" id="tech-companies-1-col-3-clone">Invitado</th>
+                                                <th data-priority="1" id="tech-companies-1-col-3-clone">Fin Membresía</th>
                                                 <th data-priority="3" id="tech-companies-1-col-5-clone">Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php $o = 0;
-                                            foreach ($this->model->lista() as $rows) : ?>
+                                            foreach ($this->model->lista() as $rows) :
+                                              if($rows['rutInvitado_venta']){
+                                                $msjInvitado = 'Si';
+                                              }else{
+                                                $msjInvitado = 'No';
+                                              }
+
+                                              ?>
 
                                                 <tr>
                                                     <th data-org-colspan="1" data-columns="tech-companies-1-col-0"><span class="co-name"><?php echo $rows['id_venta'];?></span></th>
                                                     <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['fechaUsuario_venta']); ?></td>
                                                     <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo strtoupper($rows['nombre_usuario']); ?> <?php echo strtoupper($rows['apellido_usuario']); ?></td>
-                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo $rows['cliente_venta']; ?></td>
-                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">$<?php echo $rows['valor_venta']; ?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo $rows['rutCliente_venta']; ?>-<?php echo $rows['dvCliente_venta']; ?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo $rows['nombreCliente_venta']; ?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1"><?php echo $msjInvitado; ?></td>
+                                                    <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-1">COMPLETAR</td>
                                                     <td data-org-colspan="1" data-priority="1" data-columns="tech-companies-1-col-5">
 
                                                         <span class="hint  hint--left iconVenta" data-hint="Ver Reporte" attr-idventa="<?php echo $rows['id_venta'] ?>">
@@ -193,6 +204,7 @@
                 beforeSend: function() {
                 },
                 success: function(respuesta) {
+                  console.log(respuesta);
                     $('#contenidoInfoVenta').html(respuesta);
 
                 }
