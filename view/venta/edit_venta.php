@@ -265,24 +265,24 @@ function validacionesUsu() {
 }
 
 function limpiar() {
-  $('#txtValorventa').val('');
-  $('#txtFechaventa').val('');
-  $('#txtNombrecventa').val('');
-  $('#txtDireccioventa').val('');
-  $('#selTipopago').val('');
-  $('#txtDetalleventa').val('');
-  $('#txtTelefonocliente').val('');
-  $('#txtCorreocliente').val('');
+    $('#txtValorventa').val('');
+    $('#txtFechaventa').val('');
+    $('#txtNombrecventa').val('');
+    $('#txtDireccioventa').val('');
+    $('#selTipopago').val('');
+    $('#txtDetalleventa').val('');
+    $('#txtTelefonocliente').val('');
+    $('#txtCorreocliente').val('');
 
-  $('#txtNombrePremium').val();
-  $('#txtRutPremium').val();
-  $('#txtCorreoPremium').val();
+    $('#txtNombrePremium').val('');
+    $('#txtRutPremium').val('');
+    $('#txtCorreoPremium').val('');
 
-  $('#txtNombreInvitado').val();
-  $('#txtRutInvitado').val();
-  $('#txtCorreoInvitado').val();
+    $('#txtNombreInvitado').val('');
+    $('#txtRutInvitado').val('');
+    $('#txtCorreoInvitado').val('');
 
-  $('#txtCodigoCupon').val();
-  $('#txtCodigoVaucher').val();
+    $('#txtCodigoCupon').val('');
+    $('#txtCodigoVaucher').val('');
 }
 </script>
