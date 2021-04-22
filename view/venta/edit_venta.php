@@ -122,7 +122,7 @@
 
                                <div class="form-group col-lg-4">
                                     <label for="txtCorreoElectronico">Adjuntar Archivo</label>
-                                    <input type="file" name="archivo[]" value="" class="form-control file-input">
+                                    <input type="file"  id="archivo" name="archivo[]" value="" class="form-control file-input">
                                 </div>
                                 <br>
 
@@ -284,5 +284,7 @@ function limpiar() {
 
     $('#txtCodigoCupon').val('');
     $('#txtCodigoVaucher').val('');
+    $('#txtCodigoVaucher').val('');
+    $('#archivo').val('');
 }
 </script>
