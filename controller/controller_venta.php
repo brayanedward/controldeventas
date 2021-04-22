@@ -457,21 +457,20 @@ class VentaController
                         </div>';
             $retorno .= '</div>';
             $retorno .= '</div>';
-
-            foreach ($this->model->listaArchivos($id) as $rows2) :
+            if ($rows = mysqli_fetch_array($this->model->listaArchivos($id))) :
                 $retorno .= '<div class="row card-box">';
                 $retorno .= '<b>Archivos Adjuntados</b><br>';
-                if($rows2['extension_archivo'] == 'png' || $rows2['extension_archivo'] == 'jpg' || $rows2['extension_archivo'] == 'jpeg'){
-                    $retorno .= '<img onclick="openimg(\''.$rows2['ruta_archivo'].'\')" style="width: 10%;margin-left: 1%;margin-top: 1%;cursor:pointer;" src="'.$rows2['ruta_archivo'].'">';
-                }else if($rows2['extension_archivo'] == 'pdf'){
-                    $retorno .= '<img onclick="openpdf(\''.$rows2['ruta_archivo'].'\')" style="width: 4%;margin-left: 1%;margin-top: 1%;cursor:pointer;" src="assets/images/pdf-icon.png">';
-                }else{
-                    $retorno .= '<a href="'.$rows2['ruta_archivo'].'" ><img style="width: 4%;margin-left: 1%;margin-top: 1%;cursor:pointer;" src="assets/images/archivo.png">';
-                }
+                foreach ($this->model->listaArchivos($id) as $rows2) :
+                    if($rows2['extension_archivo'] == 'png' || $rows2['extension_archivo'] == 'jpg' || $rows2['extension_archivo'] == 'jpeg'){
+                        $retorno .= '<img onclick="openimg(\''.$rows2['ruta_archivo'].'\')" style="width: 10%;margin-left: 1%;margin-top: 1%;cursor:pointer;" src="'.$rows2['ruta_archivo'].'">';
+                    }else if($rows2['extension_archivo'] == 'pdf'){
+                        $retorno .= '<img onclick="openpdf(\''.$rows2['ruta_archivo'].'\')" style="width: 4%;margin-left: 1%;margin-top: 1%;cursor:pointer;" src="assets/images/pdf-icon.png">';
+                    }else{
+                        $retorno .= '<a href="'.$rows2['ruta_archivo'].'" ><img style="width: 4%;margin-left: 1%;margin-top: 1%;cursor:pointer;" src="assets/images/archivo.png"></a>';
+                    }
+                endforeach;
                 $retorno .= '</div>';
-            endforeach;
-
-
+            endif;
             $retorno .= '<div class="row card-box">';
             $retorno .= '<b>Fecha Venta:</b> Indicada por el vendedor como la fecha real en que realizo la venta<br><b>Fecha Venta (sistema):</b> Fecha en la que se realizo el registro.';
             $retorno .= '</div>';
