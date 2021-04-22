@@ -35,6 +35,7 @@
                             <div class="clearfix"></div>
                         </div>
                         <?php foreach ($this->model->lista() as $rows); ?>
+                        <form>
                         <div id="ventas" class="panel-collapse collapse in">
                             <div class="portlet-body">
                                 <div class="form-group col-lg-4">
@@ -132,7 +133,8 @@
                                         <textarea class="form-control" name="txtDetalleventa" id="txtDetalleventa" rows="3" style="width:100%;"  maxlength="500"><?php echo $rows['descripcion_venta']?></textarea>
                                     </div>
                                 </div>
-
+                                <input type="hidden" value="<?php echo $rows['id_venta'];?>" name="idventa" id="idventa">
+                                </form>               
                                 <br>
                                 <button type="button" onclick="grabar(<?php echo $rows['id_venta']?>)" class="btn btn-info btn-round"><i class="zmdi zmdi-floppy"></i> Editar</button>
                                 <a href="<?php echo $this->urlhome; ?>"> <button type="button" class="btn btn-danger btn-round"><i class="zmdi zmdi-long-arrow-return"></i> Volver</button></a>
@@ -196,31 +198,16 @@ $('input[name="txtRutUsuario"]').Rut({
     format_on: 'keyup'
 });
 
-function grabar(idventa) {
-
+function grabar() {
     if (validacionesUsu() == '') {
+        var formData = new FormData($('form')[0]);
         $.ajax({
-            data: {
-              "txtValorventa": $('#txtValorventa').val(),
-              "txtFechaventa": $('#txtFechaventa').val(),
-              "txtDireccioventa": $('#txtDireccioventa').val(),
-              "selTipopago": $('#selTipopago').val(),
-              "txtDetalleventa": $('#txtDetalleventa').val(),
-              "txtNombrePremium" : $("#txtNombrePremium").val(),
-              "txtRutPremium" : $("#txtRutPremium").val(),
-              "txtCorreoPremium": $("#txtCorreoPremium").val(),
-              "txtNombreInvitado" : $("#txtNombreInvitado").val(),
-              "txtRutInvitado" : $("#txtRutInvitado").val(),
-              "txtCorreoInvitado" : $("#txtCorreoInvitado").val(),
-              "txtCodigoCupon" : $("#txtCodigoCupon").val(),
-              "txtCodigoVaucher" : $("#txtCodigoVaucher").val(),
-              "idventa" : idventa
-            },
+            data: formData,
             url: "<?php echo $this->urlupdate; ?>",
             type: "POST",
             cache: false,
-            dataType: "html",
-            contentType: "application/x-www-form-urlencoded",
+            contentType: false,
+            processData: false,
             beforeSend: function() {
                 $('.message').html(
                     '<div class="sk-wave"> <div class="sk-rect sk-rect1"></div> <div class="sk-rect sk-rect2"></div> <div class="sk-rect sk-rect3"></div> <div class="sk-rect sk-rect4"></div> <div class="sk-rect sk-rect5"></div> </div>'
@@ -240,7 +227,6 @@ function grabar(idventa) {
     } else {
         alertify.error(validacionesUsu());
     }
-
 }
 
 function validacionesUsu() {
@@ -255,8 +241,24 @@ function validacionesUsu() {
     if ($('#txtNombrecventa').val() == '') {
         errores += '- Debe completar Nombre Cliente venta <br>';
     }
-    if ($('#selTipopago').val() == '') {
+    if ($('#selTipopago').val() == 0) {
         errores += '- Debe completar el Tipo de pago <br>';
+    }
+    if ($('#txtNombrePremium').val() == '') {
+        errores += '- Debe completar Nombre Cliente Premium <br>';
+    }
+    if ($('#txtRutPremium').val() == '') {
+        errores += '- Debe completar Rut Cliente Premium <br>';
+    }
+    if ($('#txtNombreInvitado').val() != '') {
+        if ($('#txtRutInvitado').val() == '') {
+            errores += '- Debe completar Rut Cliente Invitado <br>';
+        }
+    }
+    if ($('#txtRutInvitado').val() != '' && $('#txtRutInvitado').val() != '0-') {
+        if ($('#txtNombreInvitado').val() == '') {
+            errores += '- Debe completar Nombre Cliente Invitado <br>';
+        }
     }
 
     return errores;

@@ -261,4 +261,20 @@ class ventaModel
         return $datos;
     }
 
+    public function listaArchivos($id){
+        try {
+            $sql = "SELECT
+                            ruta_archivo,
+                            extension_archivo
+                    FROM
+                        tb_archivo
+                    WHERE estado_archivo = 1 and venta_archivo = $id";
+            $datos = $this->con->consultaRetorno($sql);
+            return $datos;
+
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
 }

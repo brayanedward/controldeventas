@@ -164,19 +164,25 @@ class VentaController
         $rutPremium      = $position[0];
         $dvPremium      = $position[1];
 
-        $rut2 = stripslashes($_POST['txtRutInvitado']);
-        $rut2 = addslashes($rut2);
-        $rut2 = trim($rut2);
-        $rut2 = htmlspecialchars($rut2);
-        $rut2 = str_replace('"', '', $rut2);
-        $rut2 = str_replace(':', '', $rut2);
-        $rut2 = str_replace('.', '', $rut2);
-        $rut2 = str_replace(',', '', $rut2);
-        $rut2 = str_replace(';', '', $rut2);
-
-        $position2 = explode("-", $rut2);
-        $rutInvitado     = $position2[0];
-        $dvInvitado      = $position2[1];
+        if($_POST['txtRutInvitado'] != ''){
+            $rut2 = stripslashes($_POST['txtRutInvitado']);
+            $rut2 = addslashes($rut2);
+            $rut2 = trim($rut2);
+            $rut2 = htmlspecialchars($rut2);
+            $rut2 = str_replace('"', '', $rut2);
+            $rut2 = str_replace(':', '', $rut2);
+            $rut2 = str_replace('.', '', $rut2);
+            $rut2 = str_replace(',', '', $rut2);
+            $rut2 = str_replace(';', '', $rut2);
+    
+            $position2 = explode("-", $rut2);
+            $rutInvitado     = $position2[0];
+            $dvInvitado      = $position2[1];
+        }else{
+            $rutInvitado = '';
+            $dvInvitado = '';
+        }
+        
 
         foreach ($_FILES["archivo"]['tmp_name'] as $o => $tmp_name) {
             if ($_FILES["archivo"]["name"][$o]) {
@@ -184,10 +190,13 @@ class VentaController
                 $tmp_name = $_FILES["archivo"]["tmp_name"][$o];
                 $ext = end(explode(".", $_FILES["archivo"]["name"][$o]));
                 $path = 'assets/subidas/';
-                $pathfinal = $path . $name;
+                $time = time();
+                $newpath = $path . $time.$name;
+                $pathfinal = $path .$name;
 
                 if (move_uploaded_file($tmp_name, $pathfinal)) {
                     $archivook = 1;
+                    rename($path . $name, $newpath);
                 } 
             } 
         }
@@ -222,7 +231,7 @@ class VentaController
             if($archivook == 1){
                 if ($rows1 = mysqli_fetch_array($this->model->traeUltimoInsert())) {
                     $idinsert = $rows1['id'];
-                    $this->model->set("urlFile", $pathfinal);
+                    $this->model->set("urlFile", $newpath);
                     $this->model->set("idInsert", $idinsert);
                     $this->model->set("extFile", $ext);
                     if ($query = $this->model->addArchivo()) {
@@ -238,68 +247,96 @@ class VentaController
     }
 
     public function update(){
-      $rut = stripslashes($_REQUEST['txtRutPremium']);
-      $rut = addslashes($rut);
-      $rut = trim($rut);
-      $rut = htmlspecialchars($rut);
-      $rut = str_replace('"', '', $rut);
-      $rut = str_replace(':', '', $rut);
-      $rut = str_replace('.', '', $rut);
-      $rut = str_replace(',', '', $rut);
-      $rut = str_replace(';', '', $rut);
+        $archivook = 0;
+        $rut = stripslashes($_POST['txtRutPremium']);
+        $rut = addslashes($rut);
+        $rut = trim($rut);
+        $rut = htmlspecialchars($rut);
+        $rut = str_replace('"', '', $rut);
+        $rut = str_replace(':', '', $rut);
+        $rut = str_replace('.', '', $rut);
+        $rut = str_replace(',', '', $rut);
+        $rut = str_replace(';', '', $rut);
 
-      $position = explode("-", $rut);
-      $rutPremium      = $position[0];
-      $dvPremium      = $position[1];
+        $position = explode("-", $rut);
+        $rutPremium      = $position[0];
+        $dvPremium      = $position[1];
 
-      if(isset($_REQUEST['txtRutInvitado'])){
-        $rut2 = stripslashes($_REQUEST['txtRutInvitado']);
-        $rut2 = addslashes($rut2);
-        $rut2 = trim($rut2);
-        $rut2 = htmlspecialchars($rut2);
-        $rut2 = str_replace('"', '', $rut2);
-        $rut2 = str_replace(':', '', $rut2);
-        $rut2 = str_replace('.', '', $rut2);
-        $rut2 = str_replace(',', '', $rut2);
-        $rut2 = str_replace(';', '', $rut2);
+        if($_POST['txtRutInvitado'] != ''){
+            $rut2 = stripslashes($_POST['txtRutInvitado']);
+            $rut2 = addslashes($rut2);
+            $rut2 = trim($rut2);
+            $rut2 = htmlspecialchars($rut2);
+            $rut2 = str_replace('"', '', $rut2);
+            $rut2 = str_replace(':', '', $rut2);
+            $rut2 = str_replace('.', '', $rut2);
+            $rut2 = str_replace(',', '', $rut2);
+            $rut2 = str_replace(';', '', $rut2);
+    
+            $position2 = explode("-", $rut2);
+            $rutInvitado     = $position2[0];
+            $dvInvitado      = $position2[1];
+        }else{
+            $rutInvitado = '';
+            $dvInvitado = '';
+        }
 
-        $position2 = explode("-", $rut2);
-        $rutInvitado     = $position2[0];
-        $dvInvitado      = $position2[1];
-      }else{
-        $rutInvitado = '';
-        $dvInvitado = '';
-      }
+        foreach ($_FILES["archivo"]['tmp_name'] as $o => $tmp_name) {
+            if ($_FILES["archivo"]["name"][$o]) {
+                $name = $_FILES["archivo"]["name"][$o];
+                $tmp_name = $_FILES["archivo"]["tmp_name"][$o];
+                $ext = end(explode(".", $_FILES["archivo"]["name"][$o]));
+                $path = 'assets/subidas/';
+                $time = time();
+                $newpath = $path . $time.$name;
+                $pathfinal = $path .$name;
 
-      $this->model->set("id", $_REQUEST['idventa']);
-      $this->model->set("txtValorventa", $_REQUEST['txtValorventa']);
-      $this->model->set("txtFechaventa", $_REQUEST['txtFechaventa']);
-      //$this->model->set("txtDireccioventa", $_REQUEST['txtDireccioventa']);
-      $this->model->set("selTipopago", $_REQUEST['selTipopago']);
-      $this->model->set("txtDetalleventa", $_REQUEST['txtDetalleventa']);
-      //$this->model->set("txtTelefonocliente", $_REQUEST['txtTelefonocliente']);
+                if (move_uploaded_file($tmp_name, $pathfinal)) {
+                    $archivook = 1;
+                    rename($path . $name, $newpath);
+                } 
+            } 
+        }
 
-      $this->model->set("usuario", base64_decode($_SESSION['rutUsuario']));
-      $this->model->set("estado", 1);
+        $this->model->set("id", $_POST['idventa']);
+        $this->model->set("txtValorventa", $_POST['txtValorventa']);
+        $this->model->set("txtFechaventa", $_POST['txtFechaventa']);
+        //$this->model->set("txtDireccioventa", $_REQUEST['txtDireccioventa']);
+        $this->model->set("selTipopago", $_POST['selTipopago']);
+        $this->model->set("txtDetalleventa", $_POST['txtDetalleventa']);
+        //$this->model->set("txtTelefonocliente", $_REQUEST['txtTelefonocliente']);
 
-      //data cliente premium
-      $this->model->set("nombrePremium", $_REQUEST['txtNombrePremium']);
-      $this->model->set("correoPremium", $_REQUEST['txtCorreoPremium']);
-      $this->model->set("rutPremium", $rutPremium);
-      $this->model->set("dvPremium", $dvPremium);
+        $this->model->set("usuario", base64_decode($_SESSION['rutUsuario']));
+        $this->model->set("estado", 1);
 
-      //data cliente invitado (no obligatorio)
-      $this->model->set("nombreInvitado", $_REQUEST['txtNombreInvitado']);
-      $this->model->set("correoInvitado", $_REQUEST['txtCorreoInvitado']);
-      $this->model->set("rutInvitado", $rutInvitado);
-      $this->model->set("dvInvitado", $dvInvitado);
+        //data cliente premium
+        $this->model->set("nombrePremium", $_POST['txtNombrePremium']);
+        $this->model->set("correoPremium", $_POST['txtCorreoPremium']);
+        $this->model->set("rutPremium", $rutPremium);
+        $this->model->set("dvPremium", $dvPremium);
 
-      //codigo verificador
-      $this->model->set("codigoCupon", $_REQUEST['txtCodigoCupon']);
-      $this->model->set("codigoVaucher", $_REQUEST['txtCodigoVaucher']);
+        //data cliente invitado (no obligatorio)
+        $this->model->set("nombreInvitado", $_POST['txtNombreInvitado']);
+        $this->model->set("correoInvitado", $_POST['txtCorreoInvitado']);
+        $this->model->set("rutInvitado", $rutInvitado);
+        $this->model->set("dvInvitado", $dvInvitado);
+
+        //codigo verificador
+        $this->model->set("codigoCupon", $_POST['txtCodigoCupon']);
+        $this->model->set("codigoVaucher", $_POST['txtCodigoVaucher']);
 
         if ($query = $this->model->edit()) {
-            echo 1;
+            if($archivook == 1){
+                $idinsert = $_POST['idventa'];
+                $this->model->set("urlFile", $newpath);
+                $this->model->set("idInsert", $idinsert);
+                $this->model->set("extFile", $ext);
+                if ($query = $this->model->addArchivo()) {
+                    echo '1';
+                }
+            }else{
+                echo '1';
+            }
         } else {
             echo 2;
         }
@@ -420,6 +457,20 @@ class VentaController
                         </div>';
             $retorno .= '</div>';
             $retorno .= '</div>';
+
+            foreach ($this->model->listaArchivos($id) as $rows2) :
+                $retorno .= '<div class="row card-box">';
+                $retorno .= '<b>Archivos Adjuntados</b><br>';
+                if($rows2['extension_archivo'] == 'png' || $rows2['extension_archivo'] == 'jpg' || $rows2['extension_archivo'] == 'jpeg'){
+                    $retorno .= '<img onclick="openimg(\''.$rows2['ruta_archivo'].'\')" style="width: 10%;margin-left: 1%;margin-top: 1%;cursor:pointer;" src="'.$rows2['ruta_archivo'].'">';
+                }else if($rows2['extension_archivo'] == 'pdf'){
+                    $retorno .= '<img onclick="openpdf(\''.$rows2['ruta_archivo'].'\')" style="width: 4%;margin-left: 1%;margin-top: 1%;cursor:pointer;" src="assets/images/pdf-icon.png">';
+                }else{
+                    $retorno .= '<a href="'.$rows2['ruta_archivo'].'" ><img style="width: 4%;margin-left: 1%;margin-top: 1%;cursor:pointer;" src="assets/images/archivo.png">';
+                }
+                $retorno .= '</div>';
+            endforeach;
+
 
             $retorno .= '<div class="row card-box">';
             $retorno .= '<b>Fecha Venta:</b> Indicada por el vendedor como la fecha real en que realizo la venta<br><b>Fecha Venta (sistema):</b> Fecha en la que se realizo el registro.';

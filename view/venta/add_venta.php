@@ -246,7 +246,22 @@ function validacionesUsu() {
     if ($('#selTipopago').val() == 0) {
         errores += '- Debe completar el Tipo de pago <br>';
     }
-
+    if ($('#txtNombrePremium').val() == '') {
+        errores += '- Debe completar Nombre Cliente Premium <br>';
+    }
+    if ($('#txtRutPremium').val() == '') {
+        errores += '- Debe completar Rut Cliente Premium <br>';
+    }
+    if ($('#txtNombreInvitado').val() != '') {
+        if ($('#txtRutInvitado').val() == '') {
+            errores += '- Debe completar Rut Cliente Invitado <br>';
+        }
+    }
+    if ($('#txtRutInvitado').val() != '' && $('#txtRutInvitado').val() != '0-') {
+        if ($('#txtNombreInvitado').val() == '') {
+            errores += '- Debe completar Nombre Cliente Invitado <br>';
+        }
+    }
 
     return errores;
 }
