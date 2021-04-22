@@ -149,6 +149,7 @@ class VentaController
     }
 
     public function save(){
+        $archivook = 0;
         $rut = stripslashes($_POST['txtRutPremium']);
         $rut = addslashes($rut);
         $rut = trim($rut);
@@ -179,12 +180,15 @@ class VentaController
 
         foreach ($_FILES["archivo"]['tmp_name'] as $o => $tmp_name) {
             if ($_FILES["archivo"]["name"][$o]) {
-                $name    = $_FILES["archivo"]["name"][$o];
-                $tmp_name      = $_FILES["archivo"]["tmp_name"][$o];
-                $path  = 'assets/subidas/';
-                $target_path = $path . $name;
+                $name = $_FILES["archivo"]["name"][$o];
+                $tmp_name = $_FILES["archivo"]["tmp_name"][$o];
+                $ext = end(explode(".", $_FILES["archivo"]["name"][$o]));
+                $path = 'assets/subidas/';
+                $pathfinal = $path . $name;
 
-                if (move_uploaded_file($tmp_name, $target_path)) {} 
+                if (move_uploaded_file($tmp_name, $pathfinal)) {
+                    $archivook = 1;
+                } 
             } 
         }
 
@@ -215,7 +219,19 @@ class VentaController
         $this->model->set("codigoVaucher", $_POST['txtCodigoVaucher']);
 
         if ($query = $this->model->add()) {
-            echo '1';
+            if($archivook == 1){
+                if ($rows1 = mysqli_fetch_array($this->model->traeUltimoInsert())) {
+                    $idinsert = $rows1['id'];
+                    $this->model->set("urlFile", $pathfinal);
+                    $this->model->set("idInsert", $idinsert);
+                    $this->model->set("extFile", $ext);
+                    if ($query = $this->model->addArchivo()) {
+                        echo '1';
+                    }
+                }
+            }else{
+                echo '1';
+            }
         } else {
             echo '2';
         }

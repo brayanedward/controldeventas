@@ -35,7 +35,9 @@ class ventaModel
     //vaucher verificador
     private $codigoCupon;
     private $codigoVaucher;
-
+    private $urlFile;
+    private $idInsert;
+    private $extFile;
 
     private $create;
     private $update;
@@ -228,6 +230,35 @@ class ventaModel
         } catch (Exception $e) {
             die($e->getMessage());
         }
+    }
+
+    public function traeUltimoInsert(){
+        try {
+            $sql = "select last_insert_id() as id";
+            $datos = $this->con->consultaRetorno($sql);
+            return $datos;
+
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function addArchivo(){
+        $sql = "INSERT INTO tb_archivo
+                (ruta_archivo,
+                venta_archivo,
+                estado_archivo,
+                extension_archivo)
+                VALUES
+                (
+                '{$this->get('urlFile')}',
+                '{$this->get('idInsert')}',
+                '{$this->get('estado')}',
+                '{$this->get('extFile')}'
+                )";
+
+        $datos = $this->con->consultaRetorno($sql);
+        return $datos;
     }
 
 }
