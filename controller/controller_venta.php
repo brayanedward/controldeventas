@@ -149,7 +149,7 @@ class VentaController
     }
 
     public function save(){
-        $rut = stripslashes($_REQUEST['txtRutPremium']);
+        $rut = stripslashes($_POST['txtRutPremium']);
         $rut = addslashes($rut);
         $rut = trim($rut);
         $rut = htmlspecialchars($rut);
@@ -163,7 +163,7 @@ class VentaController
         $rutPremium      = $position[0];
         $dvPremium      = $position[1];
 
-        $rut2 = stripslashes($_REQUEST['txtRutInvitado']);
+        $rut2 = stripslashes($_POST['txtRutInvitado']);
         $rut2 = addslashes($rut2);
         $rut2 = trim($rut2);
         $rut2 = htmlspecialchars($rut2);
@@ -177,31 +177,42 @@ class VentaController
         $rutInvitado     = $position2[0];
         $dvInvitado      = $position2[1];
 
-        $this->model->set("txtValorventa", $_REQUEST['txtValorventa']);
-        $this->model->set("txtFechaventa", $_REQUEST['txtFechaventa']);
+        foreach ($_FILES["archivo"]['tmp_name'] as $o => $tmp_name) {
+            if ($_FILES["archivo"]["name"][$o]) {
+                $name    = $_FILES["archivo"]["name"][$o];
+                $tmp_name      = $_FILES["archivo"]["tmp_name"][$o];
+                $path  = 'assets/subidas/';
+                $target_path = $path . $name;
+
+                if (move_uploaded_file($tmp_name, $target_path)) {} 
+            } 
+        }
+
+        $this->model->set("txtValorventa", $_POST['txtValorventa']);
+        $this->model->set("txtFechaventa", $_POST['txtFechaventa']);
         //$this->model->set("txtDireccioventa", $_REQUEST['txtDireccioventa']);
-        $this->model->set("selTipopago", $_REQUEST['selTipopago']);
-        $this->model->set("txtDetalleventa", $_REQUEST['txtDetalleventa']);
+        $this->model->set("selTipopago", $_POST['selTipopago']);
+        $this->model->set("txtDetalleventa", $_POST['txtDetalleventa']);
         //$this->model->set("txtTelefonocliente", $_REQUEST['txtTelefonocliente']);
 
         $this->model->set("usuario", base64_decode($_SESSION['rutUsuario']));
         $this->model->set("estado", 1);
 
         //data cliente premium
-        $this->model->set("nombrePremium", $_REQUEST['txtNombrePremium']);
-        $this->model->set("correoPremium", $_REQUEST['txtCorreoPremium']);
+        $this->model->set("nombrePremium", $_POST['txtNombrePremium']);
+        $this->model->set("correoPremium", $_POST['txtCorreoPremium']);
         $this->model->set("rutPremium", $rutPremium);
         $this->model->set("dvPremium", $dvPremium);
 
         //data cliente invitado (no obligatorio)
-        $this->model->set("nombreInvitado", $_REQUEST['txtNombreInvitado']);
-        $this->model->set("correoInvitado", $_REQUEST['txtCorreoInvitado']);
+        $this->model->set("nombreInvitado", $_POST['txtNombreInvitado']);
+        $this->model->set("correoInvitado", $_POST['txtCorreoInvitado']);
         $this->model->set("rutInvitado", $rutInvitado);
         $this->model->set("dvInvitado", $dvInvitado);
 
         //codigo verificador
-        $this->model->set("codigoCupon", $_REQUEST['txtCodigoCupon']);
-        $this->model->set("codigoVaucher", $_REQUEST['txtCodigoVaucher']);
+        $this->model->set("codigoCupon", $_POST['txtCodigoCupon']);
+        $this->model->set("codigoVaucher", $_POST['txtCodigoVaucher']);
 
         if ($query = $this->model->add()) {
             echo '1';

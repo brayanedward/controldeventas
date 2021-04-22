@@ -37,6 +37,7 @@
                             <div class="clearfix"></div>
                         </div>
                         <div id="ventas" class="panel-collapse collapse in">
+                        <form>
                             <div class="portlet-body">
                                 <div class="form-group col-lg-4">
                                     <label for="txtValorventa">Valor Venta</label>
@@ -55,7 +56,7 @@
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="zmdi zmdi-card"></i></span>
                                     <select id="selTipopago" name="selTipopago" class="form-control" required="">
-                                        <option>SELECCIONE ... </option>
+                                        <option value="0">SELECCIONE ... </option>
                                         <?php foreach ($this->model->listaPagos() as $rowPago) : ?>
                                         <option value="<?php echo $rowPago['id_tipopago'] ?>">
                                             <?php echo $rowPago['descripcion_tipopago'] ?></option>
@@ -136,9 +137,9 @@
                                         maxlength="500">
                                 </div>
 
-                               <div class="form-group col-lg-4">
+                                <div class="form-group col-lg-4">
                                     <label for="txtCorreoElectronico">Adjuntar Archivo</label>
-                                    <input type="file" name="archivo[]" value="" class="form-control file-input">
+                                    <input type="file" id="archivo[]" name="archivo[]" value="" class="form-control file-input">
                                 </div>
                                 <br>
                                 <div class="form-group">
@@ -148,6 +149,7 @@
                                         <textarea class="form-control" name="txtDetalleventa" id="txtDetalleventa" rows="3" style="width:100%;"  maxlength="500"></textarea>
                                     </div>
                                 </div>
+                                </form>
                                 <br>
                                 <button type="button" onclick="grabar()" class="btn btn-info btn-round"><i class="zmdi zmdi-floppy"></i> Guardar</button>
                                 <a href="<?php echo $this->urlhome; ?>"> <button type="button" class="btn btn-danger btn-round"><i class="zmdi zmdi-long-arrow-return"></i> Volver</button></a>
@@ -199,29 +201,15 @@ $('input[name="txtRutInvitado"]').Rut({
 });
 
 function grabar() {
-
     if (validacionesUsu() == '') {
+        var formData = new FormData($('form')[0]);
         $.ajax({
-            data: {
-                "txtValorventa": $('#txtValorventa').val(),
-                "txtFechaventa": $('#txtFechaventa').val(),
-                "txtDireccioventa": $('#txtDireccioventa').val(),
-                "selTipopago": $('#selTipopago').val(),
-                "txtDetalleventa": $('#txtDetalleventa').val(),
-                "txtNombrePremium" : $("#txtNombrePremium").val(),
-                "txtRutPremium" : $("#txtRutPremium").val(),
-                "txtCorreoPremium": $("#txtCorreoPremium").val(),
-                "txtNombreInvitado" : $("#txtNombreInvitado").val(),
-                "txtRutInvitado" : $("#txtRutInvitado").val(),
-                "txtCorreoInvitado" : $("#txtCorreoInvitado").val(),
-                "txtCodigoCupon" : $("#txtCodigoCupon").val(),
-                "txtCodigoVaucher" : $("#txtCodigoVaucher").val()
-            },
+            data: formData,
             url: "<?php echo $this->urlsave; ?>",
             type: "POST",
             cache: false,
-            dataType: "html",
-            contentType: "application/x-www-form-urlencoded",
+            contentType: false,
+            processData: false,
             beforeSend: function() {
                 $('.message').html(
                     '<div class="sk-wave"> <div class="sk-rect sk-rect1"></div> <div class="sk-rect sk-rect2"></div> <div class="sk-rect sk-rect3"></div> <div class="sk-rect sk-rect4"></div> <div class="sk-rect sk-rect5"></div> </div>'
@@ -241,7 +229,6 @@ function grabar() {
     } else {
         alertify.error(validacionesUsu());
     }
-
 }
 
 function validacionesUsu() {
@@ -256,7 +243,7 @@ function validacionesUsu() {
     if ($('#txtNombrecventa').val() == '') {
         errores += '- Debe completar Nombre Cliente venta <br>';
     }
-    if ($('#selTipopago').val() == '') {
+    if ($('#selTipopago').val() == 0) {
         errores += '- Debe completar el Tipo de pago <br>';
     }
 
@@ -274,15 +261,15 @@ function limpiar() {
     $('#txtTelefonocliente').val('');
     $('#txtCorreocliente').val('');
 
-    $('#txtNombrePremium').val();
-    $('#txtRutPremium').val();
-    $('#txtCorreoPremium').val();
+    $('#txtNombrePremium').val('');
+    $('#txtRutPremium').val('');
+    $('#txtCorreoPremium').val('');
 
-    $('#txtNombreInvitado').val();
-    $('#txtRutInvitado').val();
-    $('#txtCorreoInvitado').val();
+    $('#txtNombreInvitado').val('');
+    $('#txtRutInvitado').val('');
+    $('#txtCorreoInvitado').val('');
 
-    $('#txtCodigoCupon').val();
-    $('#txtCodigoVaucher').val();
+    $('#txtCodigoCupon').val('');
+    $('#txtCodigoVaucher').val('');
 }
 </script>
